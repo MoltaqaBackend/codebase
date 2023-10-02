@@ -1,0 +1,145 @@
+name: 'Dev Only'
+description: |-
+
+  <aside class="badge badge-darkred">Dev Apis for Development Process only.<br><hr>
+  Must not included in any part of the system.<br><hr>
+  The purpouse to use as utilties<br>to aid developers without depending on backend developer.</aside>
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/dev/static-mobile-otp
+    metadata:
+      groupName: 'Dev Only'
+      groupDescription: |-
+
+        <aside class="badge badge-darkred">Dev Apis for Development Process only.<br><hr>
+        Must not included in any part of the system.<br><hr>
+        The purpouse to use as utilties<br>to aid developers without depending on backend developer.</aside>
+      subgroup: 'Static Mobile Or Email binders for testing OTP'
+      subgroupDescription: 'Allow you to bind any real or fake email or mobile to recieve static OTP code 1234'
+      title: 'static mobile number OTP.'
+      description: 'an API which Offers a mean to allocate static OTP to a mobile number'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: en
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'mobile number to recieve static otp.'
+        required: true
+        example: '0564777888'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564777888'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '41'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/dev/static-mail-otp
+    metadata:
+      groupName: 'Dev Only'
+      groupDescription: |-
+
+        <aside class="badge badge-darkred">Dev Apis for Development Process only.<br><hr>
+        Must not included in any part of the system.<br><hr>
+        The purpouse to use as utilties<br>to aid developers without depending on backend developer.</aside>
+      subgroup: 'Static Mobile Or Email binders for testing OTP'
+      subgroupDescription: 'Allow you to bind any real or fake email or mobile to recieve static OTP code 1234'
+      title: 'static email address OTP.'
+      description: 'an API which Offers a mean to allocate static OTP to an email address'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: en
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'email address to recieve static otp.'
+        required: true
+        example: fahmi@moltaqa.net
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      email: fahmi@moltaqa.net
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '40'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

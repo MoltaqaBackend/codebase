@@ -1,0 +1,1155 @@
+name: 'App Provider'
+description: 'Manage Provider App Apis'
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/login
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider Login.'
+      description: 'an API which Offers a mean to login a provider'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564777888'
+        type: string
+        enumValues: []
+        custom: []
+      password:
+        name: password
+        description: 'The password of User account.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564777888'
+      password: '12345678'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '53'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/logout
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider logout.'
+      description: 'an API which Offers a mean to logout a Provider'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 84vf3c6D6e1kZVbaEadPg5h'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/register
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider Register.'
+      description: 'an API which Offers a mean to register a new Provider'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The user personal name.'
+        required: true
+        example: 'Fahmi Moustafa'
+        type: string
+        enumValues: []
+        custom: []
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+      email:
+        name: email
+        description: '(optional) The E-Mail Address of the user.'
+        required: false
+        example: fahmi@moltaqa.net
+        type: string
+        enumValues: []
+        custom: []
+      national_identity:
+        name: national_identity
+        description: 'lenght[10] required The user national identity number.'
+        required: false
+        example: '1234567893'
+        type: string
+        enumValues: []
+        custom: []
+      nationality_id:
+        name: nationality_id
+        description: 'the nationality id.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      dob:
+        name: dob
+        description: 'user date of birth formated as Y-m-d.'
+        required: true
+        example: '1990-09-30'
+        type: string
+        enumValues: []
+        custom: []
+      avatar:
+        name: avatar
+        description: 'user personal image.'
+        required: true
+        example: null
+        type: file
+        enumValues: []
+        custom: []
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+      address:
+        name: address
+        description: 'user address.'
+        required: true
+        example: 'jada - stret 13 - building 5'
+        type: string
+        enumValues: []
+        custom: []
+      latitude:
+        name: latitude
+        description: 'user lattiude.'
+        required: true
+        example: 31.324342744239
+        type: number
+        enumValues: []
+        custom: []
+      longitude:
+        name: longitude
+        description: userlongitude.
+        required: true
+        example: 41.37437832442
+        type: number
+        enumValues: []
+        custom: []
+      car_type_id:
+        name: car_type_id
+        description: 'user seelcted car type id.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      car_category_id:
+        name: car_category_id
+        description: 'user seelcted car type id.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      serial_number:
+        name: serial_number
+        description: 'user car serial number.'
+        required: true
+        example: djkjfbajkdfnlk
+        type: string
+        enumValues: []
+        custom: []
+      board_number:
+        name: board_number
+        description: 'user car board number.'
+        required: true
+        example: Kg8f06
+        type: string
+        enumValues: []
+        custom: []
+      car_image:
+        name: car_image
+        description: 'user car image.'
+        required: true
+        example: null
+        type: file
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      name: 'Fahmi Moustafa'
+      mobile: '0564776688'
+      email: fahmi@moltaqa.net
+      national_identity: '1234567893'
+      nationality_id: 1
+      dob: '1990-09-30'
+      password: '12345678'
+      address: 'jada - stret 13 - building 5'
+      latitude: 31.324342744239
+      longitude: 41.37437832442
+      car_type_id: 1
+      car_category_id: 1
+      serial_number: djkjfbajkdfnlk
+      board_number: Kg8f06
+      password_confirmation: '12345678'
+    fileParameters:
+      avatar: null
+      car_image: null
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '52'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/send-otp
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Send OTP To Mobile Number.'
+      description: 'an API which Offers a mean to Send OTP To Mobile Number.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564776688'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '51'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/resend-otp
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Re-Send OTP.'
+      description: 'an API which Offers a mean to Re-Send OTP.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3dPvbfa6DV846hgZk1ce5aE'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/verify-otp
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'OTP Verification.'
+      description: 'an API which Offers a mean to verify user otp'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      code:
+        name: code
+        description: 'The OTP sent via sms to user.'
+        required: true
+        example: '1234'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      code: '1234'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 8kcbeDa4EP653d6hf1VZavg'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/provider/auth/profile
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider Profile.'
+      description: 'an API which Offers a mean to login a Provider'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 65afVa6v1348khgePZbdEcD'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/chang-mobile
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider Change Mobile.'
+      description: 'an API which Offers a mean to change Provider mobile number.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The new Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564776688'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1aZd5efkEabD48v6cgV63Ph'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/chang-password
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider Change Password.'
+      description: 'an API which Offers a mean to Change password for logged in Provider.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+      old_password:
+        name: old_password
+        description: 'The user old password.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      password: '123456789'
+      old_password: '12345678'
+      password_confirmation: '123456789'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer P66b3kaDEhVacd58eZ4gvf1'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/forget-password
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider Forget Password.'
+      description: 'an API which Offers a mean to reset Provider password for logged out Provideres.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564777888'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564777888'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '50'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/auth/reset-password
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Provider New Password.'
+      description: 'an API which Offers a mean to set new password for logged out providers after verification step.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      password: '123456789'
+      password_confirmation: '123456789'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 664ac8EbeaZkVhDfd1P3g5v'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: api/v1/provider/auth/delete-account
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'PRovider Delete Account.'
+      description: 'an API which Offers a mean to delete a PRovider account'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer gb48ePdkDcaVfZh6E36a5v1'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/provider/home/change-avilibilty
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Home
+      subgroupDescription: 'Home Screen Apis'
+      title: 'Provider Change Avilibility'
+      description: 'an API which Offers a mean to channge provider Avilibility'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer ch6e3kDaZEgaf4V516dP8bv'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/provider/home/list-orders
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Home
+      subgroupDescription: 'Home Screen Apis'
+      title: 'Provider List Order'
+      description: 'an API which Offers a mean to list orders for a provider'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      type:
+        name: type
+        description: 'value in accepted or processing.'
+        required: true
+        example: accepted
+        type: string
+        enumValues: []
+        custom: []
+    cleanQueryParameters:
+      type: accepted
+    bodyParameters:
+      type:
+        name: type
+        description: ''
+        required: true
+        example: accepted
+        type: string
+        enumValues:
+          - accepted
+          - processing
+        custom: []
+    cleanBodyParameters:
+      type: accepted
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer v4d586hfaeb3ZakcPVg6DE1'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/provider/home/store-price-offer
+    metadata:
+      groupName: 'App Provider'
+      groupDescription: 'Manage Provider App Apis'
+      subgroup: Home
+      subgroupDescription: 'Home Screen Apis'
+      title: 'Provider Store Order Price Offer'
+      description: 'an API which Offers a mean to Store Order Price Offer'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      order_id:
+        name: order_id
+        description: 'order identifier.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        custom: []
+      price:
+        name: price
+        description: 'order offer price.'
+        required: true
+        example: '50'
+        type: numeric
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      order_id: 2
+      price: '50'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer kZfe1vbgE5VaPaD6d68c43h'
+    controller: null
+    method: null
+    route: null
+    custom: []

@@ -1,0 +1,1186 @@
+name: 'App Client'
+description: 'Manage Client App Apis'
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/login
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Login.'
+      description: 'an API which Offers a mean to login a client'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564777888'
+        type: string
+        enumValues: []
+        custom: []
+      password:
+        name: password
+        description: 'The password of User account.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564777888'
+      password: '12345678'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '58'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/logout
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client logout.'
+      description: 'an API which Offers a mean to logout a client'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer ZaD4v6ePg6cE1k8hfVad5b3'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/register
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Register.'
+      description: 'an API which Offers a mean to register a new client'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The user personal name.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+      email:
+        name: email
+        description: '(optional) The E-Mail Address of the user.'
+        required: false
+        example: fahmi@moltaqa.net
+        type: string
+        enumValues: []
+        custom: []
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      name: '0564776688'
+      mobile: '0564776688'
+      email: fahmi@moltaqa.net
+      password: '12345678'
+      password_confirmation: '12345678'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '57'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/send-otp
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Send OTP To Mobile Number.'
+      description: 'an API which Offers a mean to Send OTP To Mobile Number.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564776688'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '56'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/resend-otp
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Re-Send OTP.'
+      description: 'an API which Offers a mean to Re-Send OTP.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer h4c166aEaDb3vfk8PV5Zegd'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/verify-otp
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'OTP Verification.'
+      description: 'an API which Offers a mean to verify user otp'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      code:
+        name: code
+        description: 'The OTP sent via sms to user.'
+        required: true
+        example: '1234'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      code: '1234'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer gcfZa61dhEav4e5kbD86P3V'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/client/auth/profile
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Profile.'
+      description: 'an API which Offers a mean to login a client'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer ZchD54af1akvP6gE8deb6V3'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/change-mobile
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Change Mobile.'
+      description: 'an API which Offers a mean to change client mobile number.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The new Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564776688'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer aVbecEga35vhf8D614dP6Zk'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/chang-password
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Change Password.'
+      description: 'an API which Offers a mean to Change password for logged in client.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+      old_password:
+        name: old_password
+        description: 'The user old password.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      password: '123456789'
+      old_password: '12345678'
+      password_confirmation: '123456789'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Zkbv6fE38a561cdg4VPDahe'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/forget-password
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Forget Password.'
+      description: 'an API which Offers a mean to reset client password for logged out clients.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564777888'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564777888'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '55'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/auth/reset-password
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client New Password.'
+      description: 'an API which Offers a mean to set new password for logged out clients after verification step.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      password: '123456789'
+      password_confirmation: '123456789'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 38Dg145ahcEZbdk6Vefa6vP'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: api/v1/client/auth/delete-account
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Client Delete Account.'
+      description: 'an API which Offers a mean to delete a client account'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer evk5h48P3afVcE16gaD6dZb'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/client/home/slide
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Home
+      subgroupDescription: |-
+        Home Screen Apis
+
+        used to manage client app home apis
+      title: 'Client Home Screen Slides.'
+      description: 'an API which Offers a mean to list client home screen slides.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '54'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/client/home/store-shipment
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Home
+      subgroupDescription: |-
+        Home Screen Apis
+
+        used to manage client app home apis
+      title: 'Store Shipment and its Order.'
+      description: 'an API which Offers a mean to Store Shipment and its Order then send FCM to nearby providers.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      source_address:
+        name: source_address
+        description: 'source location address.'
+        required: true
+        example: 'jada , street 15'
+        type: srting
+        enumValues: []
+        custom: []
+      source_latitude:
+        name: source_latitude
+        description: 'source location latitude.'
+        required: true
+        example: '31.2384238384782'
+        type: numeric
+        enumValues: []
+        custom: []
+      source_longitude:
+        name: source_longitude
+        description: 'source location longitude.'
+        required: true
+        example: '43.26543254625'
+        type: numeric
+        enumValues: []
+        custom: []
+      destination_address:
+        name: destination_address
+        description: 'destination location address.'
+        required: true
+        example: 'jada , street 40'
+        type: srting
+        enumValues: []
+        custom: []
+      destination_latitude:
+        name: destination_latitude
+        description: 'destination location latitude.'
+        required: true
+        example: '31.2384238384782'
+        type: numeric
+        enumValues: []
+        custom: []
+      destination_longitude:
+        name: destination_longitude
+        description: 'destination location longitude.'
+        required: true
+        example: '43.2384238384782'
+        type: numeric
+        enumValues: []
+        custom: []
+      loaded_at:
+        name: loaded_at
+        description: 'load shipment date.'
+        required: true
+        example: '2023-10-15 04:30:00'
+        type: srting
+        enumValues: []
+        custom: []
+      car_type_id:
+        name: car_type_id
+        description: 'car type idntifier.'
+        required: true
+        example: '1'
+        type: interger
+        enumValues: []
+        custom: []
+      car_category_id:
+        name: car_category_id
+        description: 'car category idntifier.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      shipment_type_id:
+        name: shipment_type_id
+        description: 'shipment type idntifier.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      shipment_sub_type_id:
+        name: shipment_sub_type_id
+        description: 'shipment sub type idntifier.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      length:
+        name: length
+        description: 'shipment length.'
+        required: true
+        example: '60'
+        type: numeric
+        enumValues: []
+        custom: []
+      width:
+        name: width
+        description: 'shipment width.'
+        required: true
+        example: '70'
+        type: numeric
+        enumValues: []
+        custom: []
+      height:
+        name: height
+        description: 'shipment height.'
+        required: true
+        example: '90'
+        type: numeric
+        enumValues: []
+        custom: []
+      weight:
+        name: weight
+        description: 'shipment weight.'
+        required: true
+        example: '112'
+        type: numeric
+        enumValues: []
+        custom: []
+      description:
+        name: description
+        description: 'shipment description.'
+        required: true
+        example: 'shipment description'
+        type: srting
+        enumValues: []
+        custom: []
+      image:
+        name: image
+        description: required.
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      source_address: 'jada , street 15'
+      source_latitude: '31.2384238384782'
+      source_longitude: '43.26543254625'
+      destination_address: 'jada , street 40'
+      destination_latitude: '31.2384238384782'
+      destination_longitude: '43.2384238384782'
+      loaded_at: '2023-10-15 04:30:00'
+      car_type_id: '1'
+      car_category_id: 1
+      shipment_type_id: 1
+      shipment_sub_type_id: 1
+      length: '60'
+      width: '70'
+      height: '90'
+      weight: '112'
+      description: 'shipment description'
+    fileParameters:
+      image: null
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer VvPfhab1D3ec4k6aE56Zgd8'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/client/home/list-price-offers
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Home
+      subgroupDescription: |-
+        Home Screen Apis
+
+        used to manage client app home apis
+      title: 'List Orders price Offers'
+      description: 'an API which Offers a mean to list orders price offers.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      order_id:
+        name: order_id
+        description: 'the order identitfer .'
+        required: true
+        example: 4
+        type: integer
+        enumValues: []
+        custom: []
+    cleanQueryParameters:
+      order_id: 4
+    bodyParameters:
+      order_id:
+        name: order_id
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 543dh1agaVZc66bPefk8EvD'
+    controller: null
+    method: null
+    route: null
+    custom: []

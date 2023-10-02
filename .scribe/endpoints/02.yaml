@@ -1,0 +1,801 @@
+name: 'Dashboard Admin'
+description: 'Manage Dashboard Apis'
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/core/check-abilities
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Core
+      subgroupDescription: 'Manage Admins Abilities and other tasks'
+      title: 'check if admin has has one or more Dashboard abilities.'
+      description: 'an API which Offers a mean to list abilities with filtering'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Eaf1cevkhaZ8bP4dD6g36V5'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/admin/core/check-ability/{module}/{ability}'
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Core
+      subgroupDescription: 'Manage Admins Abilities and other tasks'
+      title: 'checks if admin has a spesefic ability.'
+      description: 'an API which Offers a mean to list abilities with filtering'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters:
+      module:
+        name: module
+        description: ''
+        required: true
+        example: nostrum
+        type: string
+        enumValues: []
+        custom: []
+      ability:
+        name: ability
+        description: ''
+        required: true
+        example: ut
+        type: string
+        enumValues: []
+        custom: []
+    cleanUrlParameters:
+      module: nostrum
+      ability: ut
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 4gva5Z8baEkd66hVPfe13Dc'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/login
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin Login.'
+      description: 'an API which Offers a mean to login a Admin'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The Email Address of the user.'
+        required: true
+        example: fahmi@moltaqa.net
+        type: string
+        enumValues: []
+        custom: []
+      password:
+        name: password
+        description: 'The password of User account.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      email: fahmi@moltaqa.net
+      password: '12345678'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '49'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/logout
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin logout.'
+      description: 'an API which Offers a mean to logout a Admin'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3vVb8gaP6Dcf6a1hkEZ4ed5'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/send-otp
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Send OTP To Mobile Number.'
+      description: 'an API which Offers a mean to Send OTP To Mobile Number.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile:
+        name: mobile
+        description: 'The Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      mobile: '0564776688'
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '48'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/resend-otp
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Re-Send OTP.'
+      description: 'an API which Offers a mean to Re-Send OTP.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer ZhD1g36bk56Pc8afV4Eeadv'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/verify-otp
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'OTP Verification.'
+      description: 'an API which Offers a mean to verify user otp'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      code:
+        name: code
+        description: 'The OTP sent via sms to user.'
+        required: true
+        example: '1234'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      code: '1234'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer dDVb46cf85aaE3g61PhekZv'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/auth/profile
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin Profile.'
+      description: 'an API which Offers a mean to login a Admin'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer a65f3kh8PbeDcaVE641dvgZ'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/changpassword
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin Change Password.'
+      description: 'an API which Offers a mean to Change password for logged in Admin.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+      old_password:
+        name: old_password
+        description: 'The user old password.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      password: '123456789'
+      old_password: '12345678'
+      password_confirmation: '123456789'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Db4e6cV8d6f1a5EkvPh3gaZ'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/forget-password
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin Forget Password.'
+      description: 'an API which Offers a mean to reset Admin password for logged out Admins.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The E-Mail Address of the user.'
+        required: true
+        example: fahmi@moltaqa.net
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      email: fahmi@moltaqa.net
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": [
+                  [
+                      "Api Key Not Valid"
+                  ]
+              ],
+              "pagination": [],
+              "extras": [],
+              "message": "Api Key Not Valid"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '47'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/auth/reset-password
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin New Password.'
+      description: 'an API which Offers a mean to set new password for logged out Admins after verification step.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'The User bew password.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'The user new password confirmation.'
+        required: true
+        example: '123456789'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      password: '123456789'
+      password_confirmation: '123456789'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer cfeZg45kP81h36Ea6bDdvaV'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: api/v1/admin/auth/delete-account
+    metadata:
+      groupName: 'Dashboard Admin'
+      groupDescription: 'Manage Dashboard Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'Admin Delete Account.'
+      description: 'an API which Offers a mean to delete an Admin account'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: |-
+          {
+              "success": false,
+              "data": [],
+              "error": {
+                  "unauthenticated": [
+                      "Unauthenticated."
+                  ]
+              },
+              "pagination": [],
+              "extras": [],
+              "message": "Unauthenticated."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Vfb46dE1kvDZP5a86gcah3e'
+    controller: null
+    method: null
+    route: null
+    custom: []
