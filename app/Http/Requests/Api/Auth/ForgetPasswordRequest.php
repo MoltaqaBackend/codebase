@@ -30,4 +30,11 @@ class ForgetPasswordRequest extends FormRequest
             'mobile' => ['required', "exists:users,mobile,deleted_at,NULL"],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'mobile' => __('Mobile'),
+        ];
+    }
 }

@@ -62,4 +62,26 @@ class RegisterProviderRequest extends FormRequest
             "car_image" => ["required","image","max:2048","mimes:png,jpg,jpeg"],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('Name'),
+            'mobile' => __('Mobile'),
+            'email' => __('E-Mail'),
+            'national_identity' => __('National Identity'),
+            'nationality_id' => __('Nationality Identifier'),
+            'dob' => __('Date of Birth'),
+            'password' => __('Password'),
+            'password_confirmation' => __('Password Confirmation'),
+            'address' => __('Address'),
+            'latitude' => __('Latitude'),
+            'longitude' => __('Longitude'),
+            'car_type_id' => __('Car Type Identifier'),
+            'car_category_id' => __('Car Category Identifier'),
+            'serial_number' => __('Serial Number'),
+            'board_number' => __('Board Number'),
+            'car_image' => __('Car Image'),
+        ];
+    }
 }

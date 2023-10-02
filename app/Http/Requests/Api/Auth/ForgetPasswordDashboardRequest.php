@@ -30,4 +30,11 @@ class ForgetPasswordDashboardRequest extends FormRequest
             'email' => ['required', "exists:users,email,deleted_at,NULL"],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'email' => __('E-Mail'),
+        ];
+    }
 }

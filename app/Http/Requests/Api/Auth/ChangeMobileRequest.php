@@ -31,4 +31,11 @@ class ChangeMobileRequest extends FormRequest
             'mobile' => ['required', "unique:users,mobile,deleted_at,NULL"],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'mobile' => __('Mobile'),
+        ];
+    }
 }

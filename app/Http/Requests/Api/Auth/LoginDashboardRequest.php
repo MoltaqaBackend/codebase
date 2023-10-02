@@ -39,6 +39,14 @@ class LoginDashboardRequest extends FormRequest
         ];
     }
 
+    public function attributes(): array
+    {
+        return [
+            'email' => __('E-Mail'),
+            'password' => __('Password'),
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *

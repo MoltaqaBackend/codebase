@@ -80,7 +80,7 @@ class StoreShipmentRequest extends FormRequest
             'height' => __('Height'),
             'weight' => __('Weight'),
             'description' => __('Description'),
-            'image' => __('Image'),
+            'image' => __('Car Image'),
         ];
     }
 }

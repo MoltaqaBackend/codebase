@@ -39,6 +39,14 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function attributes(): array
+    {
+        return [
+            'mobile' => __('Mobile'),
+            'password' => __('Password'),
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *

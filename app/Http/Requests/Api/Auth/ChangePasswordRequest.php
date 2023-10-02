@@ -35,4 +35,13 @@ class ChangePasswordRequest extends FormRequest
             'old_password' => ['required', 'string'],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'password' => __('Password'),
+            'password_confirmation' => __('Password Confirmation'),
+            'old_password' => __('Current Password'),
+        ];
+    }
 }

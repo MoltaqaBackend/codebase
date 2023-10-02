@@ -38,4 +38,15 @@ class RegisterAdminRequest extends FormRequest
             "password" => ["required","confirmed",Password::default()],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('Name'),
+            'mobile' => __('Mobile'),
+            'email' => __('E-Mail'),
+            'password' => __('Password'),
+            'password_confirmation' => __('Password Confirmation'),
+        ];
+    }
 }

@@ -32,4 +32,12 @@ class ResetPasswordRequest extends FormRequest
             'password' => ['required', 'confirmed', 'string', Password::default()],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'password' => __('Password'),
+            'password_confirmation' => __('Password Confirmation'),
+        ];
+    }
 }

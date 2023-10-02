@@ -30,4 +30,11 @@ class SendOTPRequest extends FormRequest
             'mobile' => ["required", "unique:users,mobile"],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'mobile' => __('Mobile'),
+        ];
+    }
 }

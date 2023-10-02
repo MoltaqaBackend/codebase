@@ -30,4 +30,11 @@ class UpdateCMUUIDRequest extends FormRequest
             'CMUUID' => ['required', 'string', 'max:190'],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'CMUUID' => __('CMUUID'),
+        ];
+    }
 }

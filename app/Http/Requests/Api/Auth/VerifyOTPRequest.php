@@ -30,4 +30,11 @@ class VerifyOTPRequest extends FormRequest
             'code' => ['required', 'string', 'min:4'],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'code' => __('OTP Code'),
+        ];
+    }
 }

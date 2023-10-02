@@ -30,4 +30,11 @@ class RefreshTokenRequest extends FormRequest
             "token" => ["string"],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'token' => __('Authorization Token'),
+        ];
+    }
 }
