@@ -2,11 +2,20 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\Exceptions\MissingAbilityException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Broadcasting\BroadcastException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponseTrait;
+
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -26,5 +35,52 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $exception)
+    {
+        
+        if ($request->is('api/*') || $request->wantsJson()) {
+            
+            if ($exception->getMessage() == "Unauthenticated.") {
+                $error = ['unauthenticated' => [$exception->getMessage()]];
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                $code = $exception->getCode();
+                return $this->setStatusCode($exception->getCode())->respondWithError($message);
+            }
+
+            if ($exception instanceof AuthenticationException) {
+                $error = ['unauthenticated' => [$exception->getMessage()]];
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                return $this->setStatusCode(401)->respondWithError($message);
+            }
+
+            if($exception instanceof UnauthorizedException){
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                return $this->setStatusCode(403)->respondWithError($message);
+
+            }
+
+            if ($exception instanceof HttpException) {
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                return $this->setStatusCode($exception->getCode())->respondWithError($message);
+            }
+
+            if ($exception instanceof ValidationException) {
+                $errors = $exception->errors();
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                return $this->setStatusCode(422)->respondWithError($message);
+            }
+        }
+        return parent::render($request, $exception);
     }
 }

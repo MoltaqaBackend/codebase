@@ -65,12 +65,15 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'apiversion' => \App\Http\Middleware\APIVersion::class,
         'apikey' => \App\Http\Middleware\APIKey::class,
         'apilocale' => \App\Http\Middleware\APILocale::class,
         'auth.optional' => \App\Http\Middleware\OptionalAuthSanctum::class,
 
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
+
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class
     ];
 }

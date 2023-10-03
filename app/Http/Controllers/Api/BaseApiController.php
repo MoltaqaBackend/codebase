@@ -21,8 +21,14 @@ class BaseApiController extends Controller
      * @param BaseContract $repository
      * @param mixed $modelResource
      */
-    public function __construct(BaseContract $repository, mixed $modelResource)
+    public function __construct(BaseContract $repository, mixed $modelResource,$model=null)
     {
+
+        $this->middleware(['permission:read_'.$model])->only(['__invoke','index']);
+        $this->middleware(['permission:update_'.$model])->only('update');
+        $this->middleware(['permission:create_'.$model])->only('create');
+        $this->middleware(['permission:delete_'.$model])->only('destroy');
+
         $this->repository = $repository;
         $this->modelResource = $modelResource;
 

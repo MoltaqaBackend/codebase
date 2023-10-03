@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Api\BaseApiController;
-use App\Http\Requests\Api\RoleRequest;
+use App\Http\Requests\Dashboard\RoleRequest;
 use App\Http\Resources\Api\RoleResource;
 use App\Models\Role;
 use App\Repositories\Contracts\RoleContract;
@@ -18,7 +18,7 @@ class RoleController extends BaseApiController
      */
     public function __construct(RoleContract $repository)
     {
-        parent::__construct($repository, RoleResource::class);
+        parent::__construct($repository, RoleResource::class,'role');
     }
 
     public function index(): mixed

@@ -2,8 +2,8 @@
  
 namespace App\Exceptions\Api\Auth;
 
-use App\Exceptions\Api\ApiBaseException;
- 
+use App\Exceptions\Api\Auth\ApiBaseException;
+
 class AuthException extends ApiBaseException
 {
    public static function userNotFound($errors,$code = null){
