@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Auth\Models;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

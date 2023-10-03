@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\Auth\Services;
+namespace App\Services\Auth;
 
 use App\Exceptions\Api\Auth\AuthException;
 use App\Http\Requests\Api\Auth\ForgetPasswordDashboardRequest;
 use App\Http\Requests\Api\Auth\LoginDashboardRequest;
 use App\Http\Requests\Api\Auth\RegisterAdminRequest;
-use App\Repositories\Auth\Concretes\AuthAbstract;
-use App\Repositories\Auth\Models\User;
+use App\Services\Auth\AuthAbstract;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AuthAdminService extends AuthAbstract

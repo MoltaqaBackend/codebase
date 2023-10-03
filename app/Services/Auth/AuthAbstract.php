@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Auth\Concretes;
+namespace App\Services\Auth;
 
 use App\Exceptions\Api\Auth\AuthException;
 use App\Http\Requests\Api\Auth\ChangeMobileRequest;
@@ -10,7 +10,7 @@ use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
-use App\Repository\Auth\Models\AuthenticatableOTP;
+use App\Models\AuthenticatableOTP;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Http\FormRequest;
