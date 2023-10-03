@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->mediumInteger('code');
             $table->boolean('active')->default(1);
-            $table->morphs('authenticatable');
+            $table->morphs('authenticatable','authenticatable_otp_type_id_index');
             $table->softDeletes();
             $table->timestamps();
         });

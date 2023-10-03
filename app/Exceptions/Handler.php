@@ -4,11 +4,6 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Validation\ValidationException;
-use Laravel\Sanctum\Exceptions\MissingAbilityException;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Broadcasting\BroadcastException;
 
 class Handler extends ExceptionHandler
 {
@@ -31,51 +26,5 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-    }
-
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Throwable
-     */
-    public function render($request, Throwable $exception)
-    {
-        if ($request->is('api/*') || $request->wantsJson()) {
-            if ($exception->getMessage() == "Unauthenticated.") {
-                $error = ['unauthenticated' => [$exception->getMessage()]];
-                $message = $exception->getMessage();
-                return apiErrors($error, [], $message, 401);
-            }
-            if ($exception instanceof AuthenticationException) {
-                $error = ['unauthenticated' => [$exception->getMessage()]];
-                $message = $exception->getMessage();
-                return apiErrors($error, [], $message, 401);
-            }
-            if ($exception instanceof HttpException) {
-                $error = ['failed' => [$exception->getMessage()]];
-                $message = $exception->getMessage();
-                return apiErrors($error, [], $message, $exception->getStatusCode());
-            }
-            if ($exception instanceof ValidationException) {
-                $errors = $exception->errors();
-                $message = reset($errors);
-                return apiErrors($errors, [], $message, 422);
-            }
-            if ($exception instanceof MissingAbilityException) {
-                $error = ['failed' => [$exception->getMessage()]];
-                $message = $exception->getMessage();
-                return apiErrors($error, [], $message, 403);
-            }
-            if($exception instanceof BroadcastException){
-                $message = $exception->getMessage();
-                $error = ['failed' => [$message]];
-                return apiErrors($error, [], $message, $exception->getCode() ?? 404);
-            }
-        }
-        return parent::render($request, $exception);
     }
 }

@@ -76,6 +76,6 @@ class User extends Authenticatable implements HasMedia
 
     public function isActive(): bool
     {
-        return $this->account_status ?? 1;
+        return $this->is_active ?? 1;
     }
 }

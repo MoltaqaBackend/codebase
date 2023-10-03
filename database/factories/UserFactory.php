@@ -48,32 +48,7 @@ class UserFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function(User $user){
-            if($user->id < 3){
-                $abilityRecord = $user->abilities()->save(new AbilityUser([
-                    'ability_id' => 1,
-                ]));
-                $user->access_token = $user->createToken('kdadeltariq',$abilityRecord->ability->abilities)->plainTextToken;
-            }
-            else if($user->id > 3 && $user->id <= 6){
-                $abilityRecord = $user->abilities()->save(new AbilityUser([
-                    'ability_id' => 2,
-                ]));
-                $user->access_token = $user->createToken('kdadeltariq',$abilityRecord->ability->abilities)->plainTextToken;
-            }
-            else if($user->id > 6 && $user->id <= 9){
-                $abilityRecord = $user->abilities()->save(new AbilityUser([
-                    'ability_id' => 3,
-                ]));
-                $user->access_token = $user->createToken('kdadeltariq',$abilityRecord->ability->abilities)->plainTextToken;
-            }
-            else{
-                $abilityRecord = $user->abilities()->save(new AbilityUser([
-                    'ability_id' => 4,
-                ]));
-                $user->access_token = $user->createToken('kdadeltariq',$abilityRecord->ability->abilities)->plainTextToken;
-                Provider::factory()->count(1)->for($user)->create();
-                ProviderCar::factory()->count(1)->for($user)->create();
-            }
+            $user->access_token = $user->createToken('codebase',['*'])->plainTextToken;
             $this->addTokenExpiration($user->access_token);
         });
     }

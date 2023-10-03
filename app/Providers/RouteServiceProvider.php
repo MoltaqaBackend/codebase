@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::middleware('api')
+            Route::middleware(['api','apilocale'])
             ->prefix('dashboard-api/v1')
             ->namespace($this->dashboardApiNamespace)
             ->group(base_path('routes/dashboard-v1.php'));

@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Dashboard\AuthController;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\Dashboard\{
+    PermissionController,
+    RoleController,
+    AuthController
+};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,4 +33,13 @@ Route::prefix("auth")->group(function () {
     Route::post('send-otp', [AuthController::class, 'sendOTP']);
     Route::post('forget-password', [AuthController::class, 'forgetPassword']);
 
+});
+
+
+Route::middleware(["auth:sanctum"])->group(function () {
+    # Roles
+    Route::apiResource('roles',RoleController::class);
+
+    # Permission
+    Route::get('permissions', PermissionController::class);
 });

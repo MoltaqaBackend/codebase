@@ -6,7 +6,6 @@ use App\Exceptions\Api\Auth\AuthException;
 use App\Http\Requests\Api\Auth\ChangeMobileRequest;
 use App\Http\Requests\Api\Auth\ChangePasswordRequest;
 use App\Http\Requests\Api\Auth\ForgetPasswordRequest;
-use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
@@ -36,9 +35,6 @@ abstract class AuthAbstract
      * Login
      */
     public function login(FormRequest $request,$abilities = null){
-        if(!($request instanceof LoginRequest))
-            throw AuthException::wrongImplementation(['wrong_implementation' => [__('Wrong Implementation')]]);
-
         $request->authenticate();
         $user = $request->user();
 

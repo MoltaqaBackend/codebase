@@ -42,7 +42,7 @@ class AuthClientService extends AuthAbstract
             throw AuthException::wrongImplementation(['wrong_implementation' => [__("Failed Operation")]]);
         
         $data = $request->validated();
-        $data['account_status'] = 1;
+        $data['is_active'] = 1;
         
         $user = User::create($data);
         if(!$user->wasRecentlyCreated)

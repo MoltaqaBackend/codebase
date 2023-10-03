@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Api\Auth;
 
+use App\Enum\UserTypeEnum;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
@@ -14,7 +16,7 @@ use Illuminate\Validation\ValidationException;
  * @bodyParam mobile string required The Mobile Number of the user.Example: 0564777888
  * @bodyParam password string required The password of User account.Example: 12345678
  */
-class LoginRequest extends FormRequest
+class LoginClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,7 +36,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ['required', "exists:users,mobile"],
+            'mobile' => ['required',
+                Rule::exists('users', 'mobile')->whereIn('type', [UserTypeEnum::CLIENT])],
             'password' => ['required', 'string', Password::default()],
         ];
     }

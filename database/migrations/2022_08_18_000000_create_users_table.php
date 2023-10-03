@@ -19,11 +19,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->boolean('account_status')->default(0);
-            $table->string('platform')->nullable()->comment('android , ios , desktop');
-            $table->string('CMUUID')->nullable();
-            $table->string('prefered_locale')->nullable();
-            $table->dateTime('logged_in_at')->nullable();
+            $table->boolean('is_active')->default(0);
+            $table->string('fcm_token')->nullable();
+            $table->string('type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

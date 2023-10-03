@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\ChangeMobileRequest;
 use App\Http\Requests\Api\Auth\ChangePasswordRequest;
 use App\Http\Requests\Api\Auth\ForgetPasswordRequest;
-use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\LoginClientRequest;
 use App\Http\Requests\Api\Auth\RegisterClientRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
@@ -41,7 +41,7 @@ class AuthController extends Controller
      * @header Api-Version v1
      * @header Accept-Language ar
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginClientRequest $request): JsonResponse
     {
         return apiSuccess(
             new ClientResource(

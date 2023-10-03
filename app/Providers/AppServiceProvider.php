@@ -4,11 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Storage;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,12 +26,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (config('app.env') === 'production') {
-            URL::forceScheme('https');
-        }
 
+        Paginator::useBootstrap();
         Schema::defaultStringLength(191);
-        date_default_timezone_set(Config::get('app.timezone', 'Africa/Cairo'));
+        //date_default_timezone_set(Config::get('app.timezone', 'Africa/Cairo'));
+
+        # Enforce Morph Modela
+        $modelFiles = Storage::disk('app')->files('Models');
+        foreach ($modelFiles as $modelFile) {
+            $model = str_replace('.php', '', $modelFile);
+            $model = str_replace('Models/', '', $model);
+            $modelClass = 'App\\Models\\' . str_replace('/', '\\', $model);
+            Relation::enforceMorphMap([
+                "$model" => "$modelClass"
+            ]);
+        }
 
 
         Response::macro('apiResponse', function ($data, $error, $pagination, $extras, $message, $success, $code) {
@@ -54,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
          * @param string $pageName
          * @return array
          */
-        Collection::macro('paginate', function ($perPage, $total = null, $page = null, $pageName = 'page') {
+        Collection::macro('customPaginate', function ($perPage, $total = null, $page = null, $pageName = 'page') {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
             return new LengthAwarePaginator(
                 $this->forPage($page, $perPage),
