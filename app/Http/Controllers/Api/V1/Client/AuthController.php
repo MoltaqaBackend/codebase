@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\AppClient\Auth;
+namespace App\Http\Controllers\Api\V1\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\ChangeMobileRequest;
@@ -12,7 +12,7 @@ use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\ClientResource;
-use App\Repositories\Auth\Services\AuthClientService;
+use App\Services\Auth\AuthClientService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
  * @subGroup Auth
  * @subgroupDescription Auth Cycle Apis
  */
-class AuthClientController extends Controller
+class AuthController extends Controller
 {
     private $authClientService;
 

@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\Dashboard\Auth;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\ChangePasswordRequest;
 use App\Http\Requests\Api\Auth\ForgetPasswordDashboardRequest;
 use App\Http\Requests\Api\Auth\LoginDashboardRequest;
-use App\Http\Requests\Api\Auth\RegisterAdminRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\AdminResource;
-use App\Repositories\Auth\Services\AuthAdminService;
+use App\Services\Auth\AuthAdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -22,7 +21,7 @@ use Illuminate\Http\Request;
  * @subGroup Auth
  * @subgroupDescription Auth Cycle Apis
  */
-class AuthAdminController extends Controller
+class AuthController extends Controller
 {
     private $authAdminService;
 
@@ -47,23 +46,6 @@ class AuthAdminController extends Controller
                 $this->authAdminService->login($request,adminAbilities())
             ),[],[],__('Logged in Successfully'));
     }
-
-    // /**
-    //  * Admin Register.
-    //  * 
-    //  * an API which Offers a mean to register a new Admin
-    //  * @unauthenticated
-    //  * @header Api-Key xx
-    //  * @header Api-Version v1
-    //  * @header Accept-Language ar
-    //  */
-    // public function register(RegisterAdminRequest $request): JsonResponse
-    // {
-    //     return apiSuccess(
-    //         new AdminResource(
-    //             $this->authAdminService->register($request,adminAbilities())
-    //         ),[],[],__('Registered Successfully'));
-    // }
 
     /**
      * Send OTP To Mobile Number.

@@ -18,6 +18,10 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    protected $namespace    = 'App\\Http\\Controllers';
+    protected string $apiClientNamespace = 'App\\Http\\Controllers\\Api\\V1\\Client';
+    protected string $apiProviderNamespace = 'App\\Http\\Controllers\\Api\\V1\\Provider';
+    protected string $dashboardApiNamespace = 'App\\Http\\Controllers\\Api\\V1\\Dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -29,11 +33,23 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::middleware(['api', 'apiversion', 'apikey','apilocale'])
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+            Route::middleware('api')
+            ->prefix('dashboard-api/v1')
+            ->namespace($this->dashboardApiNamespace)
+            ->group(base_path('routes/dashboard-v1.php'));
+
+            Route::middleware(['api','apilocale'])
+                ->namespace($this->apiClientNamespace)
+                ->prefix('client-api/v1')
+                ->group(base_path('routes/api-v1.php'));
+
+            Route::middleware(['api','apilocale'])
+                ->namespace($this->apiProviderNamespace)
+                ->prefix('provider-api/v1')
+                ->group(base_path('routes/provider-v1.php'));
 
             Route::middleware('web')
+                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
     }
