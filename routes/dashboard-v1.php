@@ -42,4 +42,7 @@ Route::middleware(["auth:admin"])->group(function () {
 
     # Permission
     Route::get('permissions', PermissionController::class);
+
+    # Chat
+    include __DIR__.'/chat.php';
 });

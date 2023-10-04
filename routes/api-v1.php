@@ -30,5 +30,13 @@ Route::prefix("auth")->group(function () {
         Route::post('register', [AuthController::class, 'register']);
         Route::post('send-otp', [AuthController::class, 'sendOTP']);
         Route::post('forget-password', [AuthController::class, 'forgetPassword']);
+});
+
+Route::middleware(["auth:client"])->group(function () {
+
+    # Chat
+    include __DIR__.'/chat.php';
 
 });
+
+

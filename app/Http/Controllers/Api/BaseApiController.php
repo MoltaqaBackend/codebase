@@ -47,8 +47,6 @@ class BaseApiController extends Controller
      */
     public function index(): mixed
     {
-
-
         $page = 1;
         $limit = 10;
         $order = $this->order;

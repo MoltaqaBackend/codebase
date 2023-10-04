@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-        
+
+# TODO Make Guard (Provider) If Need
 Route::prefix("auth")->group(function () {
     Route::middleware(["auth:sanctum"])->group(function () {
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
@@ -30,5 +31,12 @@ Route::prefix("auth")->group(function () {
         Route::post('register', [AuthController::class, 'register']);
         Route::post('send-otp', [AuthController::class, 'sendOTP']);
         Route::post('forget-password', [AuthController::class, 'forgetPassword']);
+});
+
+Route::middleware(["auth:sanctum"])->group(function () {
+
+    # Chat
+    include __DIR__.'/chat.php';
 
 });
+

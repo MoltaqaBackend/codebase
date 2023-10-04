@@ -21,13 +21,6 @@ class RoleController extends BaseApiController
      */
     public function __construct(RoleContract $repository)
     {
-
-        auth('admin')->user()
-            ->walletType(WalletTypeEnum::MONEY, WalletTransactionTypeEnum::DEPOSIT)
-            ->walletSteps(10)
-            ->walletTransactionReason(WalletTransactionReasonEnum::DEPOSIT_ORDER_AMOUNT)
-            ->walletCreate();
-
         parent::__construct($repository, RoleResource::class,'role');
     }
 
