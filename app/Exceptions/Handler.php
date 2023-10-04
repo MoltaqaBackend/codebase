@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponseTrait;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -48,9 +49,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        
+
         if ($request->is('api/*') || $request->wantsJson()) {
-            
+
             if ($exception->getMessage() == "Unauthenticated.") {
                 $error = ['unauthenticated' => [$exception->getMessage()]];
                 $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
@@ -64,7 +65,7 @@ class Handler extends ExceptionHandler
                 return $this->setStatusCode(401)->respondWithError($message);
             }
 
-            if($exception instanceof UnauthorizedException){
+            if($exception instanceof UnauthorizedException || $exception instanceof AuthorizationException ){
                 $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
                 return $this->setStatusCode(403)->respondWithError($message);
 

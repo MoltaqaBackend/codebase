@@ -8,8 +8,8 @@ class Role extends \Spatie\Permission\Models\Role
 {
     use ModelTrait;
 
-    public const DEFAULT_ROLE_SUPER_ADMIN = 'Admin';
-    public const DEFAULT_ROLE_CLIENT = 'Client';
+    public const DEFAULT_ROLE_SUPER_ADMIN = 'admin';
+    public const DEFAULT_ROLE_CLIENT = 'client';
 
 
     protected array $filters = [

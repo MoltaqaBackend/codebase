@@ -8,14 +8,12 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 
 class UserSeeder extends Seeder
 {
 
-    
+
     /**
      * Run the database seeds.
      */
@@ -27,10 +25,10 @@ class UserSeeder extends Seeder
         DB::table('model_has_roles')->truncate();
         DB::table('model_has_permissions')->truncate();
 
-        $permissions = Permission::where('guard_name', 'sanctum')->get();
+        $permissions = Permission::where('guard_name', 'admin')->get();
 
         # Admin
-        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN, 'sanctum');
+        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN, 'admin');
         $adminRole->givePermissionTo($permissions);
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@admin.com'],
@@ -51,7 +49,7 @@ class UserSeeder extends Seeder
 
 
         # Client
-        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT, 'sanctum');
+        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT, 'client');
         $clientRole->givePermissionTo([]);
         $clientUser = User::firstOrCreate(
             ['email' => 'client@client.com'],
@@ -68,7 +66,7 @@ class UserSeeder extends Seeder
         $this->command->warn($clientUser->mobile);
         $this->command->warn(123123);
         $this->command->line('------------------------------------------------------------------------------');
-        
+
     }
 
 }

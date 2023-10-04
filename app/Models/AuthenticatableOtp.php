@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AuthenticatableOTP extends Model
+class AuthenticatableOtp extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = "authenticatable_otp";

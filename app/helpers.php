@@ -21,7 +21,20 @@ if (!function_exists('getLocales')) {
      */
     function getLocales($forSeeder = false)
     {
-        return $forSeeder ? ['ar'=> 'ar_EG', 'en' => 'en_US'] : ['ar', 'en'];
+        return $forSeeder ? ['ar' => 'ar_EG', 'en' => 'en_US'] : ['ar', 'en'];
+    }
+}
+if (!function_exists('activeGuard')) {
+
+    function activeGuard(): int|string|null
+    {
+
+        foreach (array_keys(config('auth.guards')) as $guard) {
+
+            if (auth()->guard($guard)->check()) return $guard;
+
+        }
+        return null;
     }
 }
 
@@ -61,7 +74,7 @@ if (!function_exists('createdAt')) {
 }
 
 if (!function_exists('retrieveFromCache')) {
-    function retrieveFromCache(string $key, $model = null,$quries = null, $relations = null, $order = "ASC", $isCollection = true)
+    function retrieveFromCache(string $key, $model = null, $quries = null, $relations = null, $order = "ASC", $isCollection = true)
     {
         return cache()->rememberForever($key, function () use ($model, $quries, $relations, $order, $isCollection) {
             if ($model == null)
@@ -70,8 +83,8 @@ if (!function_exists('retrieveFromCache')) {
             if ($relations != null)
                 $records = $records->with($relations);
             if (is_array($quries))
-                foreach($quries as $query){
-                    if(array_key_exists('attr',$query))
+                foreach ($quries as $query) {
+                    if (array_key_exists('attr', $query))
                         $records = $records->{$query['fn']}($query['attr']);
                     else
                         $records = $records->{$query['fn']}();
@@ -103,7 +116,7 @@ if (!function_exists('reCache')) {
 if (!function_exists('prepareQueryCache')) {
     function prepareQueryCache(string $fn, $attr = null)
     {
-        return is_null($attr) ? ['fn' => $fn]: ['fn' => $fn , 'attr' => $attr];
+        return is_null($attr) ? ['fn' => $fn] : ['fn' => $fn, 'attr' => $attr];
     }
 }
 
@@ -222,10 +235,10 @@ if (!function_exists('sendFCMNotiffication')) {
      * @param $message string notification message
      * @param $topic string notification topic
      * @param $payLoad array notification payload
-     * @param $isDataMessage bool if true send firbase data message notification else normal notification 
+     * @param $isDataMessage bool if true send firbase data message notification else normal notification
      * @return bool the status of sending the notification
      */
-    function sendFCMNotiffication($locale,$tokens, $title, $message, $topic, $payLoad = null, $isDataMessage = true):bool
+    function sendFCMNotiffication($locale, $tokens, $title, $message, $topic, $payLoad = null, $isDataMessage = true): bool
     {
         if ($payLoad == null)
             $payLoad = array();
@@ -237,13 +250,13 @@ if (!function_exists('sendFCMNotiffication')) {
             "registration_ids" => $tokens,
         ];
         if ($isDataMessage) {
-            $payLoad["body"] = __($message,[],$locale);
-            $payLoad["title"] = __($title,[],$locale);
+            $payLoad["body"] = __($message, [], $locale);
+            $payLoad["title"] = __($title, [], $locale);
             $data["data"] = $payLoad;
         } else {
             $data["notification"] = [
-                "body" => __($message,[],$locale),
-                "title" => __($title,[],$locale),
+                "body" => __($message, [], $locale),
+                "title" => __($title, [], $locale),
             ];
             $data["data"] = $payLoad;
         }
@@ -294,9 +307,9 @@ if (!function_exists('searchMultipleLanguages')) {
     /**
      * search multi language database columns
      *
-     * @param  mixed  $query elquent query builder
-     * @param  mixed  $field database column
-     * @param  mixed  $seach search value
+     * @param mixed $query elquent query builder
+     * @param mixed $field database column
+     * @param mixed $seach search value
      * @return mixed
      */
     function searchMultipleLanguages($query, $field, $search)
@@ -330,14 +343,14 @@ if (!function_exists('stringfyErrors')) {
 }
 
 if (!function_exists('apiSuccess')) {
-    function apiSuccess($data, $pagination = [], $extras = [], $message = null, $code = 200):JsonResponse
+    function apiSuccess($data, $pagination = [], $extras = [], $message = null, $code = 200): JsonResponse
     {
         return response()->apiResponse($data, array(), $pagination, $extras, $message ?? __('Data Found'), true, $code);
     }
 }
 
 if (!function_exists('apiErrors')) {
-    function apiErrors($errors, $extras = [], $message = null, $code = 200):JsonResponse
+    function apiErrors($errors, $extras = [], $message = null, $code = 200): JsonResponse
     {
         $errors = is_array($errors) ? stringfyErrors($errors) : $errors;
         return response()->apiResponse(array(), $errors, [], $extras, is_array($message) ? reset($message) : $message, false, $code);
@@ -353,7 +366,7 @@ if (!function_exists('sendSMS')) {
         $encodedauthdata = "MTEwMTkzODA0NzY6Z3MydjtCKERfMy9CaHU6MTUxOQ==";
         $result = ['sms' => true];
 
-        if(!config('kdadeltariq.sms') == "local") {
+        if (!config('kdadeltariq.sms') == "local") {
             $guzzelClient = new Client();
             $response = $guzzelClient->request('POST', 'http://weapi.connekio.com/sms/single', [
                 'json' => [
@@ -375,13 +388,13 @@ if (!function_exists('sendSMS')) {
 
             $sms = false;
             if ($response->getStatusCode() === 200) {
-                $data =  json_decode((string) $response->getBody(),true);
+                $data = json_decode((string)$response->getBody(), true);
                 $sms = filter_var($data['status'], FILTER_VALIDATE_BOOLEAN);
             }
 
             $result["sms"] = $sms;
         }
-        
+
         return $result;
     }
 }
@@ -397,78 +410,83 @@ if (!function_exists('sendOtpMail')) {
     }
 }
 
-if(!function_exists('clientAbilities')){
+if (!function_exists('clientAbilities')) {
     /**
      * intial abilities set for client
      */
-    function clientAbilities(): array{
+    function clientAbilities(): array
+    {
         return [
             AbilitiesConstant::CLIENT,
         ];
     }
 }
 
-if(!function_exists('providerAbilities')){
+if (!function_exists('providerAbilities')) {
     /**
      * intial abilities set for provider
      */
-    function providerAbilities(): array{
+    function providerAbilities(): array
+    {
         return [
             AbilitiesConstant::PROVIDER,
         ];
     }
 }
 
-if(!function_exists('adminAbilities')){
+if (!function_exists('adminAbilities')) {
     /**
      * intial abilities set for admin
      */
-    function adminAbilities(): array{
+    function adminAbilities(): array
+    {
         $abilities = generateDashboardAdminAbilities();
-        array_push($abilities,AbilitiesConstant::ADMIN);
+        array_push($abilities, AbilitiesConstant::ADMIN);
         return $abilities;
     }
 }
 
-if(!function_exists('generateDashboardAdminAbilities')){
-    function generateDashboardAdminAbilities(){
+if (!function_exists('generateDashboardAdminAbilities')) {
+    function generateDashboardAdminAbilities()
+    {
         $abilities = array();
         // modules with full main actions
         $dashboardModules = array_values(DashboardModulesConstant::getModulesForMainActions());
         $dashboardModulesActions = array_values(DashboardModulesActionsConstant::getMainActions());
-        foreach($dashboardModules as $module){
+        foreach ($dashboardModules as $module) {
             $abilities[] = $module;
-            foreach($dashboardModulesActions as $action){
-                $abilities[] = $module.' '.$action;
+            foreach ($dashboardModulesActions as $action) {
+                $abilities[] = $module . ' ' . $action;
             }
         }
         // single module with spesific actions
         $settingModule = DashboardModulesConstant::SETTING;
         $settingModuleActions = array_values(DashboardModulesActionsConstant::getSettingActions());
         $abilities[] = $settingModule;
-        foreach($settingModuleActions as $action){
-            $abilities[] = $settingModule.' '.$action;
+        foreach ($settingModuleActions as $action) {
+            $abilities[] = $settingModule . ' ' . $action;
         }
         return $abilities;
     }
 }
-if(!function_exists('checkDashboardAdminAbilities')){
-    function checkDashboardAdminAbilities($userCurrentAbilities,$adminFullAbilitites){
+if (!function_exists('checkDashboardAdminAbilities')) {
+    function checkDashboardAdminAbilities($userCurrentAbilities, $adminFullAbilitites)
+    {
         $abilities = array();
         $dashboardModules = array_values(DashboardModulesConstant::getDashboardModules());
-        foreach($dashboardModules as $module){
+        foreach ($dashboardModules as $module) {
             $temp = [
                 "parent_key" => $module,
-                "has_permission" => in_array($module,$userCurrentAbilities),
+                "has_permission" => in_array($module, $userCurrentAbilities),
                 "permission" => array(),
             ];
-            foreach($adminFullAbilitites as $ability){
-                if(!str($ability)->contains($module)){
+            foreach ($adminFullAbilitites as $ability) {
+                if (!str($ability)->contains($module)) {
                     continue;
                 }
                 $temp['permission'][] = [
-                    "key" => str($ability)->replaceFirst($module.' ',''),
-                    "has_permission" => in_array($ability,$userCurrentAbilities),
+                    "key" => str($ability)->replaceFirst($module . ' ', ''),
+                    "has_permission" => in_array($ability, $userCurrentAbilities),
                 ];
             }
             $abilities[] = $temp;

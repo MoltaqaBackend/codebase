@@ -66,12 +66,12 @@ class User extends Authenticatable implements HasMedia
 
     public function latestOTPToken(): MorphOne
     {
-        return $this->morphOne(AuthenticatableOTP::class,'authenticatable')->latestOfMany();
+        return $this->morphOne(AuthenticatableOtp::class,'authenticatable')->latestOfMany();
     }
 
     public function OTPTokens(): MorphMany
     {
-        return $this->morphMany(AuthenticatableOTP::class,'authenticatable')->whereActive(true)->latest();
+        return $this->morphMany(AuthenticatableOtp::class,'authenticatable')->whereActive(true)->latest();
     }
 
     public function isActive(): bool

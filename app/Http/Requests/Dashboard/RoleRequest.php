@@ -25,6 +25,7 @@ class RoleRequest extends FormRequest
         return [
             'name' => [
                 'required',
+                'unique:roles,name,' .$this->route('role')->id,
                 'min:1',
                 'max:250',
                 new RoleBodyRule()

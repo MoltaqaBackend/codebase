@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-        
+
 Route::prefix("auth")->group(function () {
-    Route::middleware(["auth:sanctum"])->group(function () {
+    Route::middleware(["auth:client"])->group(function () {
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
         Route::post('verify-otp', [AuthController::class, 'verifyOTP']);
         Route::post('logout', [AuthController::class, 'logout']);

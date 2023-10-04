@@ -21,11 +21,6 @@ class RoleController extends BaseApiController
         parent::__construct($repository, RoleResource::class,'role');
     }
 
-    public function index(): mixed
-    {
-        return parent::index();
-    }
-
     /**
      * @param RoleRequest $request
      * @return JsonResponse
@@ -34,7 +29,6 @@ class RoleController extends BaseApiController
     {
         $role = $this->repository->create([
             'name' => $request['name'],
-            'tenant_id' => auth('sanctum')->user()->tenant_id
         ]);
         $requestPermissions=$request['role_permissions']?array_filter(Arr::flatten(array_values($request['role_permissions']))):[];
         $role->syncPermissions($requestPermissions);

@@ -9,6 +9,7 @@ use App\Traits\ApiResponseTrait;
 class BaseApiController extends Controller
 {
     use ApiResponseTrait;
+
     protected bool $order = true;
     protected $orderBy = 'id';
     protected BaseContract $repository;
@@ -21,13 +22,14 @@ class BaseApiController extends Controller
      * @param BaseContract $repository
      * @param mixed $modelResource
      */
-    public function __construct(BaseContract $repository, mixed $modelResource,$model=null)
+    public function __construct(BaseContract $repository, mixed $modelResource, $model = null)
     {
 
-        $this->middleware(['permission:read_'.$model])->only(['__invoke','index']);
-        $this->middleware(['permission:update_'.$model])->only('update');
-        $this->middleware(['permission:create_'.$model])->only('create');
-        $this->middleware(['permission:delete_'.$model])->only('destroy');
+        $this->middleware(['role_or_permission:' . \Str::plural($model) . ' index|'.activeGuard()])->only(['__invoke', 'index']);
+        $this->middleware(['role_or_permission:' . \Str::plural($model) . ' edit|'.activeGuard()])->only('update');
+        $this->middleware(['role_or_permission:' . \Str::plural($model) . ' create|'.activeGuard()])->only('create');
+        $this->middleware(['role_or_permission:' . \Str::plural($model) . ' delete|'.activeGuard()])->only('destroy');
+
 
         $this->repository = $repository;
         $this->modelResource = $modelResource;
@@ -62,7 +64,7 @@ class BaseApiController extends Controller
             $order = request('order');
         }
         if (request()->has('orderBy')) {
-            $orderBy= request('orderBy');
+            $orderBy = request('orderBy');
         }
         $models = $this->repository->search($filters, $this->relations, $order, $page, $limit, $orderBy);
         return $this->respondWithCollection($models);

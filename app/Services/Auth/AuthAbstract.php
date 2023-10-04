@@ -9,7 +9,7 @@ use App\Http\Requests\Api\Auth\ForgetPasswordRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
-use App\Models\AuthenticatableOTP;
+use App\Models\AuthenticatableOtp;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -40,25 +40,25 @@ abstract class AuthAbstract
 
         if(!$user->isActive())
             throw AuthException::accountStatusDeactive(['deactive' => [__("Account Deactive")]]);
-            
+
         $user->access_token = $user->createToken('kdadeltariq',$abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
 
         if($this->loginRequireSendOTP)
             return $this->handelOTPMethod($user);
-            
+
         return $user;
     }
 
-    
+
     public function sendOTP(SendOTPRequest $request){
         $user = $this->model::query()->whereMobile($request->mobile)->first();
         if(is_null($user))
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
-        return $this->handelOTPMethod($user); 
+        return $this->handelOTPMethod($user);
     }
 
-    
+
     public function resendOTP(Request $request)
     {
         $user = $request->user();
@@ -68,7 +68,7 @@ abstract class AuthAbstract
 
     /**
      * verify OTP.
-     * 
+     *
      * @return JsonResponse
      */
     public function verifyOTP(VerifyOTPRequest $request): JsonResponse{
@@ -84,19 +84,19 @@ abstract class AuthAbstract
                     $user->save();
                 }
                 return apiSuccess(array(),[],[], __("Successfull Operation"));
-            } 
-            
+            }
+
             return apiErrors(['otp_not_matched' => [__("Code Not Matched")]],[], __("Code Not Matched"), 422);
-            
-        } 
+
+        }
 
          return apiErrors(['otp_expired' => [__("Code Expired")]],[], __("Code Expired"), 422);
-        
+
     }
 
     /**
      * forget password.
-     * 
+     *
      * @return JsonResponse
      */
     public function forgetPassword(FormRequest $request,$abilities = null){
@@ -106,14 +106,14 @@ abstract class AuthAbstract
         $user = $this->model::whereMobile($request->mobile)->first();
         if (is_null($user))
             throw AuthException::userNotFound(['unauthorized' => [__("Unauthorized")]]);
-        
+
         $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('kdadeltariq', $abilities ?? [] )->plainTextToken : $user->currentAccessToken();
         return $this->handelOTPMethod($user);
     }
 
     /**
      * change password
-     * 
+     *
      * @return JsonResponse
      */
     public function changePassword(ChangePasswordRequest $request,$abilities = null):JsonResponse
@@ -122,7 +122,7 @@ abstract class AuthAbstract
         if (is_null($user))
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
         if (Hash::check($request->old_password, $user->password)) {
-            
+
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -131,7 +131,7 @@ abstract class AuthAbstract
             $user->access_token = $user->createToken('kdadeltariq', $abilities ?? [] )->plainTextToken;
             $this->addTokenExpiration($user->access_token);
             return apiSuccess(array("access_token" => $user->access_token),[],[], __('Successfull Operation'));
-            
+
         } else {
             return apiErrors(["old_password" => [__("Current Password Wrong")]],[],[], __('Wrong Credentials'), 422);
         }
@@ -139,14 +139,14 @@ abstract class AuthAbstract
 
     /**
      * reset password.
-     * 
+     *
      * @return JsonResponse
      */
     public function resetPassword(ResetPasswordRequest $request,$abilities = null): JsonResponse{
         $user = $request->user();
         if(is_null($user))
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         $user->currentAccessToken()->delete();
@@ -155,15 +155,15 @@ abstract class AuthAbstract
         return apiSuccess(array("access_token" => $user->access_token),[],[], __('Successfull Operation'));
     }
 
-    
+
     public function logout(Request $request){
-        
+
         $request->user()->currentAccessToken()->delete();
     }
 
     /**
      * change user mobile.
-     * 
+     *
      * @return User
      */
     public function changeMobile(ChangeMobileRequest $request){
@@ -190,7 +190,7 @@ abstract class AuthAbstract
         $sendSMS = false;
         $createRecord = false;
         $fixedOTP = false;
-        
+
         if (in_array($user->mobile, $fixedOTPNumbers))
             $fixedOTP = true;
         if (is_null($user->latestOTPToken) || !$user->latestOTPToken->isValid()) {
@@ -208,7 +208,7 @@ abstract class AuthAbstract
             $user->sms = $sms["sms"];
 
             if ($createRecord && ($sms['sms'])) {
-                $user->OTPTokens()->save(new AuthenticatableOTP([
+                $user->OTPTokens()->save(new AuthenticatableOtp([
                     'code' => $user->OTP,
                 ]));
             }
@@ -240,7 +240,7 @@ abstract class AuthAbstract
         if ($sendMail) {
             $user->mailed = sendOtpMail($user->OTP, $user->email);
             if ($createRecord && $user->mailed) {
-                $user->OTPTokens()->save(new AuthenticatableOTP([
+                $user->OTPTokens()->save(new AuthenticatableOtp([
                     'code' => $user->OTP,
                 ]));
             }
@@ -259,7 +259,7 @@ abstract class AuthAbstract
         return $user->hasRole(['super-admin','admin']) ? $this->handelMailOTP($user) : $this->handelMobileOTP($user);
     }
 
- 
+
     protected function addTokenExpiration($accessToken): void
     {
         $expirationTime = Carbon::now()->addDays(90);
@@ -268,7 +268,7 @@ abstract class AuthAbstract
         $personalAccessToken->save();
     }
 
-    
+
     protected function isTokenExpired($personalAccessToken)
     {
         $isExpired = false;
@@ -279,7 +279,7 @@ abstract class AuthAbstract
             $isExpired = true;
         return $isExpired;
     }
-    
+
     public function deleteAccount(Request $request):JsonResponse{
         $user = $request->user();
         if(is_null($user))

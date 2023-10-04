@@ -17,16 +17,16 @@ use App\Http\Controllers\Api\V1\Dashboard\{
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-        
+
 Route::prefix("auth")->group(function () {
-    Route::middleware(["auth:sanctum"])->group(function () {
+    Route::middleware(["auth:admin"])->group(function () {
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
         Route::post('verify-otp', [AuthController::class, 'verifyOTP']);
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('profile', [AuthController::class, 'profile']);
         Route::post('changpassword', [AuthController::class, 'changePassword']);
         Route::post('reset-password', [AuthController::class, 'resetPassword']);
-        Route::delete('delete-account',[AuthController::class,'deleteAccount']); 
+        Route::delete('delete-account',[AuthController::class,'deleteAccount']);
     });
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
@@ -36,7 +36,7 @@ Route::prefix("auth")->group(function () {
 });
 
 
-Route::middleware(["auth:sanctum"])->group(function () {
+Route::middleware(["auth:admin"])->group(function () {
     # Roles
     Route::apiResource('roles',RoleController::class);
 

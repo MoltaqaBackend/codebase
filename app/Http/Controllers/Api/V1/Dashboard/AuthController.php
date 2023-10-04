@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\ChangePasswordRequest;
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 /**
  * @group Dashboard Admin
  * Manage Dashboard Apis
- * 
+ *
  * @subGroup Auth
  * @subgroupDescription Auth Cycle Apis
  */
@@ -31,7 +32,7 @@ class AuthController extends Controller
 
     /**
      * Admin Login.
-     * 
+     *
      * an API which Offers a mean to login a Admin
      * @unauthenticated
      * @header Api-Key xx
@@ -48,8 +49,8 @@ class AuthController extends Controller
 
     /**
      * Send OTP To Mobile Number.
-     * 
-     * an API which Offers a mean to Send OTP To Mobile Number. 
+     *
+     * an API which Offers a mean to Send OTP To Mobile Number.
      * @unauthenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -62,8 +63,8 @@ class AuthController extends Controller
 
     /**
      * Re-Send OTP.
-     * 
-     * an API which Offers a mean to Re-Send OTP. 
+     *
+     * an API which Offers a mean to Re-Send OTP.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -76,7 +77,7 @@ class AuthController extends Controller
 
     /**
      * OTP Verification.
-     * 
+     *
      * an API which Offers a mean to verify user otp
      * @authenticated
      * @header Api-Key xx
@@ -90,8 +91,8 @@ class AuthController extends Controller
 
     /**
      * Admin New Password.
-     * 
-     * an API which Offers a mean to set new password for logged out Admins after verification step.  
+     *
+     * an API which Offers a mean to set new password for logged out Admins after verification step.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -104,8 +105,8 @@ class AuthController extends Controller
 
     /**
      * Admin Change Password.
-     * 
-     * an API which Offers a mean to Change password for logged in Admin.  
+     *
+     * an API which Offers a mean to Change password for logged in Admin.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -118,8 +119,8 @@ class AuthController extends Controller
 
     /**
      * Admin Forget Password.
-     * 
-     * an API which Offers a mean to reset Admin password for logged out Admins. 
+     *
+     * an API which Offers a mean to reset Admin password for logged out Admins.
      * @unauthenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -135,7 +136,7 @@ class AuthController extends Controller
 
     /**
      * Admin Profile.
-     * 
+     *
      * an API which Offers a mean to login a Admin
      * @authenticated
      * @header Api-Key xx
@@ -152,7 +153,7 @@ class AuthController extends Controller
 
     /**
      * Admin logout.
-     * 
+     *
      * an API which Offers a mean to logout a Admin
      * @authenticated
      * @header Api-Key xx
@@ -169,7 +170,7 @@ class AuthController extends Controller
 
     /**
      * Admin Delete Account.
-     * 
+     *
      * an API which Offers a mean to delete an Admin account
      * @authenticated
      * @header Api-Key xx
