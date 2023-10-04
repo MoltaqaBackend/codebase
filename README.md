@@ -8,8 +8,12 @@
 Which Has The Main Features like
 Roles, Permissions, Wallet, Chat....
 
+# Chat Module Vendors
+1. [x] User
+2. [x] Provider
+3. [x] Driver
 
-# Wallet Using Exampel
+# Wallet Using Example
 
     auth('admin')->user()
         ->walletType(WalletTypeEnum::MONEY, WalletTransactionTypeEnum::DEPOSIT)
