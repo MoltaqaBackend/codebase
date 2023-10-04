@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
+use App\Enum\WalletTransactionReasonEnum;
+use App\Enum\WalletTransactionTypeEnum;
+use App\Enum\WalletTypeEnum;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Dashboard\RoleRequest;
 use App\Http\Resources\Api\RoleResource;
@@ -18,6 +21,13 @@ class RoleController extends BaseApiController
      */
     public function __construct(RoleContract $repository)
     {
+
+        auth('admin')->user()
+            ->walletType(WalletTypeEnum::MONEY, WalletTransactionTypeEnum::DEPOSIT)
+            ->walletSteps(10)
+            ->walletTransactionReason(WalletTransactionReasonEnum::DEPOSIT_ORDER_AMOUNT)
+            ->walletCreate();
+
         parent::__construct($repository, RoleResource::class,'role');
     }
 
