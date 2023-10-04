@@ -20,3 +20,10 @@ Roles, Permissions, Wallet, Chat....
         ->walletSteps(10)
         ->walletTransactionReason(WalletTransactionReasonEnum::DEPOSIT_ORDER_AMOUNT)
         ->walletCreate();
+
+# Send Notification Firebase Example
+
+            (new SendFCM(User::class))
+            ->sendForAdmin(true)
+            ->sendForUsers(false)
+            ->sendNotification('test title','test body',User::first());

@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
-use App\Enum\WalletTransactionReasonEnum;
-use App\Enum\WalletTransactionTypeEnum;
-use App\Enum\WalletTypeEnum;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Dashboard\RoleRequest;
 use App\Http\Resources\Api\RoleResource;

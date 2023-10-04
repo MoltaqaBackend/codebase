@@ -44,6 +44,12 @@ class User extends Authenticatable implements HasMedia
         'password' => 'hashed',
     ];
 
+    # Relations
+    public function deviceTokens(): MorphMany
+    {
+        return $this->morphMany(DeviceToken::class, 'tokenable');
+    }
+
     public function registerMediaCollections(): void
     {
         $this
