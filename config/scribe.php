@@ -14,7 +14,7 @@ return [
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => 'Api Docs for Kdad El-Tariq System',
+    'description' => 'Api Docs for Code Base System',
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
@@ -36,7 +36,7 @@ return [
                 /*
                  * Match only routes whose paths match this pattern (use * as a wildcard to match any characters). Example: 'users/*'.
                  */
-                'prefixes' => ['api/v1/*'],
+                'prefixes' => ['dashboard-api/v1/*','client-api/v1/*','provider-api/v1/*'],
 
                 /*
                  * Match only routes whose domains match this pattern (use * as a wildcard to match any characters). Example: 'api.*'.
@@ -308,7 +308,7 @@ INTRO,
             'item.*.item.*.item.*.request.header.2.value' => "{{apiKey}}",
             'item.*.item.*.item.*.request.header.4.value' => "{{lang}}",
             // info
-            'info.description' => 'Kdad El-Tariq delivery managment app started dev at Sep 2023 By Fahmi Moustafa a Backend Developer @ Moltaqa Company',
+            'info.description' => 'Code Base delivery managment app started dev at 2023 By Moltaqa Company',
             'info.version' => '2.0.1',
             // auth
             'auth.bearer.0.key' => "token",

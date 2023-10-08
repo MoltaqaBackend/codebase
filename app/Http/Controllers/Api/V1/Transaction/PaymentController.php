@@ -8,6 +8,12 @@ use App\Models\Transaction;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 
+/**
+ * @group Payment
+ * 
+ * @subgroup My-Fatorah
+ * @subgroupDesription My-Fatorah Payment
+ */
 class PaymentController extends Controller
 {
     use ApiResponseTrait;
@@ -18,6 +24,17 @@ class PaymentController extends Controller
         $this->myFatoorah = MyFatoorahAction::instance();
     }
 
+    /**
+     * Create Invoice.
+     *
+     * an API which Offers a mean to create an invoice
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar 
+     * 
+     * @bodyParam pay_id required unique identitfer.Example: dbkdjfbskdbfnkj4hrkb4khb43 
+     */
     public function createInvoice(Request $request)
     {
         $validated = $request->validate([
@@ -29,6 +46,17 @@ class PaymentController extends Controller
         return $this->setStatusCode($status)->respondWithArray(['invoice' => $response]);
     }
 
+    /**
+     * Verify Payment Invoice Proccessed.
+     *
+     * an API which Offers a mean to verify inovice payment
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar 
+     * 
+     * @bodyParam paymentId required.Example: dbkdjfbskdbfnkj4hrkb4khb43 
+     */    
     public function callbackPayInvoice(Request $request)
     {
         $request->validate(['paymentId' => 'required']);

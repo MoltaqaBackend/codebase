@@ -44,4 +44,7 @@ Route::middleware(["auth:admin"])->group(function () {
 
     # Chat
     include __DIR__.'/chat.php';
+
+    # Notification
+    include __DIR__.'/notification.php';
 });

@@ -16,26 +16,47 @@ use App\Models\Order;
 use App\Repositories\Contracts\ChatContract;
 use App\Traits\ApiResponseTrait;
 
+/**
+ * @group chat
+ * 
+ * @subgroup Chat
+ * @subgroupDescription Chat Apis
+ */
 class ChatController extends BaseApiController
 {
 
     use ApiResponseTrait;
+
+    protected mixed $modelResource = ChatResource::class;
+
     public function __construct(ChatContract $repository)
     {
         parent::__construct($repository, ChatResource::class);
     }
 
     /**
-     * @throws \Exception
+     * List Chats
+     * 
+     * an API which Offers a mean to list Chats
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar
      */
     public function index(): mixed
     {
         $chats = (new GetChatsAction())->handle(auth(activeGuard())->user());
-        return $this->respondWithCollection($chats);
+        return $this->respondWithCollection(ChatResource::collection($chats));
     }
 
     /**
-     * @throws \Exception
+     * show chat
+     * 
+     * an API which Offers a mean to show chat
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar
      */
     protected function showChat(GetChatRequest $request)
     {
@@ -45,6 +66,15 @@ class ChatController extends BaseApiController
         return $this->respondWithModel($chat);
     }
 
+    /**
+     * send message
+     * 
+     * an API which Offers a mean to send message
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar
+     */
     protected function sendMessage(SendMessageRequest $request, Chat $chat)
     {
         $to = ChatUsersTypeEnum::model($request->to_type);

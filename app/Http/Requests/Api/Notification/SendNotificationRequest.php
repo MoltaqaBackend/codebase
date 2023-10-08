@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\Notification;
 
 use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * @bodyParam title string required Notification title.Example: title
- * @bodyParam message string required Notification Message.Example: message
+ * @bodyParam body string required Notification Message.Example: message
+ * @bodyParam topic string (optional) Notification Topic.Example: offer
+ * @bodyParam roles [] string required.Example: ['all','admin']
+ * @bodyParam users [] integer required.Example: [1,2]
  */
 class SendNotificationRequest extends FormRequest
 {
@@ -28,12 +32,15 @@ class SendNotificationRequest extends FormRequest
      */
     public function rules()
     {
+        $roles = Role::pluck('name')->toArray();
+        array_push($roles, 'all');
         return [
             'title' => ['required', 'string'],
-            'message' => ['required', 'string'],
-            'roles' => ['required','array','min:1'],
-            'roles.*' => ['required','in:'.Role::pluck('name')->toArray()],
-            'users' => ['nullable','array'],
+            'body' => ['required', 'string'],
+            'topic' => ['nullable','string'],
+            'roles' => ['required', 'array', 'min:1'],
+            'roles.*' => ['required', Rule::in($roles)],
+            'users' => ['nullable', 'array'],
         ];
     }
 
@@ -41,7 +48,10 @@ class SendNotificationRequest extends FormRequest
     {
         return [
             'title' => __('Title'),
-            'message' => __('Message'),
+            'body' => __('Message'),
+            'topic' => __('Topic'),
+            'roles' => __('User Roles'),
+            'users' => __('Users'),
         ];
     }
 }

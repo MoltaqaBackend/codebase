@@ -1,17 +1,17 @@
-name: 'Dashboard Admin'
-description: 'Manage Dashboard Apis'
+name: chat
+description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/core/check-abilities
+    uri: dashboard-api/v1/chat/chats
     metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Core
-      subgroupDescription: 'Manage Admins Abilities and other tasks'
-      title: 'check if admin has has one or more Dashboard abilities.'
-      description: 'an API which Offers a mean to list abilities with filtering'
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'List Chats'
+      description: 'an API which Offers a mean to list Chats'
       authenticated: true
       custom: []
     headers:
@@ -30,429 +30,171 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer Eaf1cevkhaZ8bP4dD6g36V5'
+      - 'Bearer 5face3vDPZb8664Eg1adhkV'
     controller: null
     method: null
     route: null
     custom: []
   -
     httpMethods:
-      - GET
-    uri: 'api/v1/admin/core/check-ability/{module}/{ability}'
+      - POST
+    uri: dashboard-api/v1/chat/chats/show-chat
     metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Core
-      subgroupDescription: 'Manage Admins Abilities and other tasks'
-      title: 'checks if admin has a spesefic ability.'
-      description: 'an API which Offers a mean to list abilities with filtering'
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'show chat'
+      description: 'an API which Offers a mean to show chat'
       authenticated: true
       custom: []
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      chat_id:
+        name: chat_id
+        description: required.
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      type:
+        name: type
+        description: 'in user_driver,provider_user,provider_driver.'
+        required: true
+        example: user_driver
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      chat_id: 1
+      type: user_driver
+    fileParameters: []
+    responses:
+      -
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6ZhDc1ae3b6VavEfkP4g58d'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'dashboard-api/v1/chat/chats/{chat_id}/send-message'
+    metadata:
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'send message'
+      description: 'an API which Offers a mean to send message'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: multipart/form-data
       Accept: application/json
       Api-Key: xx
       Api-Version: v1
       Accept-Language: ar
     urlParameters:
-      module:
-        name: module
-        description: ''
+      chat_id:
+        name: chat_id
+        description: 'The ID of the chat.'
         required: true
-        example: nostrum
-        type: string
-        enumValues: []
-        custom: []
-      ability:
-        name: ability
-        description: ''
-        required: true
-        example: ut
-        type: string
+        example: 17
+        type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      module: nostrum
-      ability: ut
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 4gva5Z8baEkd66hVPfe13Dc'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/auth/login
-    metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin Login.'
-      description: 'an API which Offers a mean to login a Admin'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
+      chat_id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      email:
-        name: email
-        description: 'The Email Address of the user.'
+      to_type:
+        name: to_type
+        description: 'in user,provider,driver.'
         required: true
-        example: fahmi@moltaqa.net
+        example: user
         type: string
         enumValues: []
         custom: []
-      password:
-        name: password
-        description: 'The password of User account.'
-        required: true
-        example: '12345678'
+      to_id:
+        name: to_id
+        description: required.
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        custom: []
+      message:
+        name: message
+        description: required.
+        required: false
+        example: dsbfjksdbk
         type: string
+        enumValues: []
+        custom: []
+      images:
+        name: images
+        description: '[].'
+        required: false
+        example: null
+        type: file
         enumValues: []
         custom: []
     cleanBodyParameters:
-      email: fahmi@moltaqa.net
-      password: '12345678'
-    fileParameters: []
+      to_type: user
+      to_id: 2
+      message: dsbfjksdbk
+    fileParameters:
+      images: null
     responses:
       -
-        status: 500
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": [
-                  [
-                      "Api Key Not Valid"
-                  ]
-              ],
-              "pagination": [],
-              "extras": [],
-              "message": "Api Key Not Valid"
-          }
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '49'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/auth/logout
-    metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin logout.'
-      description: 'an API which Offers a mean to logout a Admin'
-      authenticated: true
-      custom: []
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer 3vVb8gaP6Dcf6a1hkEZ4ed5'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/auth/send-otp
-    metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Send OTP To Mobile Number.'
-      description: 'an API which Offers a mean to Send OTP To Mobile Number.'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      mobile:
-        name: mobile
-        description: 'The Mobile Number of the user.'
-        required: true
-        example: '0564776688'
-        type: string
-        enumValues: []
-        custom: []
-    cleanBodyParameters:
-      mobile: '0564776688'
-    fileParameters: []
-    responses:
-      -
-        status: 500
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": [
-                  [
-                      "Api Key Not Valid"
-                  ]
-              ],
-              "pagination": [],
-              "extras": [],
-              "message": "Api Key Not Valid"
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '48'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/auth/resend-otp
-    metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Re-Send OTP.'
-      description: 'an API which Offers a mean to Re-Send OTP.'
-      authenticated: true
-      custom: []
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer ZhD1g36bk56Pc8afV4Eeadv'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/auth/verify-otp
-    metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'OTP Verification.'
-      description: 'an API which Offers a mean to verify user otp'
-      authenticated: true
-      custom: []
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      code:
-        name: code
-        description: 'The OTP sent via sms to user.'
-        required: true
-        example: '1234'
-        type: string
-        enumValues: []
-        custom: []
-    cleanBodyParameters:
-      code: '1234'
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer dDVb46cf85aaE3g61PhekZv'
+      - 'Bearer 164ZakDv8abdghfe5VP3E6c'
     controller: null
     method: null
     route: null
@@ -460,14 +202,14 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/auth/profile
+    uri: client-api/v1/chat/chats
     metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin Profile.'
-      description: 'an API which Offers a mean to login a Admin'
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'List Chats'
+      description: 'an API which Offers a mean to list Chats'
       authenticated: true
       custom: []
     headers:
@@ -486,31 +228,18 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer a65f3kh8PbeDcaVE641dvgZ'
+      - 'Bearer 6vb364Ec8eghDPd1akaZ5fV'
     controller: null
     method: null
     route: null
@@ -518,14 +247,14 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/auth/changpassword
+    uri: client-api/v1/chat/chats/show-chat
     metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin Change Password.'
-      description: 'an API which Offers a mean to Change password for logged in Admin.'
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'show chat'
+      description: 'an API which Offers a mean to show chat'
       authenticated: true
       custom: []
     headers:
@@ -540,62 +269,40 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      password:
-        name: password
-        description: 'The User bew password.'
-        required: true
-        example: '123456789'
-        type: string
+      chat_id:
+        name: chat_id
+        description: required.
+        required: false
+        example: 1
+        type: integer
         enumValues: []
         custom: []
-      old_password:
-        name: old_password
-        description: 'The user old password.'
+      type:
+        name: type
+        description: 'in user_driver,provider_user,provider_driver.'
         required: true
-        example: '12345678'
-        type: string
-        enumValues: []
-        custom: []
-      password_confirmation:
-        name: password_confirmation
-        description: 'The user new password confirmation.'
-        required: true
-        example: '123456789'
+        example: user_driver
         type: string
         enumValues: []
         custom: []
     cleanBodyParameters:
-      password: '123456789'
-      old_password: '12345678'
-      password_confirmation: '123456789'
+      chat_id: 1
+      type: user_driver
     fileParameters: []
     responses:
       -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer Db4e6cV8d6f1a5EkvPh3gaZ'
+      - 'Bearer 1Vg46bhDkd5v6feaaP8c3EZ'
     controller: null
     method: null
     route: null
@@ -603,155 +310,104 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/auth/forget-password
+    uri: 'client-api/v1/chat/chats/{chat_id}/send-message'
     metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin Forget Password.'
-      description: 'an API which Offers a mean to reset Admin password for logged out Admins.'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      email:
-        name: email
-        description: 'The E-Mail Address of the user.'
-        required: true
-        example: fahmi@moltaqa.net
-        type: string
-        enumValues: []
-        custom: []
-    cleanBodyParameters:
-      email: fahmi@moltaqa.net
-    fileParameters: []
-    responses:
-      -
-        status: 500
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": [
-                  [
-                      "Api Key Not Valid"
-                  ]
-              ],
-              "pagination": [],
-              "extras": [],
-              "message": "Api Key Not Valid"
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '47'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/auth/reset-password
-    metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin New Password.'
-      description: 'an API which Offers a mean to set new password for logged out Admins after verification step.'
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'send message'
+      description: 'an API which Offers a mean to send message'
       authenticated: true
       custom: []
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
       Api-Key: xx
       Api-Version: v1
       Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      chat_id:
+        name: chat_id
+        description: 'The ID of the chat.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        custom: []
+    cleanUrlParameters:
+      chat_id: 5
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      password:
-        name: password
-        description: 'The User bew password.'
+      to_type:
+        name: to_type
+        description: 'in user,provider,driver.'
         required: true
-        example: '123456789'
+        example: user
         type: string
         enumValues: []
         custom: []
-      password_confirmation:
-        name: password_confirmation
-        description: 'The user new password confirmation.'
-        required: true
-        example: '123456789'
+      to_id:
+        name: to_id
+        description: required.
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        custom: []
+      message:
+        name: message
+        description: required.
+        required: false
+        example: dsbfjksdbk
         type: string
+        enumValues: []
+        custom: []
+      images:
+        name: images
+        description: '[].'
+        required: false
+        example: null
+        type: file
         enumValues: []
         custom: []
     cleanBodyParameters:
-      password: '123456789'
-      password_confirmation: '123456789'
-    fileParameters: []
+      to_type: user
+      to_id: 2
+      message: dsbfjksdbk
+    fileParameters:
+      images: null
     responses:
       -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer cfeZg45kP81h36Ea6bDdvaV'
+      - 'Bearer 6haVc85df41De6PvgbkaZE3'
     controller: null
     method: null
     route: null
     custom: []
   -
     httpMethods:
-      - DELETE
-    uri: api/v1/admin/auth/delete-account
+      - GET
+    uri: provider-api/v1/chat/chats
     metadata:
-      groupName: 'Dashboard Admin'
-      groupDescription: 'Manage Dashboard Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Admin Delete Account.'
-      description: 'an API which Offers a mean to delete an Admin account'
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'List Chats'
+      description: 'an API which Offers a mean to list Chats'
       authenticated: true
       custom: []
     headers:
@@ -770,31 +426,171 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: |-
-          {
-              "success": false,
-              "data": [],
-              "error": {
-                  "unauthenticated": [
-                      "Unauthenticated."
-                  ]
-              },
-              "pagination": [],
-              "extras": [],
-              "message": "Unauthenticated."
-          }
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer Vfb46dE1kvDZP5a86gcah3e'
+      - 'Bearer 6ZVP4b3D1vdhg6fcae5Ek8a'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: provider-api/v1/chat/chats/show-chat
+    metadata:
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'show chat'
+      description: 'an API which Offers a mean to show chat'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      chat_id:
+        name: chat_id
+        description: required.
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+      type:
+        name: type
+        description: 'in user_driver,provider_user,provider_driver.'
+        required: true
+        example: user_driver
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      chat_id: 1
+      type: user_driver
+    fileParameters: []
+    responses:
+      -
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer fP3hakaDVg5v4Z8edcb6E16'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'provider-api/v1/chat/chats/{chat_id}/send-message'
+    metadata:
+      groupName: chat
+      groupDescription: ''
+      subgroup: Chat
+      subgroupDescription: 'Chat Apis'
+      title: 'send message'
+      description: 'an API which Offers a mean to send message'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters:
+      chat_id:
+        name: chat_id
+        description: 'The ID of the chat.'
+        required: true
+        example: 8
+        type: integer
+        enumValues: []
+        custom: []
+    cleanUrlParameters:
+      chat_id: 8
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      to_type:
+        name: to_type
+        description: 'in user,provider,driver.'
+        required: true
+        example: user
+        type: string
+        enumValues: []
+        custom: []
+      to_id:
+        name: to_id
+        description: required.
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        custom: []
+      message:
+        name: message
+        description: required.
+        required: false
+        example: dsbfjksdbk
+        type: string
+        enumValues: []
+        custom: []
+      images:
+        name: images
+        description: '[].'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      to_type: user
+      to_id: 2
+      message: dsbfjksdbk
+    fileParameters:
+      images: null
+    responses:
+      -
+        status: 400
+        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 5ek6ab3Z8chf4v6Vg1EdaDP'
     controller: null
     method: null
     route: null
