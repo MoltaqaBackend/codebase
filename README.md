@@ -56,6 +56,11 @@ Roles, Permissions, Wallet, Chat, Notification(Mail,Pusher,Firebase,database), s
         model: $user
     )
 
+# Generate Postman Docs using Scribe
+
+    php artisan scribe:generate
+
+    Note: for force genrate add flag ( --force )
 
 ## Run Locally
 
