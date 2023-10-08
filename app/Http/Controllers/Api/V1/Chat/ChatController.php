@@ -7,6 +7,8 @@ use App\Actions\Chats\GetChatsAction;
 use App\Actions\Chats\SendMessageAction;
 use App\Enum\Chat\ChatUsersTypeEnum;
 use App\Http\Controllers\Api\BaseApiController;
+use App\Http\Requests\Chat\GetChatRequest;
+use App\Http\Requests\Chat\SendMessageRequest;
 use App\Http\Resources\Api\Chat\ChatResource;
 use App\Http\Resources\Api\Chat\MessageResource;
 use App\Models\Chat;
@@ -35,7 +37,7 @@ class ChatController extends BaseApiController
     /**
      * @throws \Exception
      */
-    protected function showChat(ChatRequest $request)
+    protected function showChat(GetChatRequest $request)
     {
         $order = Order::findOrFail($request->order_id);
         $chat = (new GetChatAction())->handle($order, auth()->user(), $request->type);
