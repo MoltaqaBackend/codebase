@@ -29,7 +29,7 @@ trait ApiResponseTrait
      */
     protected function respondWithArray($data, array $headers = []): JsonResponse
     {
-        return response()->json($data, $data['status'], $headers);
+        return response()->json($data, $data['status'] ?? 200, $headers);
     }
 
     /**
@@ -69,6 +69,13 @@ trait ApiResponseTrait
     {
         $statusCode = $statusCode ?? 200;
         return $this->setStatusCode($statusCode)->respond($collection, $headers);
+    }
+
+    protected function respondWithModelData($model, int $statusCode = null, array $headers = []): mixed
+    {
+        $statusCode = $statusCode ?? 200;
+        $resource = new $this->modelResource($model->load($this->relations)); // ???
+        return $this->setStatusCode($statusCode)->respond($model, $headers);
     }
 
     /**

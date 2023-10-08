@@ -1,6 +1,5 @@
 <?php
 
-use App\Classes\AbilitiesConstant;
 use Illuminate\Support\Facades\Broadcast;
 
 /*

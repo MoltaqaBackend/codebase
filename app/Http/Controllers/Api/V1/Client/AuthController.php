@@ -13,19 +13,25 @@ use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\ClientResource;
 use App\Services\Auth\AuthClientService;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
  * @group App Client
  * Manage Client App Apis
- * 
+ *
  * @subGroup Auth
  * @subgroupDescription Auth Cycle Apis
  */
 class AuthController extends Controller
 {
+    use ApiResponseTrait;
+
     private $authClientService;
+
+    private string $modelResource = ClientResource::class;
+    private array $relations = [];
 
     public function __construct(AuthClientService $authClientService)
     {
@@ -34,7 +40,7 @@ class AuthController extends Controller
 
     /**
      * Client Login.
-     * 
+     *
      * an API which Offers a mean to login a client
      * @unauthenticated
      * @header Api-Key xx
@@ -43,15 +49,16 @@ class AuthController extends Controller
      */
     public function login(LoginClientRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ClientResource(
-                $this->authClientService->login($request,clientAbilities())
-            ),[],[],__('Logged in Successfully'));
+                $this->authClientService->login($request)
+            )
+        );
     }
 
     /**
      * Client Register.
-     * 
+     *
      * an API which Offers a mean to register a new client
      * @unauthenticated
      * @header Api-Key xx
@@ -60,15 +67,17 @@ class AuthController extends Controller
      */
     public function register(RegisterClientRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ClientResource(
-                $this->authClientService->register($request,clientAbilities())
-            ),[],[],__('Registered Successfully'));
+                $this->authClientService->register($request)
+            )
+        );
     }
+
     /**
      * Send OTP To Mobile Number.
-     * 
-     * an API which Offers a mean to Send OTP To Mobile Number. 
+     *
+     * an API which Offers a mean to Send OTP To Mobile Number.
      * @unauthenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -76,13 +85,17 @@ class AuthController extends Controller
      */
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
-        return apiSuccess(["verification_code" => $this->authClientService->sendOTP($request)->OTP],[],[], __("Verification Code Sent"));
+        return $this->respondWithArray([
+                "verification_code" =>
+                    $this->authClientService->sendOTP($request)->OTP
+            ]
+        );
     }
 
     /**
      * Re-Send OTP.
-     * 
-     * an API which Offers a mean to Re-Send OTP. 
+     *
+     * an API which Offers a mean to Re-Send OTP.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -90,12 +103,16 @@ class AuthController extends Controller
      */
     public function resendOTP(Request $request): JsonResponse
     {
-        return apiSuccess(["verification_code" => $this->authClientService->resendOTP($request)->OTP],[],[], __("Verification Code Resent"));
+        return $this->respondWithArray([
+                "verification_code" =>
+                    $this->authClientService->resendOTP($request)->OTP
+            ]
+        );
     }
 
     /**
      * OTP Verification.
-     * 
+     *
      * an API which Offers a mean to verify user otp
      * @authenticated
      * @header Api-Key xx
@@ -109,22 +126,22 @@ class AuthController extends Controller
 
     /**
      * Client New Password.
-     * 
-     * an API which Offers a mean to set new password for logged out clients after verification step.  
+     *
+     * an API which Offers a mean to set new password for logged out clients after verification step.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
      * @header Accept-Language ar
      */
-    public function resetpassword(ResetPasswordRequest $request):JsonResponse
+    public function resetpassword(ResetPasswordRequest $request): JsonResponse
     {
-        return $this->authClientService->resetPassword($request,clientAbilities());
+        return $this->authClientService->resetPassword($request);
     }
 
     /**
      * Client Change Password.
-     * 
-     * an API which Offers a mean to Change password for logged in client.  
+     *
+     * an API which Offers a mean to Change password for logged in client.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -132,13 +149,13 @@ class AuthController extends Controller
      */
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
-        return $this->authClientService->changePassword($request,clientAbilities());
+        return $this->authClientService->changePassword($request);
     }
 
     /**
      * Client Forget Password.
-     * 
-     * an API which Offers a mean to reset client password for logged out clients. 
+     *
+     * an API which Offers a mean to reset client password for logged out clients.
      * @unauthenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -146,16 +163,17 @@ class AuthController extends Controller
      */
     public function forgetPassword(ForgetPasswordRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ClientResource(
-                $this->authClientService->forgetPassword($request,clientAbilities())
-            ),[],[],__('Proccessed Successfully'));
+                $this->authClientService->forgetPassword($request)
+            )
+        );
     }
 
     /**
      * Client Change Mobile.
-     * 
-     * an API which Offers a mean to change client mobile number. 
+     *
+     * an API which Offers a mean to change client mobile number.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -163,15 +181,16 @@ class AuthController extends Controller
      */
     public function changeMobile(ChangeMobileRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ClientResource(
                 $this->authClientService->changeMobile($request)
-            ),[],[],__('Changed Successfully'));
+            )
+        );
     }
 
     /**
      * Client Profile.
-     * 
+     *
      * an API which Offers a mean to login a client
      * @authenticated
      * @header Api-Key xx
@@ -180,15 +199,16 @@ class AuthController extends Controller
      */
     public function profile(Request $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ClientResource(
                 $this->authClientService->profile($request)
-            ),[],[],__('Data Found'));
+            )
+        );
     }
 
     /**
      * Client logout.
-     * 
+     *
      * an API which Offers a mean to logout a client
      * @authenticated
      * @header Api-Key xx
@@ -198,14 +218,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $this->authClientService->logout($request);
-        return apiSuccess(
-            array()
-            ,[],[],__('Logged out Successfully'));
+        return $this->respondWithSuccess(
+            __('Logged out Successfully')
+        );
     }
 
     /**
      * Client Delete Account.
-     * 
+     *
      * an API which Offers a mean to delete a client account
      * @authenticated
      * @header Api-Key xx

@@ -196,25 +196,7 @@ abstract class BaseConcrete implements BaseContract
         if (empty($attributes)) {
             return false;
         }
-        // Clean the attributes from unnecessary inputs
-        $attributes = $this->cleanUpAttributes($attributes);
-        $identifier = $this->cleanUpAttributes($identifier);
-        if (key_exists('dynamics_id', $identifier)) {
-            $exists = $this->query->where('dynamics_id', $identifier['dynamics_id'])->exists();
-            $message = $exists ? 'Updated' : 'created';
-            $action = $exists ? 'Update' : 'Creation';
-        } else {
-            $message = 'created';
-            $action = 'Creation';
-        }
-        $model = $this->query->updateOrCreate($attributes, $identifier);
-        $this->propertyLogActivity(
-            $model,
-            auth()->user(),
-            "$this->modelName $message",
-            ['action' => $action, 'module' => $this->modelName]
-        );
-        return $model;
+        return $this->query->updateOrCreate($attributes, $identifier);
     }
 
     /**

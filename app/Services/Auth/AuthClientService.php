@@ -23,32 +23,32 @@ class AuthClientService extends AuthAbstract
         $user = $request->user();
         if(is_null($user))
             throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]],401);
-        
+
         DB::beginTransaction();
         $user->tokens()->delete();
         if($user->delete())
         {
             DB::commit();
-            return apiSuccess(array(),[],[],__('Deleted Successfully'));
+            return $this->respondWithSuccess(__('Deleted Successfully'));
         }
         DB::rollBack();
-        
-        return apiErrors(['failed' => [__('Failed Operation')]],[],__('Failed Operation'));
+
+        return $this->setStatusCode(400)->respondWithError(__('Failed Operation'));
     }
 
     public function register(FormRequest $request,$abilities = null): User
     {
         if(!($request instanceof RegisterClientRequest))
             throw AuthException::wrongImplementation(['wrong_implementation' => [__("Failed Operation")]]);
-        
+
         $data = $request->validated();
         $data['is_active'] = 1;
-        
+
         $user = User::create($data);
         if(!$user->wasRecentlyCreated)
             throw AuthException::userFailedRegistration(['genration_failed' => [__("Failed Operation")]]);
-       
-        $user->access_token = $user->createToken('kdadeltariq',$abilities ?? [])->plainTextToken;
+
+        $user->access_token = $user->createToken('snctumToken',$abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
 
         return $this->handelMobileOTP($user);

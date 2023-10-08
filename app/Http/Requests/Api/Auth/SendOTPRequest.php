@@ -27,7 +27,7 @@ class SendOTPRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ["required", "unique:users,mobile"],
+            'mobile' => ["required"],
         ];
     }
 

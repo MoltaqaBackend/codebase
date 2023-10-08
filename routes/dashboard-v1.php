@@ -2,11 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Dashboard\{
-    PermissionController,
-    RoleController,
-    AuthController
-};
+use App\Http\Controllers\Api\V1\Dashboard\{PermissionController, RoleController, AuthController, SettingController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,6 +38,9 @@ Route::middleware(["auth:admin"])->group(function () {
 
     # Permission
     Route::get('permissions', PermissionController::class);
+
+    # Setting
+    Route::apiResource('settings', SettingController::class);
 
     # Chat
     include __DIR__.'/chat.php';

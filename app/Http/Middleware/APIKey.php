@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ApiResponseTrait;
 use Closure;
 use Illuminate\Http\Request;
 
 class APIKey
 {
+    use ApiResponseTrait;
     /**
      * Handle an incoming request.
      *
@@ -23,8 +25,13 @@ class APIKey
                 ['api_key' => ['Api Key Not Valid']],
             ];
             $message = 'Api Key Not Valid';
-            return apiErrors($errors,[],$message,500);
+
+            return $this->respondWithErrors(
+                __('Failed Operation'),
+                400,
+                $errors,
+                __($message)
+            );
         }
-        return $next($request);
     }
 }

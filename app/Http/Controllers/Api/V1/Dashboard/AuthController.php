@@ -11,6 +11,7 @@ use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\AdminResource;
 use App\Services\Auth\AuthAdminService;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,11 @@ use Illuminate\Http\Request;
  */
 class AuthController extends Controller
 {
-    private $authAdminService;
+    use ApiResponseTrait;
+
+    private AuthAdminService $authAdminService;
+    private string $modelResource = AdminResource::class;
+    private array $relations = [];
 
     public function __construct(AuthAdminService $authAdminService)
     {
@@ -41,10 +46,11 @@ class AuthController extends Controller
      */
     public function login(LoginDashboardRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new AdminResource(
-                $this->authAdminService->login($request,adminAbilities())
-            ),[],[],__('Logged in Successfully'));
+                $this->authAdminService->login($request)
+            )
+        );
     }
 
     /**
@@ -58,7 +64,11 @@ class AuthController extends Controller
      */
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
-        return apiSuccess(["verification_code" => $this->authAdminService->sendOTP($request)->OTP],[],[], __("Verification Code Sent"));
+        return $this->respondWithArray([
+            "verification_code" =>
+                $this->authAdminService->sendOTP($request)->OTP
+            ]
+        );
     }
 
     /**
@@ -72,7 +82,11 @@ class AuthController extends Controller
      */
     public function resendOTP(Request $request): JsonResponse
     {
-        return apiSuccess(["verification_code" => $this->authAdminService->resendOTP($request)->OTP],[],[], __("Verification Code Resent"));
+        return $this->respondWithArray([
+                "verification_code" =>
+                    $this->authAdminService->resendOTP($request)->OTP
+            ]
+        );
     }
 
     /**
@@ -98,9 +112,9 @@ class AuthController extends Controller
      * @header Api-Version v1
      * @header Accept-Language ar
      */
-    public function resetpassword(ResetPasswordRequest $request):JsonResponse
+    public function resetpassword(ResetPasswordRequest $request): JsonResponse
     {
-        return $this->authAdminService->resetPassword($request,AdminAbilities());
+        return $this->authAdminService->resetPassword($request);
     }
 
     /**
@@ -114,7 +128,7 @@ class AuthController extends Controller
      */
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
-        return $this->authAdminService->changePassword($request,AdminAbilities());
+        return $this->authAdminService->changePassword($request);
     }
 
     /**
@@ -128,10 +142,11 @@ class AuthController extends Controller
      */
     public function forgetPassword(ForgetPasswordDashboardRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new AdminResource(
-                $this->authAdminService->forgetPassword($request,AdminAbilities())
-            ),[],[],__('Proccessed Successfully'));
+                $this->authAdminService->forgetPassword($request)
+            )
+        );
     }
 
     /**
@@ -145,10 +160,11 @@ class AuthController extends Controller
      */
     public function profile(Request $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new AdminResource(
                 $this->authAdminService->profile($request)
-            ),[],[],__('Data Found'));
+            )
+        );
     }
 
     /**
@@ -163,9 +179,9 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $this->authAdminService->logout($request);
-        return apiSuccess(
-            array()
-            ,[],[],__('Logged out Successfully'));
+        return $this->respondWithSuccess(
+            __('Logged out Successfully')
+        );
     }
 
     /**

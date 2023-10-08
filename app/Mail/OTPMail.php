@@ -29,7 +29,7 @@ class OTPMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'),__('Kdad El-Tariq',[],'ar').' | ' .__('Kdad El-Tariq',[],'en')),
+            from: new Address(config('mail.from.address'),__(env('APP_NAME'),[],'ar').' | ' .__(env('APP_NAME'),[],'en')),
             subject: __('OTP Code',[],'ar').' | '.__('OTP Code',[],'en'),
         );
     }

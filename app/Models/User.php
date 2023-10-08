@@ -44,11 +44,8 @@ class User extends Authenticatable implements HasMedia
         'password' => 'hashed',
     ];
 
-    # Relations
-    public function deviceTokens(): MorphMany
-    {
-        return $this->morphMany(DeviceToken::class, 'tokenable');
-    }
+
+    # Getters
 
     public function registerMediaCollections(): void
     {
@@ -56,6 +53,10 @@ class User extends Authenticatable implements HasMedia
             ->addMediaCollection('avatar')
             ->singleFile()
             ->useDisk(env('FILESYSTEM_DISK') ?? 'public');
+    }
+    public function isActive(): bool
+    {
+        return $this->is_active ?? 1;
     }
 
     protected function avatar(): Attribute
@@ -72,6 +73,12 @@ class User extends Authenticatable implements HasMedia
         );
     }
 
+
+    # Relations
+    public function deviceTokens(): MorphMany
+    {
+        return $this->morphMany(DeviceToken::class, 'tokenable');
+    }
     public function latestOTPToken(): MorphOne
     {
         return $this->morphOne(AuthenticatableOtp::class,'authenticatable')->latestOfMany();
@@ -82,8 +89,9 @@ class User extends Authenticatable implements HasMedia
         return $this->morphMany(AuthenticatableOtp::class,'authenticatable')->whereActive(true)->latest();
     }
 
-    public function isActive(): bool
+    public function transactions()
     {
-        return $this->is_active ?? 1;
+        return $this->morphMany(Transaction::class, 'transactionable');
     }
+
 }

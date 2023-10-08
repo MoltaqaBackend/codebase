@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AuthProviderService extends AuthAbstract
-{ 
+{
     public function __construct()
     {
         parent::__construct(new User());
@@ -23,16 +23,15 @@ class AuthProviderService extends AuthAbstract
         $user = $request->user();
         if(is_null($user))
             throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]],401);
-        
+
         DB::beginTransaction();
         $user->tokens()->delete();
         if($user->delete()){
             DB::commit();
-            return apiSuccess(array(),[],[],__('Deleted Successfully'));
+            return $this->respondWithSuccess(__('Deleted Successfully'));
         }
         DB::rollBack();
-        
-        return apiErrors(array(['failed' => ['Failed Operation']]),[],__('Failed Operation'));
+        return $this->setStatusCode(400)->respondWithError(__('Failed Operation'));
     }
 
     public function register(FormRequest $request,$abilities = null): User
@@ -52,7 +51,7 @@ class AuthProviderService extends AuthAbstract
             throw AuthException::userFailedRegistration("generation_failed**".__('Failed Operation'),500);
         }
         DB::commit();
-        $user->access_token = $user->createToken('kdadeltariq',$abilities ?? [])->plainTextToken;
+        $user->access_token = $user->createToken('snctumToken',$abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
         return $this->handelMobileOTP($user);
     }

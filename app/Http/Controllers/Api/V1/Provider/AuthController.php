@@ -13,19 +13,24 @@ use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\ProviderResource;
 use App\Services\Auth\AuthProviderService;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
  * @group App Provider
  * Manage Provider App Apis
- * 
+ *
  * @subGroup Auth
  * @subgroupDescription Auth Cycle Apis
  */
 class AuthController extends Controller
 {
+    use ApiResponseTrait;
     private $authProviderService;
+
+    private string $modelResource = ProviderResource::class;
+    private array $relations = [];
 
     public function __construct(AuthProviderService $authProviderService)
     {
@@ -34,7 +39,7 @@ class AuthController extends Controller
 
     /**
      * Provider Login.
-     * 
+     *
      * an API which Offers a mean to login a provider
      * @unauthenticated
      * @header Api-Key xx
@@ -43,15 +48,16 @@ class AuthController extends Controller
      */
     public function login(LoginProviderRequest $request):JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ProviderResource(
-                $this->authProviderService->login($request,providerAbilities())
-            ),[],[],__('Logged in Successfully'));
+                $this->authProviderService->login($request)
+            )
+        );
     }
 
     /**
      * Provider Register.
-     * 
+     *
      * an API which Offers a mean to register a new Provider
      * @unauthenticated
      * @header Api-Key xx
@@ -60,16 +66,17 @@ class AuthController extends Controller
      */
     public function register(RegisterProviderRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ProviderResource(
-                $this->authProviderService->register($request,providerAbilities())
-            ),[],[],__('Registered Successfully'));
+                $this->authProviderService->register($request)
+            )
+        );
     }
 
     /**
      * Send OTP To Mobile Number.
-     * 
-     * an API which Offers a mean to Send OTP To Mobile Number. 
+     *
+     * an API which Offers a mean to Send OTP To Mobile Number.
      * @unauthenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -77,13 +84,17 @@ class AuthController extends Controller
      */
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
-        return apiSuccess(["verification_code" => $this->authProviderService->sendOTP($request)->OTP],[],[], __("Verification Code Sent"));
+        return $this->respondWithArray([
+            "verification_code" =>
+                    $this->authProviderService->sendOTP($request)->OTP
+            ]
+        );
     }
 
     /**
      * Re-Send OTP.
-     * 
-     * an API which Offers a mean to Re-Send OTP. 
+     *
+     * an API which Offers a mean to Re-Send OTP.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -91,13 +102,17 @@ class AuthController extends Controller
      */
     public function resendOTP(Request $request): JsonResponse
     {
-        return apiSuccess(["verification_code" => $this->authProviderService->resendOTP($request)->OTP],[],[], __("Verification Code Resent"));
+        return $this->respondWithArray([
+            "verification_code" =>
+                    $this->authProviderService->resendOTP($request)->OTP
+            ]
+        );
     }
 
 
     /**
      * OTP Verification.
-     * 
+     *
      * an API which Offers a mean to verify user otp
      * @authenticated
      * @header Api-Key xx
@@ -111,8 +126,8 @@ class AuthController extends Controller
 
     /**
      * Provider New Password.
-     * 
-     * an API which Offers a mean to set new password for logged out providers after verification step.  
+     *
+     * an API which Offers a mean to set new password for logged out providers after verification step.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -120,13 +135,13 @@ class AuthController extends Controller
      */
     public function resetpassword(ResetPasswordRequest $request):JsonResponse
     {
-        return $this->authProviderService->resetPassword($request,providerAbilities());
+        return $this->authProviderService->resetPassword($request);
     }
 
     /**
      * Provider Change Password.
-     * 
-     * an API which Offers a mean to Change password for logged in Provider.  
+     *
+     * an API which Offers a mean to Change password for logged in Provider.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -134,13 +149,13 @@ class AuthController extends Controller
      */
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
-        return $this->authProviderService->changePassword($request,providerAbilities());
+        return $this->authProviderService->changePassword($request);
     }
 
     /**
      * Provider Forget Password.
-     * 
-     * an API which Offers a mean to reset Provider password for logged out Provideres. 
+     *
+     * an API which Offers a mean to reset Provider password for logged out Provideres.
      * @unauthenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -148,16 +163,17 @@ class AuthController extends Controller
      */
     public function forgetPassword(ForgetPasswordRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ProviderResource(
-                $this->authProviderService->forgetPassword($request,providerAbilities())
-            ),[],[],__('Proccessed Successfully'));
+                $this->authProviderService->forgetPassword($request)
+            )
+        );
     }
 
     /**
      * Provider Change Mobile.
-     * 
-     * an API which Offers a mean to change Provider mobile number. 
+     *
+     * an API which Offers a mean to change Provider mobile number.
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
@@ -165,15 +181,16 @@ class AuthController extends Controller
      */
     public function changeMobile(ChangeMobileRequest $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ProviderResource(
                 $this->authProviderService->changeMobile($request)
-            ),[],[],__('Changed Successfully'));
+            )
+        );
     }
 
     /**
      * Provider Profile.
-     * 
+     *
      * an API which Offers a mean to login a Provider
      * @authenticated
      * @header Api-Key xx
@@ -182,15 +199,16 @@ class AuthController extends Controller
      */
     public function profile(Request $request): JsonResponse
     {
-        return apiSuccess(
+        return $this->respondWithModelData(
             new ProviderResource(
                 $this->authProviderService->profile($request)
-            ),[],[],__('Data Found'));
+            )
+        );
     }
 
     /**
      * Provider logout.
-     * 
+     *
      * an API which Offers a mean to logout a Provider
      * @authenticated
      * @header Api-Key xx
@@ -200,14 +218,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $this->authProviderService->logout($request);
-        return apiSuccess(
-            array()
-            ,[],[],__('Logged out Successfully'));
+        return $this->respondWithSuccess(
+            __('Logged out Successfully')
+        );
     }
 
     /**
      * Provider Delete Account.
-     * 
+     *
      * an API which Offers a mean to delete a Provider account
      * @authenticated
      * @header Api-Key xx

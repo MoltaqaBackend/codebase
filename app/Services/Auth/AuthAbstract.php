@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Models\AuthenticatableOtp;
+use App\Traits\ApiResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -22,12 +23,13 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 abstract class AuthAbstract
 {
+    use ApiResponseTrait;
     protected bool $loginRequireSendOTP;
     public $model;
 
     public function __construct(User $model)
     {
-        $this->loginRequireSendOTP = config('kdadeltariq.login_require_otp');
+        $this->loginRequireSendOTP = config('global.login_require_otp');
         $this->model = $model;
     }
 
@@ -41,7 +43,7 @@ abstract class AuthAbstract
         if(!$user->isActive())
             throw AuthException::accountStatusDeactive(['deactive' => [__("Account Deactive")]]);
 
-        $user->access_token = $user->createToken('kdadeltariq',$abilities ?? [])->plainTextToken;
+        $user->access_token = $user->createToken('snctumToken',$abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
 
         if($this->loginRequireSendOTP)
@@ -83,14 +85,13 @@ abstract class AuthAbstract
                     $user->email_verified_at = now();
                     $user->save();
                 }
-                return apiSuccess(array(),[],[], __("Successfull Operation"));
+                return $this->respondWithSuccess(__("Successfull Operation"));
             }
 
-            return apiErrors(['otp_not_matched' => [__("Code Not Matched")]],[], __("Code Not Matched"), 422);
+            return $this->setStatusCode(422)->respondWithError(__("Code Not Matched"));
 
         }
-
-         return apiErrors(['otp_expired' => [__("Code Expired")]],[], __("Code Expired"), 422);
+        return $this->setStatusCode(422)->respondWithError(__("Code Expired"));
 
     }
 
@@ -107,7 +108,7 @@ abstract class AuthAbstract
         if (is_null($user))
             throw AuthException::userNotFound(['unauthorized' => [__("Unauthorized")]]);
 
-        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('kdadeltariq', $abilities ?? [] )->plainTextToken : $user->currentAccessToken();
+        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [] )->plainTextToken : $user->currentAccessToken();
         return $this->handelOTPMethod($user);
     }
 
@@ -128,12 +129,12 @@ abstract class AuthAbstract
 
             $user->currentAccessToken()->delete();
 
-            $user->access_token = $user->createToken('kdadeltariq', $abilities ?? [] )->plainTextToken;
+            $user->access_token = $user->createToken('snctumToken', $abilities ?? [] )->plainTextToken;
             $this->addTokenExpiration($user->access_token);
-            return apiSuccess(array("access_token" => $user->access_token),[],[], __('Successfull Operation'));
+            return $this->respondWithArray(array("access_token" => $user->access_token));
 
         } else {
-            return apiErrors(["old_password" => [__("Current Password Wrong")]],[],[], __('Wrong Credentials'), 422);
+            return $this->setStatusCode(422)->respondWithError(__("Current Password Wrong"));
         }
     }
 
@@ -150,9 +151,9 @@ abstract class AuthAbstract
         $user->password = Hash::make($request->password);
         $user->save();
         $user->currentAccessToken()->delete();
-        $user->access_token = $user->createToken('kdadeltariq', $abilities ?? [])->plainTextToken;
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
-        return apiSuccess(array("access_token" => $user->access_token),[],[], __('Successfull Operation'));
+        return $this->respondWithArray(array("access_token" => $user->access_token));
     }
 
 
@@ -224,7 +225,7 @@ abstract class AuthAbstract
         $createRecord = false;
         $fixedOTP = false;
 
-        if (in_array($user->email, $fixedOTPMails))
+        if (!is_null($fixedOTPMails) && in_array($user->email, $fixedOTPMails))
             $fixedOTP = true;
 
 
@@ -280,13 +281,13 @@ abstract class AuthAbstract
         return $isExpired;
     }
 
-    public function deleteAccount(Request $request):JsonResponse{
+    public function deleteAccount(Request $request){
         $user = $request->user();
         if(is_null($user))
             throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]],401);
         $user->tokens()->delete();
         $user->delete();
-        return apiSuccess(array(),[],[],__('Deleted Successfully'));
+        $this->respondWithSuccess(__('Deleted Successfully'));
     }
 
     abstract public function register(FormRequest $request,$abilities = null);

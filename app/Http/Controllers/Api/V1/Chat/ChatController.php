@@ -28,7 +28,7 @@ class ChatController extends BaseApiController
      */
     public function index(): mixed
     {
-        $chats = app(GetChatsAction::class)->handle(auth(activeGuard())->user());
+        $chats = (new GetChatsAction())->handle(auth(activeGuard())->user());
         return $this->respondWithCollection($chats);
     }
 
@@ -38,8 +38,7 @@ class ChatController extends BaseApiController
     protected function showChat(ChatRequest $request)
     {
         $order = Order::findOrFail($request->order_id);
-        $chat = app(GetChatAction::class)
-            ->handle($order, auth()->user(), $request->type);
+        $chat = (new GetChatAction())->handle($order, auth()->user(), $request->type);
 
         return $this->respondWithModel($chat);
     }
@@ -49,7 +48,7 @@ class ChatController extends BaseApiController
         $to = ChatUsersTypeEnum::model($request->to_type);
         $to = $to::findOrFail((int) $request->to_id);
 
-        $message = app(SendMessageAction::class)
+        $message = (new SendMessageAction())
             ->handle($chat, auth()->user(), $to, $request->message, [], toType: $request->to_type);
 
         return $this->setStatusCode(200)->respond(new MessageResource($message), []);
