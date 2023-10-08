@@ -141,8 +141,6 @@ interface BaseContract
      * @param array $conditions
      * @param bool $customizePaginationURI
      * @param null $paginationURI
-     * @param  $orderBy2
-     * @param  $orderDir2
      * @return mixed
      */
     public function search(
@@ -156,8 +154,6 @@ interface BaseContract
         array  $conditions = [],
         bool   $customizePaginationURI = false,
                $paginationURI = null,
-               $orderBy2 = null,
-               $orderDir2 = null,
                $withQueryString = false,
     ): mixed;
 

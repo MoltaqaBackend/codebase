@@ -613,8 +613,6 @@ abstract class BaseConcrete implements BaseContract
      * @param array $conditions
      * @param bool $customizePaginationURI
      * @param null $paginationURI
-     * @param null $orderBy2
-     * @param null $orderDir2
      *
      * @return mixed
      */
@@ -630,8 +628,6 @@ abstract class BaseConcrete implements BaseContract
         array  $conditions = [],
         bool   $customizePaginationURI = false,
         $paginationURI = null,
-        $orderBy2 = null,
-        $orderDir2 = null
     ): mixed {
         if (!empty($relations)) {
             $query = $query->with($relations);
@@ -711,8 +707,6 @@ abstract class BaseConcrete implements BaseContract
      * @param array $conditions
      * @param bool $customizePaginationURI
      * @param null $paginationURI
-     * @param null $orderBy2
-     * @param null $orderDir2
      *
      * @return mixed
      */
@@ -727,8 +721,6 @@ abstract class BaseConcrete implements BaseContract
         array  $conditions = [],
         bool   $customizePaginationURI = false,
         $paginationURI = null,
-        $orderBy2 = null,
-        $orderDir2 = null,
         $withQueryString = false
     ): mixed {
         $query =  $this->baseSearch(
@@ -743,10 +735,8 @@ abstract class BaseConcrete implements BaseContract
             $conditions,
             $customizePaginationURI,
             $paginationURI,
-            $orderBy2,
-            $orderDir2
         );
-        return $this->getQueryResult($query, $applyOrder, $page, $limit, $orderBy, $orderDir, $customizePaginationURI, $paginationURI, $orderBy2, $orderDir2, $withQueryString);
+        return $this->getQueryResult($query, $applyOrder, $page, $limit, $orderBy, $orderDir, $customizePaginationURI, $paginationURI, $withQueryString);
     }
 
     /**
@@ -760,8 +750,6 @@ abstract class BaseConcrete implements BaseContract
      * @param array $conditions
      * @param bool $customizePaginationURI
      * @param null $paginationURI
-     * @param null $orderBy2
-     * @param null $orderDir2
      *
      * @return mixed
      */
@@ -776,8 +764,6 @@ abstract class BaseConcrete implements BaseContract
         array  $conditions = [],
         bool   $customizePaginationURI = false,
         $paginationURI = null,
-        $orderBy2 = null,
-        $orderDir2 = null,
         $withQueryString = false
     ): mixed {
         $query =  $this->baseSearch(
@@ -792,10 +778,8 @@ abstract class BaseConcrete implements BaseContract
             $conditions,
             $customizePaginationURI,
             $paginationURI,
-            $orderBy2,
-            $orderDir2
         );
-        return $this->getQueryResult($query, $applyOrder, $page, $limit, $orderBy, $orderDir, $customizePaginationURI, $paginationURI, $orderBy2, $orderDir2, $withQueryString);
+        return $this->getQueryResult($query, $applyOrder, $page, $limit, $orderBy, $orderDir, $customizePaginationURI, $paginationURI, $withQueryString);
     }
 
     /**
@@ -807,8 +791,6 @@ abstract class BaseConcrete implements BaseContract
      * @param string $orderDir
      * @param bool $customizePaginationURI
      * @param null $paginationURI
-     * @param null $orderBy2
-     * @param null $orderDir2
      *
      * @return mixed
      */
@@ -821,15 +803,10 @@ abstract class BaseConcrete implements BaseContract
         string $orderDir = self::ORDER_DIR,
         bool $customizePaginationURI = false,
         $paginationURI = null,
-        $orderBy2 = null,
-        $orderDir2 = null,
         $withQueryString = false,
     ): mixed {
         if ($applyOrder) {
             $query = $query->orderBy($orderBy, $orderDir);
-            if (($orderBy2 != null) && ($orderDir2 != null)) {
-                $query = $query->orderBy($orderBy2, $orderDir2);
-            }
         }
 
         if (config('app.query_debug')) {
