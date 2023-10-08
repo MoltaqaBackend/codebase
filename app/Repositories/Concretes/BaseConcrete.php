@@ -30,7 +30,7 @@ abstract class BaseConcrete implements BaseContract
     {
         $this->query = $model->query();
         $this->model = $model;
-        $this->modelName = class_basename($this->model);;
+        $this->modelName = class_basename($this->model);
     }
 
     public function freshRepo(): static
@@ -646,6 +646,7 @@ abstract class BaseConcrete implements BaseContract
             }
         }
         if (!empty($conditions)) {
+            # ['where' => ['phone'=>578687686]]
             foreach ($conditions as $conditionType => $whereConditions) {
 
                 if ($conditionType == 'where' && !empty($whereConditions)) {

@@ -29,7 +29,7 @@ class NotificationController extends Controller
     public function __construct()
     {
         $this->middleware(['role_or_permission:notification index|'.activeGuard()])->only(['__invoke', 'index']);
-        $this->middleware(['role_or_permission:notification create|'.activeGuard()])->only('create');
+        $this->middleware(['role_or_permission:notification create|'.activeGuard()])->only('store');
     }
 
 

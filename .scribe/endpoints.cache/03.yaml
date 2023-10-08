@@ -50,8 +50,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -61,7 +61,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer VEa6D64ecvg31fdZhk5abP8'
+      - 'Bearer e4badgVh5Pf6vD3EcakZ186'
     controller: null
     method: null
     route: null
@@ -90,13 +90,64 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'Notification title.'
+        required: true
+        example: title
+        type: string
+        enumValues: []
+        custom: []
+      body:
+        name: body
+        description: 'Notification Message.'
+        required: true
+        example: message
+        type: string
+        enumValues: []
+        custom: []
+      topic:
+        name: topic
+        description: '(optional) Notification Topic.'
+        required: false
+        example: offer
+        type: string
+        enumValues: []
+        custom: []
+      roles:
+        name: roles
+        description: 'string required.'
+        required: false
+        example:
+          - asperiores
+        type: '[]'
+        enumValues: []
+        custom: []
+      users:
+        name: users
+        description: 'integer required.'
+        required: false
+        example:
+          - 1
+          - 2
+        type: '[]'
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      title: title
+      body: message
+      topic: offer
+      roles:
+        - asperiores
+      users:
+        - 1
+        - 2
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -106,7 +157,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 1V6hkZb5ac6f8eEvad3D4Pg'
+      - 'Bearer k8vbgDEceaPfa4VZd36615h'
     controller: null
     method: null
     route: null

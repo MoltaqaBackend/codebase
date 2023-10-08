@@ -30,8 +30,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -41,7 +41,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 5face3vDPZb8664Eg1adhkV'
+      - 'Bearer eDZkE66V3f5gh41abcP8vda'
     controller: null
     method: null
     route: null
@@ -93,8 +93,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -104,7 +104,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6ZhDc1ae3b6VavEfkP4g58d'
+      - 'Bearer 3d5vaEg1kePDbhc6Z4Vf68a'
     controller: null
     method: null
     route: null
@@ -134,12 +134,12 @@ endpoints:
         name: chat_id
         description: 'The ID of the chat.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      chat_id: 17
+      chat_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -183,8 +183,8 @@ endpoints:
       images: null
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -194,7 +194,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 164ZakDv8abdghfe5VP3E6c'
+      - 'Bearer ZDP5a86Eke6hc3da14gvbfV'
     controller: null
     method: null
     route: null
@@ -228,8 +228,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -239,7 +239,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6vb364Ec8eghDPd1akaZ5fV'
+      - 'Bearer P6fc8aDkhE6ga5Z4dbv13Ve'
     controller: null
     method: null
     route: null
@@ -291,8 +291,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -302,7 +302,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 1Vg46bhDkd5v6feaaP8c3EZ'
+      - 'Bearer faVDdb6v86PkhgeEZ5413ca'
     controller: null
     method: null
     route: null
@@ -332,12 +332,12 @@ endpoints:
         name: chat_id
         description: 'The ID of the chat.'
         required: true
-        example: 5
+        example: 2
         type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      chat_id: 5
+      chat_id: 2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -381,8 +381,8 @@ endpoints:
       images: null
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -392,7 +392,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6haVc85df41De6PvgbkaZE3'
+      - 'Bearer 6ca3Vv8e6bPZda5hEkgf1D4'
     controller: null
     method: null
     route: null
@@ -426,8 +426,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -437,7 +437,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6ZVP4b3D1vdhg6fcae5Ek8a'
+      - 'Bearer vb145aVc8gE6DZ6faeh3kdP'
     controller: null
     method: null
     route: null
@@ -489,8 +489,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -500,7 +500,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer fP3hakaDVg5v4Z8edcb6E16'
+      - 'Bearer caDv6behZ6VEPkd1gf584a3'
     controller: null
     method: null
     route: null
@@ -530,12 +530,12 @@ endpoints:
         name: chat_id
         description: 'The ID of the chat.'
         required: true
-        example: 8
+        example: 2
         type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      chat_id: 8
+      chat_id: 2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -579,8 +579,8 @@ endpoints:
       images: null
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -590,7 +590,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 5ek6ab3Z8chf4v6Vg1EdaDP'
+      - 'Bearer aP83Vge6a6h5Ek1bvc4ZdfD'
     controller: null
     method: null
     route: null

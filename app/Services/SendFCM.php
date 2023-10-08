@@ -33,23 +33,24 @@ class SendFCM
     }
 
     # Registration Id
-    public function registrationIds($user = null): array
+    public function registrationIds($fcmTokens = []): array
     {
-        if ($user) {
-            $tokens[] = $user->deviceTokens?->pluck('device_token')->all();
+        if ($fcmTokens) {
+            $tokens[] = $fcmTokens;
         }
 
         if ($this->shouldSendForAdmin) {
             $tokens[] = DeviceToken::query()->where('tokenable_type', class_basename($this->tokenModel) ?? '')
                 ->whereHas('tokenable', function ($q) {
-                    $q->whereHas('roles');
+                    $q->whereHas('roles',function($q){ $q->whereIn("name", ["admin"]);});
                 })->pluck('device_token')->toArray();
         }
 
         if ($this->shouldSendForUsers) {
             $tokens[] = DeviceToken::query()->where('tokenable_type', class_basename($this->tokenModel) ?? '')
                 ->whereHas('tokenable', function ($q) {
-                    $q->whereDoesntHave('roles');
+                    $q->whereDoesntHave('roles')
+                    ->orWhereHas('roles',function($q){ $q->whereIn("name", ["admin"]);});
                 })->pluck('device_token')->toArray();
         }
 
@@ -63,7 +64,7 @@ class SendFCM
         return $action;
     }
 
-    public function sendNotification($title, $body, $user = null): void
+    public function sendNotification($title, $body, $fcmTokens = null): void
     {
         $body = [
             'title' => (string)__($title, [], $this->setLocale()),
@@ -72,7 +73,7 @@ class SendFCM
         ];
 
         $data = [
-            'registration_ids' => collect($this->registrationIds($user))->unique()->toArray(),
+            'registration_ids' => collect($this->registrationIds($fcmTokens))->unique()->toArray(),
             'data' => $body,
             'notification' => $body,
         ];

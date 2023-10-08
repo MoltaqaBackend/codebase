@@ -32,8 +32,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -43,7 +43,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer fvc8V61dkDegZ4aPEabh563'
+      - 'Bearer 1aDh6Ev6ZPd4a83bf5gkcVe'
     controller: null
     method: null
     route: null
@@ -77,17 +77,17 @@ endpoints:
         name: name
         description: 'يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا.'
         required: true
-        example: dwmtcqwzfcgzq
+        example: jyrezzqfyrrf
         type: string
         enumValues: []
         custom: []
     cleanBodyParameters:
-      name: dwmtcqwzfcgzq
+      name: jyrezzqfyrrf
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -97,7 +97,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer eaDf6kZg51a6Ev8b4dVh3Pc'
+      - 'Bearer ha5bEgecVdk8fD1Z63Pva46'
     controller: null
     method: null
     route: null
@@ -140,8 +140,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -151,7 +151,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6P5bfg831V4ceZEvahdkaD6'
+      - 'Bearer geD6k5h4v8VZcf61dbaPaE3'
     controller: null
     method: null
     route: null
@@ -195,17 +195,17 @@ endpoints:
         name: name
         description: 'يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا.'
         required: true
-        example: gdrdzegagmff
+        example: rggfmehhnqidvybqrpnjouy
         type: string
         enumValues: []
         custom: []
     cleanBodyParameters:
-      name: gdrdzegagmff
+      name: rggfmehhnqidvybqrpnjouy
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -215,7 +215,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer E6Ve64Za1daD3bfP5hc8kgv'
+      - 'Bearer PEvafd6Dc65Z4bah3ekV1g8'
     controller: null
     method: null
     route: null
@@ -258,8 +258,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -269,7 +269,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer k4ePc81fhZaD6V6a5bd3Egv'
+      - 'Bearer 4P1eZEvVcfaa6h3b85d6gDk'
     controller: null
     method: null
     route: null
@@ -303,8 +303,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -314,7 +314,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 63Va85hfg1PkbDZ4cavd6eE'
+      - 'Bearer Vaavde6f1E8c4DZ5h3kbg6P'
     controller: null
     method: null
     route: null
@@ -328,7 +328,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'index() Display a listing of the resource.'
       description: ''
       authenticated: true
       custom: []
@@ -348,8 +348,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -359,7 +359,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer ca3dk4V6hebZ1a68v5fDEgP'
+      - 'Bearer hEPVvd5acfg13Ze4D8kab66'
     controller: null
     method: null
     route: null
@@ -393,7 +393,7 @@ endpoints:
         name: key
         description: ''
         required: true
-        example: cum
+        example: quaerat
         type: string
         enumValues: []
         custom: []
@@ -406,13 +406,13 @@ endpoints:
         enumValues: []
         custom: []
     cleanBodyParameters:
-      key: cum
+      key: quaerat
       value: []
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -422,7 +422,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer ceZ4kvgd6P6b3EhafV1a8D5'
+      - 'Bearer D1e5ba4akV3EgPfhvZd86c6'
     controller: null
     method: null
     route: null

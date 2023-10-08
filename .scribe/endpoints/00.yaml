@@ -30,8 +30,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -41,7 +41,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer v4dVbEah6DPcf1a6g38keZ5'
+      - 'Bearer 3bcPD18f6havVak65ZegEd4'
     controller: null
     method: null
     route: null
@@ -84,8 +84,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -95,7 +95,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer Pa4k1ZEab8Ve3vg6c56hdDf'
+      - 'Bearer 6e8h5D6d4acaPk1Vf3EZgvb'
     controller: null
     method: null
     route: null
@@ -633,7 +633,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 41Zcb5Da3vd6Pk6afegV8hE'
+      - 'Bearer 3hgPaE4kv6V1e8ZbdfacD56'
     controller: null
     method: null
     route: null
@@ -667,8 +667,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -678,7 +678,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 31bhv58f64ZcVaDkPa6gedE'
+      - 'Bearer a6hZP4v5cb6a8kVDEdgef31'
     controller: null
     method: null
     route: null
@@ -739,8 +739,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -750,7 +750,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer vdaZ4gE8aDf136Pbhc5e6kV'
+      - 'Bearer b4P6a3k681Ddvhc5eEZagVf'
     controller: null
     method: null
     route: null
@@ -802,8 +802,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -813,7 +813,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer Ekh4vdfe1ca3aZg6bV6P58D'
+      - 'Bearer 4hbe3aEdvf8gZDPa56ck16V'
     controller: null
     method: null
     route: null
@@ -847,8 +847,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -858,7 +858,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6hDg4k6vf8abZe135VEdPca'
+      - 'Bearer a6dkaf65c48DhZP1V3bvEge'
     controller: null
     method: null
     route: null

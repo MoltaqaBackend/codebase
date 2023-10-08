@@ -11,19 +11,14 @@ use App\Repositories\Contracts\SettingContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 
-class SettingController extends Controller
+class SettingController extends BaseApiController
 {
     /**
      * @param SettingContract $repository
      */
     public function __construct(SettingContract $repository)
     {
-//        parent::__construct($repository, SettingResource::class, 'setting');
-    }
-
-    public function index(){
-        return myFatoorahTransaction([],50);
-
+       parent::__construct($repository, SettingResource::class, 'setting');
     }
 
     /**

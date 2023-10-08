@@ -30,8 +30,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -41,7 +41,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer fEVd1Ze8aDbg63ka54Pvh6c'
+      - 'Bearer d8k61hVfEbgDa54vZe3ca6P'
     controller: null
     method: null
     route: null
@@ -84,8 +84,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -95,7 +95,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer a8kcde36Pv4DZhag56EVb1f'
+      - 'Bearer gc4PD5eVka6b8haZfv16Ed3'
     controller: null
     method: null
     route: null
@@ -633,7 +633,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer bDa6c3f8d6Z5eE4avVPhg1k'
+      - 'Bearer 4vEgaVkhZPb1fc536Dea86d'
     controller: null
     method: null
     route: null
@@ -667,8 +667,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -678,7 +678,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 54EP66Z3dVgDva1bhkef8ac'
+      - 'Bearer fcvk6adEPg83a654Zhb1DVe'
     controller: null
     method: null
     route: null
@@ -721,8 +721,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -732,7 +732,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer gack36a81DE5e64ZdVPfbhv'
+      - 'Bearer DV45a6db8cZPEhvak6e31gf'
     controller: null
     method: null
     route: null
@@ -793,8 +793,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -804,7 +804,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer fd5gevP8h6DZ6kEV13baca4'
+      - 'Bearer k8Dg63dZfvhea6b4E1VPc5a'
     controller: null
     method: null
     route: null
@@ -856,8 +856,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -867,7 +867,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 3c8fZvagkdh1a4EVD6Pbe56'
+      - 'Bearer bhe3Vdcvk661E4Dag8a5ZfP'
     controller: null
     method: null
     route: null
@@ -901,8 +901,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 400
-        content: '{"status":400,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
+        status: 401
+        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -912,7 +912,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer k8cEgf1Pa5ae6DhbVvd634Z'
+      - 'Bearer 6daPe4hvcV63g5Dk8b1aZEf'
     controller: null
     method: null
     route: null
@@ -1052,7 +1052,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"verification_code":"1279","access_token":"6|c1JTHKCKDWq6SvYcp1LufU9d8WoQtWA1zeZ0wJi491252c4c","user":{"name":"0564776688","email":"fahmi@moltaqa.net","mobile":"0564776688","image":"https:\/\/codebasemoltaqa.test\/assets\/avatar.png","roles":"","roles_ids":[],"role_id":null,"permissions":[]}},"status":200}'
+        content: '{"data":{"verification_code":"6324","access_token":"9|1ewfh4UwR7SWLyQSnN8vH3YUqCX31OvLWKsSOpTN46a3bbb4","user":{"name":"0564776688","email":"fahmi@moltaqa.net","mobile":"0564776688","image":"https:\/\/codebasemoltaqa.test\/assets\/avatar.png","roles":"","roles_ids":[],"role_id":null,"permissions":[]}},"status":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

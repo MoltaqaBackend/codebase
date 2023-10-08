@@ -67,6 +67,7 @@ class PaymentController extends Controller
         if (data_get($paymentData, 'InvoiceStatus') == 'Paid') {
             # Update Transaction Table Data
             $this->payServices($transaction, $paymentData);
+            
 
         }
 

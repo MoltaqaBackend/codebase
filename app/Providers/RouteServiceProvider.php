@@ -22,6 +22,7 @@ class RouteServiceProvider extends ServiceProvider
     protected string $apiClientNamespace = 'App\\Http\\Controllers\\Api\\V1\\Client';
     protected string $apiProviderNamespace = 'App\\Http\\Controllers\\Api\\V1\\Provider';
     protected string $dashboardApiNamespace = 'App\\Http\\Controllers\\Api\\V1\\Dashboard';
+    protected array $apiMiddlewares = ['api','apilocale'];
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -32,8 +33,10 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        if(config('global.should_use_api_key_middleware'))
+            array_push($this->apiMiddlewares,'apikey');
         $this->routes(function () {
-            Route::middleware(['api','apilocale'])
+            Route::middleware($this->apiMiddlewares)
             ->prefix('dashboard-api/v1')
             ->namespace($this->dashboardApiNamespace)
             ->group(base_path('routes/dashboard-v1.php'));

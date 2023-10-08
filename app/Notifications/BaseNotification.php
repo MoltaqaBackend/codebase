@@ -86,12 +86,11 @@ class BaseNotification extends Notification implements ShouldQueue
     public function sendToFireBase(object $notifiable)
     {
         # Note $notificationData must contain tokenModel , sendForAdmin , sendForUsers , title , body attributes
-        # optional passing a notifiable model instead of User::first()
         # tokenModel ex >> User::class
         (new SendFCM($this->notificationData['tokenModel']))
             ->sendForAdmin($this->notificationData['sendForAdmin'] ?? false)
             ->sendForUsers($this->notificationData['sendForUsers'] ?? false)
-            ->sendNotification($this->notificationData['title'],$this->notificationData['body'],User::first());
+            ->sendNotification($this->notificationData['title'],$this->notificationData['body'],[]);
     }
 
      public function sendToPusher(object $notifiable)

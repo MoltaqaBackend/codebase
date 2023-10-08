@@ -246,7 +246,7 @@
                                 <a href="#endpoints-GETdashboard-api-v1-permissions">GET dashboard-api/v1/permissions</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETdashboard-api-v1-settings">
-                                <a href="#endpoints-GETdashboard-api-v1-settings">GET dashboard-api/v1/settings</a>
+                                <a href="#endpoints-GETdashboard-api-v1-settings">index() Display a listing of the resource.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTdashboard-api-v1-settings">
                                 <a href="#endpoints-POSTdashboard-api-v1-settings">POST dashboard-api/v1/settings</a>
@@ -376,7 +376,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-auth-resend-otp">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -387,7 +387,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -567,7 +567,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-auth-verify-otp">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -578,7 +578,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -1427,7 +1427,7 @@ fetch(url, {
 
 <span id="example-responses-GETclient-api-v1-auth-profile">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1438,7 +1438,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -1618,7 +1618,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-auth-change-mobile">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1629,7 +1629,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -1825,7 +1825,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-auth-chang-password">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1836,7 +1836,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -2052,7 +2052,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-auth-reset-password">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2063,7 +2063,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -2257,7 +2257,7 @@ fetch(url, {
 
 <span id="example-responses-DELETEclient-api-v1-auth-delete-account">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2268,7 +2268,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -2671,8 +2671,8 @@ x-ratelimit-remaining: 53
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;verification_code&quot;: &quot;1279&quot;,
-        &quot;access_token&quot;: &quot;6|c1JTHKCKDWq6SvYcp1LufU9d8WoQtWA1zeZ0wJi491252c4c&quot;,
+        &quot;verification_code&quot;: &quot;6324&quot;,
+        &quot;access_token&quot;: &quot;9|1ewfh4UwR7SWLyQSnN8vH3YUqCX31OvLWKsSOpTN46a3bbb4&quot;,
         &quot;user&quot;: {
             &quot;name&quot;: &quot;0564776688&quot;,
             &quot;email&quot;: &quot;fahmi@moltaqa.net&quot;,
@@ -3289,7 +3289,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-auth-resend-otp">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -3300,7 +3300,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -3480,7 +3480,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-auth-verify-otp">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -3491,7 +3491,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -4340,7 +4340,7 @@ fetch(url, {
 
 <span id="example-responses-GETprovider-api-v1-auth-profile">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4351,7 +4351,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -4531,7 +4531,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-auth-change-mobile">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4542,7 +4542,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -4738,7 +4738,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-auth-chang-password">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4749,7 +4749,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -4965,7 +4965,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-auth-reset-password">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4976,7 +4976,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -5170,7 +5170,7 @@ fetch(url, {
 
 <span id="example-responses-DELETEprovider-api-v1-auth-delete-account">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -5181,7 +5181,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -5544,8 +5544,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "serial_number=djkjfbajkdfnlk"\
     --form "board_number=Kg8f06"\
     --form "password_confirmation=12345678"\
-    --form "avatar=@C:\Users\raya\AppData\Local\Temp\php2762.tmp" \
-    --form "car_image=@C:\Users\raya\AppData\Local\Temp\php2763.tmp" </code></pre></div>
+    --form "avatar=@C:\Users\raya\AppData\Local\Temp\php824E.tmp" \
+    --form "car_image=@C:\Users\raya\AppData\Local\Temp\php824F.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -6448,7 +6448,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>user personal image. Example: <code>C:\Users\raya\AppData\Local\Temp\php2762.tmp</code></p>
+<p>user personal image. Example: <code>C:\Users\raya\AppData\Local\Temp\php824E.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -6547,7 +6547,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>user car image. Example: <code>C:\Users\raya\AppData\Local\Temp\php2763.tmp</code></p>
+<p>user car image. Example: <code>C:\Users\raya\AppData\Local\Temp\php824F.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
@@ -7018,7 +7018,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-notification-index">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7029,7 +7029,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -7218,7 +7218,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --header "Api-Key: xx" \
     --header "Api-Version: v1" \
-    --header "Accept-Language: ar"</code></pre></div>
+    --header "Accept-Language: ar" \
+    --data "{
+    \"title\": \"title\",
+    \"body\": \"message\",
+    \"topic\": \"offer\",
+    \"roles\": [
+        \"asperiores\"
+    ],
+    \"users\": [
+        1,
+        2
+    ]
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -7235,16 +7248,30 @@ const headers = {
     "Accept-Language": "ar",
 };
 
+let body = {
+    "title": "title",
+    "body": "message",
+    "topic": "offer",
+    "roles": [
+        "asperiores"
+    ],
+    "users": [
+        1,
+        2
+    ]
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
 <span id="example-responses-POSTdashboard-api-v1-notification-store">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7255,7 +7282,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -7378,7 +7405,67 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>ar</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               value="title"
+               data-component="body">
+    <br>
+<p>Notification title. Example: <code>title</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>body</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="body"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               value="message"
+               data-component="body">
+    <br>
+<p>Notification Message. Example: <code>message</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>topic</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="topic"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               value="offer"
+               data-component="body">
+    <br>
+<p>(optional) Notification Topic. Example: <code>offer</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>roles</code></b>&nbsp;&nbsp;
+<small>[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="roles[0]"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="roles[1]"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               data-component="body">
+    <br>
+<p>string required.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>users</code></b>&nbsp;&nbsp;
+<small>[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="users[0]"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="users[1]"                data-endpoint="POSTdashboard-api-v1-notification-store"
+               data-component="body">
+    <br>
+<p>integer required.</p>
+        </div>
+        </form>
 
                 <h1 id="dashboard-admin">Dashboard Admin</h1>
 
@@ -7434,7 +7521,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-auth-resend-otp">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7445,7 +7532,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -7625,7 +7712,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-auth-verify-otp">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7636,7 +7723,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -8485,7 +8572,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-auth-profile">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -8496,7 +8583,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -8680,7 +8767,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-auth-changpassword">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -8691,7 +8778,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -8907,7 +8994,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-auth-reset-password">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -8918,7 +9005,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -9112,7 +9199,7 @@ fetch(url, {
 
 <span id="example-responses-DELETEdashboard-api-v1-auth-delete-account">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -9123,7 +9210,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -9889,7 +9976,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-roles">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -9900,7 +9987,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -10047,7 +10134,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Api-Version: v1" \
     --header "Accept-Language: en" \
     --data "{
-    \"name\": \"dwmtcqwzfcgzq\"
+    \"name\": \"jyrezzqfyrrf\"
 }"
 </code></pre></div>
 
@@ -10067,7 +10154,7 @@ const headers = {
 };
 
 let body = {
-    "name": "dwmtcqwzfcgzq"
+    "name": "jyrezzqfyrrf"
 };
 
 fetch(url, {
@@ -10080,7 +10167,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-roles">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -10091,7 +10178,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -10221,10 +10308,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTdashboard-api-v1-roles"
-               value="dwmtcqwzfcgzq"
+               value="jyrezzqfyrrf"
                data-component="body">
     <br>
-<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>dwmtcqwzfcgzq</code></p>
+<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>jyrezzqfyrrf</code></p>
         </div>
         </form>
 
@@ -10274,7 +10361,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-roles--id-">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -10285,7 +10372,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -10444,7 +10531,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Api-Version: v1" \
     --header "Accept-Language: en" \
     --data "{
-    \"name\": \"gdrdzegagmff\"
+    \"name\": \"rggfmehhnqidvybqrpnjouy\"
 }"
 </code></pre></div>
 
@@ -10464,7 +10551,7 @@ const headers = {
 };
 
 let body = {
-    "name": "gdrdzegagmff"
+    "name": "rggfmehhnqidvybqrpnjouy"
 };
 
 fetch(url, {
@@ -10477,7 +10564,7 @@ fetch(url, {
 
 <span id="example-responses-PUTdashboard-api-v1-roles--id-">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -10488,7 +10575,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -10634,10 +10721,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTdashboard-api-v1-roles--id-"
-               value="gdrdzegagmff"
+               value="rggfmehhnqidvybqrpnjouy"
                data-component="body">
     <br>
-<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>gdrdzegagmff</code></p>
+<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>rggfmehhnqidvybqrpnjouy</code></p>
         </div>
         </form>
 
@@ -10687,7 +10774,7 @@ fetch(url, {
 
 <span id="example-responses-DELETEdashboard-api-v1-roles--id-">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -10698,7 +10785,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -10881,7 +10968,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-permissions">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -10892,7 +10979,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -11017,7 +11104,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-GETdashboard-api-v1-settings">GET dashboard-api/v1/settings</h2>
+                    <h2 id="endpoints-GETdashboard-api-v1-settings">index() Display a listing of the resource.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -11063,7 +11150,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-settings">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -11074,7 +11161,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -11221,7 +11308,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Api-Version: v1" \
     --header "Accept-Language: en" \
     --data "{
-    \"key\": \"cum\",
+    \"key\": \"quaerat\",
     \"value\": []
 }"
 </code></pre></div>
@@ -11242,7 +11329,7 @@ const headers = {
 };
 
 let body = {
-    "key": "cum",
+    "key": "quaerat",
     "value": []
 };
 
@@ -11256,7 +11343,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-settings">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -11267,7 +11354,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -11397,10 +11484,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="key"                data-endpoint="POSTdashboard-api-v1-settings"
-               value="cum"
+               value="quaerat"
                data-component="body">
     <br>
-<p>Example: <code>cum</code></p>
+<p>Example: <code>quaerat</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
@@ -11469,7 +11556,7 @@ fetch(url, {
 
 <span id="example-responses-GETdashboard-api-v1-chat-chats">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -11480,7 +11567,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -11662,7 +11749,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-chat-chats-show-chat">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -11673,7 +11760,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -11835,7 +11922,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/17/send-message" \
+    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/16/send-message" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -11845,12 +11932,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "to_type=user"\
     --form "to_id=2"\
     --form "message=dsbfjksdbk"\
-    --form "images=@C:\Users\raya\AppData\Local\Temp\php1FEC.tmp" </code></pre></div>
+    --form "images=@C:\Users\raya\AppData\Local\Temp\php73B4.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/17/send-message"
+    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/16/send-message"
 );
 
 const headers = {
@@ -11878,7 +11965,7 @@ fetch(url, {
 
 <span id="example-responses-POSTdashboard-api-v1-chat-chats--chat_id--send-message">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -11889,7 +11976,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -12019,10 +12106,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="chat_id"                data-endpoint="POSTdashboard-api-v1-chat-chats--chat_id--send-message"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the chat. Example: <code>17</code></p>
+<p>The ID of the chat. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -12067,7 +12154,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php1FEC.tmp</code></p>
+<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php73B4.tmp</code></p>
         </div>
         </form>
 
@@ -12117,7 +12204,7 @@ fetch(url, {
 
 <span id="example-responses-GETclient-api-v1-chat-chats">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -12128,7 +12215,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -12310,7 +12397,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-chat-chats-show-chat">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -12321,7 +12408,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -12483,7 +12570,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://codebasemoltaqa.test/client-api/v1/chat/chats/5/send-message" \
+    "https://codebasemoltaqa.test/client-api/v1/chat/chats/2/send-message" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -12493,12 +12580,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "to_type=user"\
     --form "to_id=2"\
     --form "message=dsbfjksdbk"\
-    --form "images=@C:\Users\raya\AppData\Local\Temp\php2471.tmp" </code></pre></div>
+    --form "images=@C:\Users\raya\AppData\Local\Temp\php79FE.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://codebasemoltaqa.test/client-api/v1/chat/chats/5/send-message"
+    "https://codebasemoltaqa.test/client-api/v1/chat/chats/2/send-message"
 );
 
 const headers = {
@@ -12526,7 +12613,7 @@ fetch(url, {
 
 <span id="example-responses-POSTclient-api-v1-chat-chats--chat_id--send-message">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -12537,7 +12624,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -12667,10 +12754,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="chat_id"                data-endpoint="POSTclient-api-v1-chat-chats--chat_id--send-message"
-               value="5"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the chat. Example: <code>5</code></p>
+<p>The ID of the chat. Example: <code>2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -12715,7 +12802,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php2471.tmp</code></p>
+<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php79FE.tmp</code></p>
         </div>
         </form>
 
@@ -12765,7 +12852,7 @@ fetch(url, {
 
 <span id="example-responses-GETprovider-api-v1-chat-chats">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -12776,7 +12863,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -12958,7 +13045,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-chat-chats-show-chat">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -12969,7 +13056,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -13131,7 +13218,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/8/send-message" \
+    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/2/send-message" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -13141,12 +13228,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "to_type=user"\
     --form "to_id=2"\
     --form "message=dsbfjksdbk"\
-    --form "images=@C:\Users\raya\AppData\Local\Temp\php2A54.tmp" </code></pre></div>
+    --form "images=@C:\Users\raya\AppData\Local\Temp\php8540.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/8/send-message"
+    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/2/send-message"
 );
 
 const headers = {
@@ -13174,7 +13261,7 @@ fetch(url, {
 
 <span id="example-responses-POSTprovider-api-v1-chat-chats--chat_id--send-message">
             <blockquote>
-            <p>Example response (400):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -13185,7 +13272,7 @@ content-type: application/json
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: 400,
+    &quot;status&quot;: 401,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;errors&quot;: {
         &quot;message&quot;: [
@@ -13315,10 +13402,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="chat_id"                data-endpoint="POSTprovider-api-v1-chat-chats--chat_id--send-message"
-               value="8"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the chat. Example: <code>8</code></p>
+<p>The ID of the chat. Example: <code>2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -13363,7 +13450,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php2A54.tmp</code></p>
+<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php8540.tmp</code></p>
         </div>
         </form>
 
