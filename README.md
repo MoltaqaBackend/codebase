@@ -27,3 +27,8 @@ Roles, Permissions, Wallet, Chat....
             ->sendForAdmin(true)
             ->sendForUsers(false)
             ->sendNotification('test title','test body',User::first());
+
+## Github Commit Style Guide
+
+- [Link 1](https://gist.github.com/ericavonb/3c79e5035567c8ef3267)
+- [Link 2](https://gist.github.com/abravalheri/34aeb7b18d61392251a2)
