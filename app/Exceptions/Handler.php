@@ -53,14 +53,11 @@ class Handler extends ExceptionHandler
         if ($request->is('api/*') || $request->wantsJson()) {
 
             if ($exception->getMessage() == "Unauthenticated.") {
-                $error = ['unauthenticated' => [$exception->getMessage()]];
                 $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
-                $code = $exception->getCode();
-                return $this->setStatusCode($exception->getCode())->respondWithError($message);
+                return $this->setStatusCode(401)->respondWithError($message);
             }
 
             if ($exception instanceof AuthenticationException) {
-                $error = ['unauthenticated' => [$exception->getMessage()]];
                 $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
                 return $this->setStatusCode(401)->respondWithError($message);
             }

@@ -6,6 +6,7 @@ use App\Events\NotificationEvent;
 use App\Services\SendFCM;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -34,43 +35,12 @@ class BaseNotification extends Notification implements ShouldQueue
         if (in_array('mail', $this->notificationVia)) {
             $via[] = 'mail';
         }
-        if (in_array('sms', $this->notificationVia)) {
-            $via[] = 'sms';
-        }
-        if (in_array('firebase', $this->notificationVia)) {
-            $via[] = 'firebase';
-        }
-        if (in_array('pusher', $this->notificationVia)) {
-            $via[] = 'firebase';
-        }
+
         if (in_array('database', $this->notificationVia)) {
             $via[] = 'database';
         }
         return $via ?? [];
     }
-
-    public function toSms(object $notifiable)
-    {
-        # Note $notificationData must contain body
-        sendSMS($this->notificationData['body'],$notifiable->mobile);
-    }
-
-    public function toFirebase(object $notifiable)
-    {
-        # Note $notificationData must contain tokenModel , sendForAdmin , sendForUsers , title , body attributes
-        # optional passing a notifiable model instead of User::first()
-        # tokenModel ex >> User::class
-        (new SendFCM($this->notificationData['tokenModel']))
-            ->sendForAdmin($this->notificationData['sendForAdmin'])
-            ->sendForUsers($this->notificationData['sendForUsers'])
-            ->sendNotification($this->notificationData['title'],$this->notificationData['body'],User::first());
-    }
-
-     public function toPusher(object $notifiable)
-     {
-         # Note $notificationData must contain title , body and topic attributes
-         event(new NotificationEvent($this->notificationData));
-     }
 
     /**
      * Get the mail representation of the notification.
@@ -90,9 +60,43 @@ class BaseNotification extends Notification implements ShouldQueue
      */
     public function toArray(object $notifiable): array
     {
+        if (in_array('sms', $this->notificationVia)) {
+            $this->sendToSms($notifiable);
+        }
+        if (in_array('firebase', $this->notificationVia)) {
+            $this->sendToFireBase($notifiable);
+        }
+        if (in_array('pusher', $this->notificationVia)) {
+            $this->sendToPusher($notifiable);
+        }
+
         return [
             'title' => $this->notificationData['title'],
             'body' => $this->notificationData['body'],
         ];
     }
+
+    
+    public function sendToSms(object $notifiable)
+    {
+        # Note $notificationData must contain body
+        sendSMS($this->notificationData['body'],$notifiable->mobile);
+    }
+
+    public function sendToFireBase(object $notifiable)
+    {
+        # Note $notificationData must contain tokenModel , sendForAdmin , sendForUsers , title , body attributes
+        # optional passing a notifiable model instead of User::first()
+        # tokenModel ex >> User::class
+        (new SendFCM($this->notificationData['tokenModel']))
+            ->sendForAdmin($this->notificationData['sendForAdmin'] ?? false)
+            ->sendForUsers($this->notificationData['sendForUsers'] ?? false)
+            ->sendNotification($this->notificationData['title'],$this->notificationData['body'],User::first());
+    }
+
+     public function sendToPusher(object $notifiable)
+     {
+         # Note $notificationData must contain title , body and topic attributes
+         event(new NotificationEvent($this->notificationData));
+     }
 }

@@ -26,7 +26,7 @@ class PermissionSeeder extends Seeder
     {
         # Admin Models
         $adminModels = [
-            'users', 'roles', 'permissions'
+            'users', 'roles', 'permissions', 'notifications', 'chats'
         ];
 
         # Default Methods
