@@ -5,9 +5,10 @@ namespace App\Http\Requests\Api\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
+ * @bodyParam email string required user email. Example: test@test.com
  * @bodyParam mobile string required The new Mobile Number of the user.Example: 0564776688
  */
-class ChangeMobileRequest extends FormRequest
+class ValidateMobileorEmailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,13 +28,15 @@ class ChangeMobileRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ['required', "unique:users,mobile,".optional(request()->user()->id).',id'],
+            "email" => ["nullable", 'email:rfc,filter', "unique:users,email"],
+            "mobile" => ["nullable", "unique:users,mobile"],
         ];
     }
 
     public function attributes(): array
     {
         return [
+            'email' => __('E-Mail'),
             'mobile' => __('Mobile'),
         ];
     }

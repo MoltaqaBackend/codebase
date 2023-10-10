@@ -21,13 +21,13 @@ class AuthProviderService extends AuthAbstract
     public function deleteAccount(Request $request): JsonResponse
     {
         $user = $request->user();
-        if(is_null($user)) {
+        if (is_null($user)) {
             throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]], 401);
         }
 
         DB::beginTransaction();
         $user->tokens()->delete();
-        if($user->delete()) {
+        if ($user->delete()) {
             DB::commit();
             return $this->respondWithSuccess(__('Deleted Successfully'));
         }
@@ -37,7 +37,7 @@ class AuthProviderService extends AuthAbstract
 
     public function register(FormRequest $request, $abilities = null): User
     {
-        if(!($request instanceof RegisterProviderRequest)) {
+        if (!($request instanceof RegisterProviderRequest)) {
             throw AuthException::wrongImplementation('wrong_implementation**' . __("Failed Operation"));
         }
         DB::beginTransaction();
@@ -48,9 +48,9 @@ class AuthProviderService extends AuthAbstract
             'password' => $request->password,
         ]);
         $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
-        if(is_null($user)) {
+        if (is_null($user)) {
             DB::rollBack();
-            throw AuthException::userFailedRegistration("generation_failed**".__('Failed Operation'), 500);
+            throw AuthException::userFailedRegistration("generation_failed**" . __('Failed Operation'), 500);
         }
         DB::commit();
         $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;

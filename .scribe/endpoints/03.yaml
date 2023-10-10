@@ -59,7 +59,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer e4badgVh5Pf6vD3EcakZ186'
+      - 'Bearer f8D3e16VPEda4bh56aZvcgk'
     controller: null
     method: null
     route: null
@@ -118,7 +118,7 @@ endpoints:
         description: 'string required.'
         required: false
         example:
-          - asperiores
+          - a
         type: '[]'
         enumValues: []
         custom: []
@@ -137,7 +137,7 @@ endpoints:
       body: message
       topic: offer
       roles:
-        - asperiores
+        - a
       users:
         - 1
         - 2
@@ -155,7 +155,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer k8vbgDEceaPfa4VZd36615h'
+      - 'Bearer a6e6814VbhvfZE3a5gdDkPc'
     controller: null
     method: null
     route: null

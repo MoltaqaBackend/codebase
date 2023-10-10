@@ -301,7 +301,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 8, 2023</li>
+        <li>Last updated: October 10, 2023</li>
     </ul>
 </div>
 
@@ -777,11 +777,11 @@ x-ratelimit-remaining: 55
     &quot;message&quot;: &quot;Call to a member function currentAccessToken() on null&quot;,
     &quot;exception&quot;: &quot;Error&quot;,
     &quot;file&quot;: &quot;C:\\laragon\\www\\codebasemoltaqa\\app\\Services\\Auth\\AuthAbstract.php&quot;,
-    &quot;line&quot;: 162,
+    &quot;line&quot;: 175,
     &quot;trace&quot;: [
         {
             &quot;file&quot;: &quot;C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Controllers\\Api\\V1\\Client\\AuthController.php&quot;,
-            &quot;line&quot;: 220,
+            &quot;line&quot;: 222,
             &quot;function&quot;: &quot;logout&quot;,
             &quot;class&quot;: &quot;App\\Services\\Auth\\AuthAbstract&quot;,
             &quot;type&quot;: &quot;-&gt;&quot;
@@ -2671,8 +2671,8 @@ x-ratelimit-remaining: 53
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;verification_code&quot;: &quot;6324&quot;,
-        &quot;access_token&quot;: &quot;9|1ewfh4UwR7SWLyQSnN8vH3YUqCX31OvLWKsSOpTN46a3bbb4&quot;,
+        &quot;verification_code&quot;: &quot;2719&quot;,
+        &quot;access_token&quot;: &quot;10|E4Mz0Jy2TCj7N2hZlFJGqqGgIGimK5rOAAugfqAN27e4ca3d&quot;,
         &quot;user&quot;: {
             &quot;name&quot;: &quot;0564776688&quot;,
             &quot;email&quot;: &quot;fahmi@moltaqa.net&quot;,
@@ -3690,11 +3690,11 @@ x-ratelimit-remaining: 50
     &quot;message&quot;: &quot;Call to a member function currentAccessToken() on null&quot;,
     &quot;exception&quot;: &quot;Error&quot;,
     &quot;file&quot;: &quot;C:\\laragon\\www\\codebasemoltaqa\\app\\Services\\Auth\\AuthAbstract.php&quot;,
-    &quot;line&quot;: 162,
+    &quot;line&quot;: 175,
     &quot;trace&quot;: [
         {
             &quot;file&quot;: &quot;C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Controllers\\Api\\V1\\Provider\\AuthController.php&quot;,
-            &quot;line&quot;: 220,
+            &quot;line&quot;: 222,
             &quot;function&quot;: &quot;logout&quot;,
             &quot;class&quot;: &quot;App\\Services\\Auth\\AuthAbstract&quot;,
             &quot;type&quot;: &quot;-&gt;&quot;
@@ -5544,8 +5544,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "serial_number=djkjfbajkdfnlk"\
     --form "board_number=Kg8f06"\
     --form "password_confirmation=12345678"\
-    --form "avatar=@C:\Users\raya\AppData\Local\Temp\php824E.tmp" \
-    --form "car_image=@C:\Users\raya\AppData\Local\Temp\php824F.tmp" </code></pre></div>
+    --form "avatar=@C:\Users\raya\AppData\Local\Temp\phpF00.tmp" \
+    --form "car_image=@C:\Users\raya\AppData\Local\Temp\phpF01.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -6448,7 +6448,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>user personal image. Example: <code>C:\Users\raya\AppData\Local\Temp\php824E.tmp</code></p>
+<p>user personal image. Example: <code>C:\Users\raya\AppData\Local\Temp\phpF00.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -6547,7 +6547,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>user car image. Example: <code>C:\Users\raya\AppData\Local\Temp\php824F.tmp</code></p>
+<p>user car image. Example: <code>C:\Users\raya\AppData\Local\Temp\phpF01.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
@@ -7224,7 +7224,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"body\": \"message\",
     \"topic\": \"offer\",
     \"roles\": [
-        \"asperiores\"
+        \"a\"
     ],
     \"users\": [
         1,
@@ -7253,7 +7253,7 @@ let body = {
     "body": "message",
     "topic": "offer",
     "roles": [
-        "asperiores"
+        "a"
     ],
     "users": [
         1,
@@ -7922,11 +7922,11 @@ x-ratelimit-remaining: 59
     &quot;message&quot;: &quot;Call to a member function currentAccessToken() on null&quot;,
     &quot;exception&quot;: &quot;Error&quot;,
     &quot;file&quot;: &quot;C:\\laragon\\www\\codebasemoltaqa\\app\\Services\\Auth\\AuthAbstract.php&quot;,
-    &quot;line&quot;: 162,
+    &quot;line&quot;: 175,
     &quot;trace&quot;: [
         {
             &quot;file&quot;: &quot;C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Controllers\\Api\\V1\\Dashboard\\AuthController.php&quot;,
-            &quot;line&quot;: 181,
+            &quot;line&quot;: 183,
             &quot;function&quot;: &quot;logout&quot;,
             &quot;class&quot;: &quot;App\\Services\\Auth\\AuthAbstract&quot;,
             &quot;type&quot;: &quot;-&gt;&quot;
@@ -10134,7 +10134,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Api-Version: v1" \
     --header "Accept-Language: en" \
     --data "{
-    \"name\": \"jyrezzqfyrrf\"
+    \"name\": \"erv\"
 }"
 </code></pre></div>
 
@@ -10154,7 +10154,7 @@ const headers = {
 };
 
 let body = {
-    "name": "jyrezzqfyrrf"
+    "name": "erv"
 };
 
 fetch(url, {
@@ -10308,10 +10308,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTdashboard-api-v1-roles"
-               value="jyrezzqfyrrf"
+               value="erv"
                data-component="body">
     <br>
-<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>jyrezzqfyrrf</code></p>
+<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>erv</code></p>
         </div>
         </form>
 
@@ -10531,7 +10531,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Api-Version: v1" \
     --header "Accept-Language: en" \
     --data "{
-    \"name\": \"rggfmehhnqidvybqrpnjouy\"
+    \"name\": \"oeaeoawbkl\"
 }"
 </code></pre></div>
 
@@ -10551,7 +10551,7 @@ const headers = {
 };
 
 let body = {
-    "name": "rggfmehhnqidvybqrpnjouy"
+    "name": "oeaeoawbkl"
 };
 
 fetch(url, {
@@ -10721,10 +10721,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTdashboard-api-v1-roles--id-"
-               value="rggfmehhnqidvybqrpnjouy"
+               value="oeaeoawbkl"
                data-component="body">
     <br>
-<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>rggfmehhnqidvybqrpnjouy</code></p>
+<p>يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا. Example: <code>oeaeoawbkl</code></p>
         </div>
         </form>
 
@@ -11308,7 +11308,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Api-Version: v1" \
     --header "Accept-Language: en" \
     --data "{
-    \"key\": \"quaerat\",
+    \"key\": \"mollitia\",
     \"value\": []
 }"
 </code></pre></div>
@@ -11329,7 +11329,7 @@ const headers = {
 };
 
 let body = {
-    "key": "quaerat",
+    "key": "mollitia",
     "value": []
 };
 
@@ -11484,10 +11484,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="key"                data-endpoint="POSTdashboard-api-v1-settings"
-               value="quaerat"
+               value="mollitia"
                data-component="body">
     <br>
-<p>Example: <code>quaerat</code></p>
+<p>Example: <code>mollitia</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
@@ -11922,7 +11922,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/16/send-message" \
+    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/1/send-message" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -11932,12 +11932,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "to_type=user"\
     --form "to_id=2"\
     --form "message=dsbfjksdbk"\
-    --form "images=@C:\Users\raya\AppData\Local\Temp\php73B4.tmp" </code></pre></div>
+    --form "images=@C:\Users\raya\AppData\Local\Temp\phpF8B5.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/16/send-message"
+    "https://codebasemoltaqa.test/dashboard-api/v1/chat/chats/1/send-message"
 );
 
 const headers = {
@@ -12106,10 +12106,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="chat_id"                data-endpoint="POSTdashboard-api-v1-chat-chats--chat_id--send-message"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the chat. Example: <code>16</code></p>
+<p>The ID of the chat. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -12154,7 +12154,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php73B4.tmp</code></p>
+<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\phpF8B5.tmp</code></p>
         </div>
         </form>
 
@@ -12570,7 +12570,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://codebasemoltaqa.test/client-api/v1/chat/chats/2/send-message" \
+    "https://codebasemoltaqa.test/client-api/v1/chat/chats/18/send-message" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -12580,12 +12580,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "to_type=user"\
     --form "to_id=2"\
     --form "message=dsbfjksdbk"\
-    --form "images=@C:\Users\raya\AppData\Local\Temp\php79FE.tmp" </code></pre></div>
+    --form "images=@C:\Users\raya\AppData\Local\Temp\phpA89.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://codebasemoltaqa.test/client-api/v1/chat/chats/2/send-message"
+    "https://codebasemoltaqa.test/client-api/v1/chat/chats/18/send-message"
 );
 
 const headers = {
@@ -12754,10 +12754,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="chat_id"                data-endpoint="POSTclient-api-v1-chat-chats--chat_id--send-message"
-               value="2"
+               value="18"
                data-component="url">
     <br>
-<p>The ID of the chat. Example: <code>2</code></p>
+<p>The ID of the chat. Example: <code>18</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -12802,7 +12802,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php79FE.tmp</code></p>
+<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\phpA89.tmp</code></p>
         </div>
         </form>
 
@@ -13218,7 +13218,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/2/send-message" \
+    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/11/send-message" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -13228,12 +13228,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "to_type=user"\
     --form "to_id=2"\
     --form "message=dsbfjksdbk"\
-    --form "images=@C:\Users\raya\AppData\Local\Temp\php8540.tmp" </code></pre></div>
+    --form "images=@C:\Users\raya\AppData\Local\Temp\php14EE.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/2/send-message"
+    "https://codebasemoltaqa.test/provider-api/v1/chat/chats/11/send-message"
 );
 
 const headers = {
@@ -13402,10 +13402,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="chat_id"                data-endpoint="POSTprovider-api-v1-chat-chats--chat_id--send-message"
-               value="2"
+               value="11"
                data-component="url">
     <br>
-<p>The ID of the chat. Example: <code>2</code></p>
+<p>The ID of the chat. Example: <code>11</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -13450,7 +13450,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php8540.tmp</code></p>
+<p>[]. Example: <code>C:\Users\raya\AppData\Local\Temp\php14EE.tmp</code></p>
         </div>
         </form>
 

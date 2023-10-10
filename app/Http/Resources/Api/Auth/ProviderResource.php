@@ -17,6 +17,7 @@ class ProviderResource extends UserResource
         $this->loadMissing('provider');
         $parent['user'] = array_merge($parent['user'], [
             "address" => optional($this->provider)->address ?? '',
+            "is_active" => $this->isActive(),
         ]);
         return $parent;
     }

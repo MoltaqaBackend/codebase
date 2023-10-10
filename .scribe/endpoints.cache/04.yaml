@@ -43,7 +43,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer d8k61hVfEbgDa54vZe3ca6P'
+      - 'Bearer V6fP683DEabvkg41dah5ecZ'
     controller: null
     method: null
     route: null
@@ -97,7 +97,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer gc4PD5eVka6b8haZfv16Ed3'
+      - 'Bearer 3gZ1dcDPvh4aV6Eke68f5ba'
     controller: null
     method: null
     route: null
@@ -137,11 +137,11 @@ endpoints:
               "message": "Call to a member function currentAccessToken() on null",
               "exception": "Error",
               "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Services\\Auth\\AuthAbstract.php",
-              "line": 162,
+              "line": 175,
               "trace": [
                   {
                       "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Controllers\\Api\\V1\\Client\\AuthController.php",
-                      "line": 220,
+                      "line": 222,
                       "function": "logout",
                       "class": "App\\Services\\Auth\\AuthAbstract",
                       "type": "->"
@@ -635,7 +635,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4vEgaVkhZPb1fc536Dea86d'
+      - 'Bearer 86akgZP6V31dfDeh5Ebcv4a'
     controller: null
     method: null
     route: null
@@ -680,7 +680,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer fcvk6adEPg83a654Zhb1DVe'
+      - 'Bearer aVahgEZDPd53461k8b6vfec'
     controller: null
     method: null
     route: null
@@ -734,7 +734,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer DV45a6db8cZPEhvak6e31gf'
+      - 'Bearer D583ac4VbdE6efZa1gk6vPh'
     controller: null
     method: null
     route: null
@@ -806,7 +806,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer k8Dg63dZfvhea6b4E1VPc5a'
+      - 'Bearer Za6cg4V6E5v1hDbPad8fe3k'
     controller: null
     method: null
     route: null
@@ -869,7 +869,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer bhe3Vdcvk661E4Dag8a5ZfP'
+      - 'Bearer 4aDbdv6cgh3P8a16fkZeE5V'
     controller: null
     method: null
     route: null
@@ -914,7 +914,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6daPe4hvcV63g5Dk8b1aZEf'
+      - 'Bearer a8d136EkfP4vega5hcV6DZb'
     controller: null
     method: null
     route: null
@@ -1054,7 +1054,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"verification_code":"6324","access_token":"9|1ewfh4UwR7SWLyQSnN8vH3YUqCX31OvLWKsSOpTN46a3bbb4","user":{"name":"0564776688","email":"fahmi@moltaqa.net","mobile":"0564776688","image":"https:\/\/codebasemoltaqa.test\/assets\/avatar.png","roles":"","roles_ids":[],"role_id":null,"permissions":[]}},"status":200}'
+        content: '{"data":{"verification_code":"2719","access_token":"10|E4Mz0Jy2TCj7N2hZlFJGqqGgIGimK5rOAAugfqAN27e4ca3d","user":{"name":"0564776688","email":"fahmi@moltaqa.net","mobile":"0564776688","image":"https:\/\/codebasemoltaqa.test\/assets\/avatar.png","roles":"","roles_ids":[],"role_id":null,"permissions":[]}},"status":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

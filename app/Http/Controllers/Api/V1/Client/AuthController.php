@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Auth\LoginClientRequest;
 use App\Http\Requests\Api\Auth\RegisterClientRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\SendOTPRequest;
+use App\Http\Requests\Api\Auth\ValidateMobileorEmailRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Http\Resources\Api\Auth\ClientResource;
 use App\Services\Auth\AuthClientService;
@@ -86,10 +87,10 @@ class AuthController extends Controller
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
         return $this->respondWithArray(
-            [
+            app()->isLocal() ? [
                 "verification_code" =>
                     $this->authClientService->sendOTP($request)->OTP
-            ]
+            ] : []
         );
     }
 
@@ -105,10 +106,10 @@ class AuthController extends Controller
     public function resendOTP(Request $request): JsonResponse
     {
         return $this->respondWithArray(
-            [
+            app()->isLocal() ? [
                 "verification_code" =>
                     $this->authClientService->resendOTP($request)->OTP
-            ]
+            ] : []
         );
     }
 
@@ -173,6 +174,25 @@ class AuthController extends Controller
     }
 
     /**
+     * can Client Change Mobile.
+     *
+     * an API which Offers a mean to check if client can change mobile number if can send OTP.
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar
+     */
+    public function canChangeMobile(ChangeMobileRequest $request): JsonResponse
+    {
+        return $this->respondWithArray(
+            app()->isLocal() ? [
+                "verification_code" =>
+                    $this->authClientService->canChangeMobile($request)->OTP
+            ] : []
+        );
+    }
+
+    /**
      * Client Change Mobile.
      *
      * an API which Offers a mean to change client mobile number.
@@ -188,6 +208,20 @@ class AuthController extends Controller
                 $this->authClientService->changeMobile($request)
             )
         );
+    }
+
+    /**
+     * validate email and mobile.
+     *
+     * an API which Offers a mean to Validate Email and Mobile.
+     * @authenticated
+     * @header Api-Key xx
+     * @header Api-Version v1
+     * @header Accept-Language ar
+     */
+    public function validateMobileorEmail(ValidateMobileorEmailRequest $request): JsonResponse
+    {
+        return $this->authClientService->validateMobileorEmail($request);
     }
 
     /**

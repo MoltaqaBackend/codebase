@@ -43,7 +43,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer k4e6vEPfVa6dhZ8g31aD5bc'
+      - 'Bearer Ve3gbZh8fE6aP5v6ak41dcD'
     controller: null
     method: null
     route: null
@@ -97,7 +97,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer Vk4ab5c1ZDfad8EP63vh6ge'
+      - 'Bearer 5eacfvDZV6ahk64Edbg138P'
     controller: null
     method: null
     route: null
@@ -137,11 +137,11 @@ endpoints:
               "message": "Call to a member function currentAccessToken() on null",
               "exception": "Error",
               "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Services\\Auth\\AuthAbstract.php",
-              "line": 162,
+              "line": 175,
               "trace": [
                   {
                       "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Controllers\\Api\\V1\\Provider\\AuthController.php",
-                      "line": 220,
+                      "line": 222,
                       "function": "logout",
                       "class": "App\\Services\\Auth\\AuthAbstract",
                       "type": "->"
@@ -635,7 +635,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer haeEDZgPbVa13fk6vcd5468'
+      - 'Bearer 6cdE3eV6faga4kZb5v1DhP8'
     controller: null
     method: null
     route: null
@@ -680,7 +680,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer de3vaZgEab5kV1668fPcDh4'
+      - 'Bearer 66g4fE5Z8vkb3heDad1acVP'
     controller: null
     method: null
     route: null
@@ -734,7 +734,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 8PvfD5aZaeE1h34kbgVc6d6'
+      - 'Bearer VbfP5c16D46agdakZhv8E3e'
     controller: null
     method: null
     route: null
@@ -806,7 +806,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer b3dfaV5c6E64gavh8PDek1Z'
+      - 'Bearer 6ePhD48fd3av1bZck6V5agE'
     controller: null
     method: null
     route: null
@@ -869,7 +869,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4dfebV5ED3ca1Pv6k6agZh8'
+      - 'Bearer bP6D8EkZ6fV5cghdv413eaa'
     controller: null
     method: null
     route: null
@@ -914,7 +914,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 61a85bg4dceh3V6aEvZDkfP'
+      - 'Bearer Dd1aVhka4E3vf6Pc65Zgbe8'
     controller: null
     method: null
     route: null

@@ -20,22 +20,24 @@ Route::prefix("auth")->group(function () {
         Route::post('verify-otp', [AuthController::class, 'verifyOTP']);
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('profile', [AuthController::class, 'profile']);
+        Route::post('can-change-mobile', [AuthController::class, 'canChangeMobile']);
         Route::post('change-mobile', [AuthController::class, 'changeMobile']);
         Route::post('chang-password', [AuthController::class, 'changePassword']);
         Route::post('reset-password', [AuthController::class, 'resetPassword']);
-        Route::delete('delete-account',[AuthController::class,'deleteAccount']);
+        Route::delete('delete-account', [AuthController::class, 'deleteAccount']);
     });
-        Route::post('login',[AuthController::class,'login']);
-        Route::post('logout',[AuthController::class,'logout']);
-        Route::post('register', [AuthController::class, 'register']);
-        Route::post('send-otp', [AuthController::class, 'sendOTP']);
-        Route::post('forget-password', [AuthController::class, 'forgetPassword']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('send-otp', [AuthController::class, 'sendOTP']);
+    Route::post('forget-password', [AuthController::class, 'forgetPassword']);
+    Route::post('validate-mobile-email', [AuthController::class, 'validateMobileorEmail']);
 });
 
 Route::middleware(["auth:client"])->group(function () {
 
     # Chat
-    include __DIR__.'/chat.php';
+    include __DIR__ . '/chat.php';
 
 });
 
