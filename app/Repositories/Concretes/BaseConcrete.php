@@ -73,7 +73,7 @@ abstract class BaseConcrete implements BaseContract
      */
     public function update(Model $model, array $attributes = []): mixed
     {
-         if (!empty($attributes)) {
+        if (!empty($attributes)) {
             // Clean the attributes from unnecessary inputs
             $filtered = $this->cleanUpAttributes($attributes);
             $model = tap($model)->update($filtered)->fresh();
@@ -817,7 +817,7 @@ abstract class BaseConcrete implements BaseContract
             return $query->withPath($paginationURI);
         }
 
-        if ($page && $withQueryString){
+        if ($page && $withQueryString) {
             return $query->paginate($limit)->withQueryString();
         }
 
@@ -936,7 +936,7 @@ abstract class BaseConcrete implements BaseContract
     {
         $model = $this->findOrFail($id);
         $newVal = 1;
-        if($model[$field] == 1 ){
+        if($model[$field] == 1) {
             $newVal = 0;
         }
         $model = $this->update($model, [$field => $newVal]);

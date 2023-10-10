@@ -22,7 +22,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * @copyright 2021 MyFatoorah, All rights reserved
  * @license   GNU General Public License v3.0
  */
-class MyfatoorahApiV2 {
+class MyfatoorahApiV2
+{
     //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -67,7 +68,8 @@ class MyfatoorahApiV2 {
      * @param string|object $loggerObj   It is optional. This is the file name or the logger object. It will be used in logging the payment/shipping events to help in debugging and monitor the process and connections. Leave it null, if you done't want to log the events.
      * @param string        $loggerFunc  It is optional. If $loggerObj is set as a logger object, you should set this var with the function name that will be used in the debugging.
      */
-    public function __construct($apiKey, $countryMode = 'KWT', $isTest = false, $loggerObj = null, $loggerFunc = null) {
+    public function __construct($apiKey, $countryMode = 'KWT', $isTest = false, $loggerObj = null, $loggerFunc = null)
+    {
 
         $mfCountries = $this->getMyFatoorahCountries();
 
@@ -96,7 +98,8 @@ class MyfatoorahApiV2 {
      *
      * @throws HttpException        Throw exception if there is any curl error or a validation error in the MyFatoorah API endpoint URL
      */
-    public function callAPI($url, $postFields = null, $orderId = null, $function = null) {
+    public function callAPI($url, $postFields = null, $orderId = null, $function = null)
+    {
 
         //to prevent json_encode adding lots of decimal digits
         ini_set('precision', 14);
@@ -131,7 +134,7 @@ class MyfatoorahApiV2 {
         //example set a local ip to host apitest.myfatoorah.com
         if ($err) {
             $this->log("$msgLog - cURL Error: $err");
-            throw new HttpException(400,$err);
+            throw new HttpException(400, $err);
         }
 
         $this->log("$msgLog - Response: $res");
@@ -146,7 +149,7 @@ class MyfatoorahApiV2 {
 
         if ($error) {
             $this->log("$msgLog - Error: $error");
-            throw new HttpException(400,$error);
+            throw new HttpException(400, $error);
         }
 
         //***************************************
@@ -165,7 +168,8 @@ class MyfatoorahApiV2 {
      *
      * @return string
      */
-    protected function getAPIError($json, $res) {
+    protected function getAPIError($json, $res)
+    {
 
         if (isset($json->IsSuccess) && $json->IsSuccess == true) {
             return '';
@@ -203,7 +207,8 @@ class MyfatoorahApiV2 {
      *
      * @return string
      */
-    protected function getJsonErrors($json) {
+    protected function getJsonErrors($json)
+    {
 
         if (isset($json->ValidationErrors) || isset($json->FieldsErrors)) {
             //$err = implode(', ', array_column($json->ValidationErrors, 'Error'));
@@ -212,8 +217,8 @@ class MyfatoorahApiV2 {
             $blogDatas = array_column($errorsObj, 'Error', 'Name');
 
             return implode(', ', array_map(function ($k, $v) {
-                        return "$k: $v";
-                    }, array_keys($blogDatas), array_values($blogDatas)));
+                return "$k: $v";
+            }, array_keys($blogDatas), array_values($blogDatas)));
         }
 
         if (isset($json->Data->ErrorMessage)) {
@@ -245,7 +250,8 @@ class MyfatoorahApiV2 {
      *
      * @throws HttpException    Throw exception if the input length is less than 3 chars or long than 14 chars.
      */
-    public static function getPhone($inputString) {
+    public static function getPhone($inputString)
+    {
 
         //remove any arabic digit
         $newNumbers = range(0, 9);
@@ -275,7 +281,7 @@ class MyfatoorahApiV2 {
         //check for the allowed length
         $len = strlen($string4);
         if ($len < 3 || $len > 14) {
-            throw new HttpException(400,'Phone Number lenght must be between 3 to 14 digits');
+            throw new HttpException(400, 'Phone Number lenght must be between 3 to 14 digits');
         }
 
         //get the phone arr
@@ -301,14 +307,15 @@ class MyfatoorahApiV2 {
      *
      * @return null
      */
-    public function log($msg) {
+    public function log($msg)
+    {
 
         if (!$this->loggerObj) {
             return;
         }
         if (is_string($this->loggerObj)) {
             error_log(PHP_EOL . date('d.m.Y h:i:s') . ' - ' . $msg, 3, $this->loggerObj);
-        } else if (method_exists($this->loggerObj, $this->loggerFunc)) {
+        } elseif (method_exists($this->loggerObj, $this->loggerFunc)) {
             $this->loggerObj->{$this->loggerFunc}($msg);
         }
     }
@@ -324,19 +331,20 @@ class MyfatoorahApiV2 {
      *
      * @throws HttpException Throw exception if the input unit is not support. Weight must be in kg, g, lbs, or oz. Default is kg.
      */
-    public static function getWeightRate($unit) {
+    public static function getWeightRate($unit)
+    {
 
         $unit1 = strtolower($unit);
         if ($unit1 == 'kg' || $unit1 == 'kgs' || $unit1 == 'كج' || $unit1 == 'كلغ' || $unit1 == 'كيلو جرام' || $unit1 == 'كيلو غرام') {
             $rate = 1; //kg is the default
-        } else if ($unit1 == 'g' || $unit1 == 'جرام' || $unit1 == 'غرام' || $unit1 == 'جم') {
+        } elseif ($unit1 == 'g' || $unit1 == 'جرام' || $unit1 == 'غرام' || $unit1 == 'جم') {
             $rate = 0.001;
-        } else if ($unit1 == 'lbs' || $unit1 == 'lb' || $unit1 == 'رطل' || $unit1 == 'باوند') {
+        } elseif ($unit1 == 'lbs' || $unit1 == 'lb' || $unit1 == 'رطل' || $unit1 == 'باوند') {
             $rate = 0.453592;
-        } else if ($unit1 == 'oz' || $unit1 == 'اوقية' || $unit1 == 'أوقية') {
+        } elseif ($unit1 == 'oz' || $unit1 == 'اوقية' || $unit1 == 'أوقية') {
             $rate = 0.0283495;
         } else {
-            throw new HttpException(400,'Weight units must be in kg, g, lbs, or oz. Default is kg');
+            throw new HttpException(400, 'Weight units must be in kg, g, lbs, or oz. Default is kg');
         }
 
         return $rate;
@@ -353,21 +361,22 @@ class MyfatoorahApiV2 {
      *
      * @throws HttpException    Throw exception if the input unit is not support. Dimension must be in cm, m, mm, in, or yd. Default is cm.
      */
-    public static function getDimensionRate($unit) {
+    public static function getDimensionRate($unit)
+    {
 
         $unit1 = strtolower($unit);
         if ($unit1 == 'cm' || $unit1 == 'سم') {
             $rate = 1; //cm is the default
         } elseif ($unit1 == 'm' || $unit1 == 'متر' || $unit1 == 'م') {
             $rate = 100;
-        } else if ($unit1 == 'mm' || $unit1 == 'مم') {
+        } elseif ($unit1 == 'mm' || $unit1 == 'مم') {
             $rate = 0.1;
-        } else if ($unit1 == 'in' || $unit1 == 'انش' || $unit1 == 'إنش' || $unit1 == 'بوصه' || $unit1 == 'بوصة') {
+        } elseif ($unit1 == 'in' || $unit1 == 'انش' || $unit1 == 'إنش' || $unit1 == 'بوصه' || $unit1 == 'بوصة') {
             $rate = 2.54;
-        } else if ($unit1 == 'yd' || $unit1 == 'يارده' || $unit1 == 'ياردة') {
+        } elseif ($unit1 == 'yd' || $unit1 == 'يارده' || $unit1 == 'ياردة') {
             $rate = 91.44;
         } else {
-            throw new HttpException(400,'Dimension units must be in cm, m, mm, in, or yd. Default is cm');
+            throw new HttpException(400, 'Dimension units must be in cm, m, mm, in, or yd. Default is cm');
         }
 
         return $rate;
@@ -384,7 +393,8 @@ class MyfatoorahApiV2 {
      *
      * @throws HttpException    Throw exception if the input currency is not support by MyFatoorah portal account.
      */
-    public function getCurrencyRate($currency) {
+    public function getCurrencyRate($currency)
+    {
 
         $json = $this->getCurrencyRates();
         foreach ($json as $value) {
@@ -392,7 +402,7 @@ class MyfatoorahApiV2 {
                 return $value->Value;
             }
         }
-        throw new HttpException(400,'The selected currency is not supported by MyFatoorah');
+        throw new HttpException(400, 'The selected currency is not supported by MyFatoorah');
     }
 
     //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -402,7 +412,8 @@ class MyfatoorahApiV2 {
      *
      * @return object
      */
-    public function getCurrencyRates() {
+    public function getCurrencyRates()
+    {
 
         $url = "$this->apiURL/v2/GetCurrenciesExchangeList";
         return $this->callAPI($url, null, null, 'Get Currencies Exchange List');
@@ -420,7 +431,8 @@ class MyfatoorahApiV2 {
      *
      * @return array
      */
-    protected function calcGatewayData($totalAmount, $currency, $paymentCurrencyIso, $allRatesData) {
+    protected function calcGatewayData($totalAmount, $currency, $paymentCurrencyIso, $allRatesData)
+    {
 
         //if ($currency != $paymentCurrencyIso) {
         foreach ($allRatesData as $data) {
@@ -462,7 +474,8 @@ class MyfatoorahApiV2 {
      *
      * @return boolean
      */
-    public static function isSignatureValid($dataArray, $secret, $signature, $eventType = 0) {
+    public static function isSignatureValid($dataArray, $secret, $signature, $eventType = 0)
+    {
 
         if ($eventType == 2) {
             unset($dataArray['GatewayReference']);
@@ -477,11 +490,11 @@ class MyfatoorahApiV2 {
         // });
 
         $output = implode(',', array_map(
-                        function ($v, $k) {
-                    return sprintf("%s=%s", $k, $v);
-                },
-                        $dataArray,
-                        array_keys($dataArray)
+            function ($v, $k) {
+                return sprintf("%s=%s", $k, $v);
+            },
+            $dataArray,
+            array_keys($dataArray)
         ));
 
         //        $data      = utf8_encode($output);
@@ -503,7 +516,8 @@ class MyfatoorahApiV2 {
      *
      * @return array of MyFatoorah data
      */
-    public static function getMyFatoorahCountries() {
+    public static function getMyFatoorahCountries()
+    {
 
         $cachedFile = dirname(__FILE__) . '/mf-config.json';
 
@@ -531,7 +545,8 @@ class MyfatoorahApiV2 {
      *
      * @return array
      */
-    static protected function createNewMFConfigFile($cachedFile) {
+    protected static function createNewMFConfigFile($cachedFile)
+    {
 
         $curl = curl_init('https://portal.myfatoorah.com/Files/API/mf-config.json');
         curl_setopt_array($curl, array(
@@ -546,7 +561,7 @@ class MyfatoorahApiV2 {
         if ($http_code == 200) {
             file_put_contents($cachedFile, $response);
             return json_decode($response, true);
-        } else if ($http_code == 403) {
+        } elseif ($http_code == 403) {
             touch($cachedFile);
             $fileContent = file_get_contents($cachedFile);
             if (!empty($fileContent)) {

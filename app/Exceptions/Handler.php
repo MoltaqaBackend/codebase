@@ -53,29 +53,29 @@ class Handler extends ExceptionHandler
         if ($request->is('api/*') || $request->wantsJson()) {
 
             if ($exception->getMessage() == "Unauthenticated.") {
-                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0] : $exception->getMessage();
                 return $this->setStatusCode(401)->respondWithError($message);
             }
 
             if ($exception instanceof AuthenticationException) {
-                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0] : $exception->getMessage();
                 return $this->setStatusCode(401)->respondWithError($message);
             }
 
-            if($exception instanceof UnauthorizedException || $exception instanceof AuthorizationException ){
-                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+            if($exception instanceof UnauthorizedException || $exception instanceof AuthorizationException) {
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0] : $exception->getMessage();
                 return $this->setStatusCode(403)->respondWithError($message);
 
             }
 
             if ($exception instanceof HttpException) {
-                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0] : $exception->getMessage();
                 return $this->setStatusCode($exception->getCode())->respondWithError($message);
             }
 
             if ($exception instanceof ValidationException) {
                 $errors = $exception->errors();
-                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0]: $exception->getMessage();
+                $message = is_array($exception->getMessage()) ? $exception->getMessage()[0] : $exception->getMessage();
                 return $this->setStatusCode(422)->respondWithError($message);
             }
         }

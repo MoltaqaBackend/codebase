@@ -46,7 +46,7 @@ class AuthController extends Controller
      * @header Api-Version v1
      * @header Accept-Language ar
      */
-    public function login(LoginProviderRequest $request):JsonResponse
+    public function login(LoginProviderRequest $request): JsonResponse
     {
         return $this->respondWithModelData(
             new ProviderResource(
@@ -84,7 +84,8 @@ class AuthController extends Controller
      */
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
-        return $this->respondWithArray([
+        return $this->respondWithArray(
+            [
             "verification_code" =>
                     $this->authProviderService->sendOTP($request)->OTP
             ]
@@ -102,7 +103,8 @@ class AuthController extends Controller
      */
     public function resendOTP(Request $request): JsonResponse
     {
-        return $this->respondWithArray([
+        return $this->respondWithArray(
+            [
             "verification_code" =>
                     $this->authProviderService->resendOTP($request)->OTP
             ]
@@ -133,7 +135,7 @@ class AuthController extends Controller
      * @header Api-Version v1
      * @header Accept-Language ar
      */
-    public function resetpassword(ResetPasswordRequest $request):JsonResponse
+    public function resetpassword(ResetPasswordRequest $request): JsonResponse
     {
         return $this->authProviderService->resetPassword($request);
     }

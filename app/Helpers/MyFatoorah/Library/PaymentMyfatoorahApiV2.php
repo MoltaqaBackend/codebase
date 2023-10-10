@@ -216,8 +216,10 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2
 
         $userAgent = filter_input(INPUT_SERVER, 'HTTP_USER_AGENT', FILTER_SANITIZE_STRING);
 
-        if ((stripos($userAgent, 'iPod') || stripos($userAgent, 'iPhone') || stripos($userAgent, 'iPad') || stripos($userAgent,
-                    'Mac')) && (self::getBrowserName($userAgent) == 'Safari')) {
+        if ((stripos($userAgent, 'iPod') || stripos($userAgent, 'iPhone') || stripos($userAgent, 'iPad') || stripos(
+            $userAgent,
+            'Mac'
+        )) && (self::getBrowserName($userAgent) == 'Safari')) {
             return true;
         }
 
@@ -280,11 +282,11 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2
         }
 
         if (! isset($pm)) {
-            throw new HttpException(400,'Please contact Account Manager to enable the used payment method in your account');
+            throw new HttpException(400, 'Please contact Account Manager to enable the used payment method in your account');
         }
 
         if ($this->isDirectPayment && ! $pm->IsDirectPayment) {
-            throw new HttpException(400,$pm->PaymentMethodEn.' Direct Payment Method is not activated. Kindly contact your MyFatoorah account manager or sales representative to activate it.');
+            throw new HttpException(400, $pm->PaymentMethodEn.' Direct Payment Method is not activated. Kindly contact your MyFatoorah account manager or sales representative to activate it.');
         }
 
         return $pm;
@@ -415,7 +417,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2
         if (! $this->checkOrderInformation($json, $orderId, $price, $currncy)) {
             $err = 'Trying to call data of another order';
             $this->log("$msgLog - HttpException is $err");
-            throw new HttpException(400,$err);
+            throw new HttpException(400, $err);
         }
 
         //check invoice status (Paid and Not Paid Cases)

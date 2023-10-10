@@ -4,7 +4,6 @@ namespace App\Enum;
 
 enum WalletTypeEnum: string
 {
-
-    const POINTS = 'points';
-    const MONEY = 'money';
+    public const POINTS = 'points';
+    public const MONEY = 'money';
 }

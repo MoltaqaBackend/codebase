@@ -18,7 +18,7 @@ class RoleController extends BaseApiController
      */
     public function __construct(RoleContract $repository)
     {
-        parent::__construct($repository, RoleResource::class,'role');
+        parent::__construct($repository, RoleResource::class, 'role');
     }
 
     /**
@@ -30,7 +30,7 @@ class RoleController extends BaseApiController
         $role = $this->repository->create([
             'name' => $request['name'],
         ]);
-        $requestPermissions=$request['role_permissions']?array_filter(Arr::flatten(array_values($request['role_permissions']))):[];
+        $requestPermissions = $request['role_permissions'] ? array_filter(Arr::flatten(array_values($request['role_permissions']))) : [];
         $role->syncPermissions($requestPermissions);
         return $this->respondWithSuccess(__('role added successfully'), [
             'role' => new RoleResource($role),
@@ -73,7 +73,7 @@ class RoleController extends BaseApiController
     public function update(RoleRequest $request, Role $role): JsonResponse
     {
         $role = $this->repository->update($role, $request->all());
-        $requestPermissions=$request['role_permissions']?array_filter(Arr::flatten(array_values($request['role_permissions']))):[];
+        $requestPermissions = $request['role_permissions'] ? array_filter(Arr::flatten(array_values($request['role_permissions']))) : [];
         $role->syncPermissions($requestPermissions);
         return $this->respondWithSuccess(__('role updated successfully'), [
             'role' => (new RoleResource($role->load('permissions'))),

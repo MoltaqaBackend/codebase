@@ -47,7 +47,7 @@ class BaseNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
@@ -76,11 +76,11 @@ class BaseNotification extends Notification implements ShouldQueue
         ];
     }
 
-    
+
     public function sendToSms(object $notifiable)
     {
         # Note $notificationData must contain body
-        sendSMS($this->notificationData['body'],$notifiable->mobile);
+        sendSMS($this->notificationData['body'], $notifiable->mobile);
     }
 
     public function sendToFireBase(object $notifiable)
@@ -90,12 +90,12 @@ class BaseNotification extends Notification implements ShouldQueue
         (new SendFCM($this->notificationData['tokenModel']))
             ->sendForAdmin($this->notificationData['sendForAdmin'] ?? false)
             ->sendForUsers($this->notificationData['sendForUsers'] ?? false)
-            ->sendNotification($this->notificationData['title'],$this->notificationData['body'],[]);
+            ->sendNotification($this->notificationData['title'], $this->notificationData['body'], []);
     }
 
-     public function sendToPusher(object $notifiable)
-     {
-         # Note $notificationData must contain title , body and topic attributes
-         event(new NotificationEvent($this->notificationData));
-     }
+    public function sendToPusher(object $notifiable)
+    {
+        # Note $notificationData must contain title , body and topic attributes
+        event(new NotificationEvent($this->notificationData));
+    }
 }

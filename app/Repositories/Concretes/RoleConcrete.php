@@ -21,8 +21,8 @@ class RoleConcrete extends BaseConcrete implements RoleContract
      * @param Role $model
      * @return int
      */
-     public function relatedData(Role $model)
-     {
+    public function relatedData(Role $model)
+    {
         return 0;
-     }
+    }
 }

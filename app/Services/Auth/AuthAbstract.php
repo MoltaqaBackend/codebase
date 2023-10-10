@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\PersonalAccessToken;
 
-
 abstract class AuthAbstract
 {
     use ApiResponseTrait;
@@ -36,27 +35,32 @@ abstract class AuthAbstract
     /**
      * Login
      */
-    public function login(FormRequest $request,$abilities = null){
+    public function login(FormRequest $request, $abilities = null)
+    {
         $request->authenticate();
         $user = $request->user();
 
-        if(!$user->isActive())
+        if(!$user->isActive()) {
             throw AuthException::accountStatusDeactive(['deactive' => [__("Account Deactive")]]);
+        }
 
-        $user->access_token = $user->createToken('snctumToken',$abilities ?? [])->plainTextToken;
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
 
-        if($this->loginRequireSendOTP)
+        if($this->loginRequireSendOTP) {
             return $this->handelOTPMethod($user);
+        }
 
         return $user;
     }
 
 
-    public function sendOTP(SendOTPRequest $request){
+    public function sendOTP(SendOTPRequest $request)
+    {
         $user = $this->model::query()->whereMobile($request->mobile)->first();
-        if(is_null($user))
+        if(is_null($user)) {
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
+        }
         return $this->handelOTPMethod($user);
     }
 
@@ -73,10 +77,12 @@ abstract class AuthAbstract
      *
      * @return JsonResponse
      */
-    public function verifyOTP(VerifyOTPRequest $request): JsonResponse{
+    public function verifyOTP(VerifyOTPRequest $request): JsonResponse
+    {
         $user = $request->user()->load('latestOTPToken');
-        if (is_null($user->latestOTPToken))
+        if (is_null($user->latestOTPToken)) {
             throw AuthException::otpNotGenerated(['genration_failed' => [__("Failed Operation")]]);
+        }
         if ($user->latestOTPToken?->isValid()) {
             if ($request->code == $user->latestOTPToken->code) {
                 $user->latestOTPToken->active = false;
@@ -100,15 +106,18 @@ abstract class AuthAbstract
      *
      * @return JsonResponse
      */
-    public function forgetPassword(FormRequest $request,$abilities = null){
-        if(!( $request instanceof ForgetPasswordRequest))
+    public function forgetPassword(FormRequest $request, $abilities = null)
+    {
+        if(!($request instanceof ForgetPasswordRequest)) {
             throw AuthException::wrongImplementation(['wrong_implementation' => [__('Wrong Implementation')]]);
+        }
 
         $user = $this->model::whereMobile($request->mobile)->first();
-        if (is_null($user))
+        if (is_null($user)) {
             throw AuthException::userNotFound(['unauthorized' => [__("Unauthorized")]]);
+        }
 
-        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [] )->plainTextToken : $user->currentAccessToken();
+        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [])->plainTextToken : $user->currentAccessToken();
         return $this->handelOTPMethod($user);
     }
 
@@ -117,11 +126,12 @@ abstract class AuthAbstract
      *
      * @return JsonResponse
      */
-    public function changePassword(ChangePasswordRequest $request,$abilities = null):JsonResponse
+    public function changePassword(ChangePasswordRequest $request, $abilities = null): JsonResponse
     {
         $user = $request->user();
-        if (is_null($user))
+        if (is_null($user)) {
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
+        }
         if (Hash::check($request->old_password, $user->password)) {
 
             $user->password = Hash::make($request->password);
@@ -129,7 +139,7 @@ abstract class AuthAbstract
 
             $user->currentAccessToken()->delete();
 
-            $user->access_token = $user->createToken('snctumToken', $abilities ?? [] )->plainTextToken;
+            $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
             $this->addTokenExpiration($user->access_token);
             return $this->respondWithArray(array("access_token" => $user->access_token));
 
@@ -143,10 +153,12 @@ abstract class AuthAbstract
      *
      * @return JsonResponse
      */
-    public function resetPassword(ResetPasswordRequest $request,$abilities = null): JsonResponse{
+    public function resetPassword(ResetPasswordRequest $request, $abilities = null): JsonResponse
+    {
         $user = $request->user();
-        if(is_null($user))
+        if(is_null($user)) {
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
+        }
 
         $user->password = Hash::make($request->password);
         $user->save();
@@ -157,7 +169,8 @@ abstract class AuthAbstract
     }
 
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
         $request->user()->currentAccessToken()->delete();
     }
@@ -167,33 +180,38 @@ abstract class AuthAbstract
      *
      * @return User
      */
-    public function changeMobile(ChangeMobileRequest $request){
+    public function changeMobile(ChangeMobileRequest $request)
+    {
         $user = $request->user();
-        if(is_null($user))
-            throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]] );
+        if(is_null($user)) {
+            throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
+        }
         $user->update([
             'mobile' => $request->mobile,
         ]);
         return $this->handelOTPMethod($user);
     }
 
-    public function profile(Request $request){
+    public function profile(Request $request)
+    {
         $user = $request->user();
-        if(is_null($user))
-            throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]] );
+        if(is_null($user)) {
+            throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
+        }
         return $user;
     }
 
     protected function handelMobileOTP($user)
     {
         $user->loadMissing('latestOTPToken');
-        $fixedOTPNumbers = json_decode(Storage::disk('local')->get('fixed_otp_numbers.json'),true);
+        $fixedOTPNumbers = json_decode(Storage::disk('local')->get('fixed_otp_numbers.json'), true);
         $sendSMS = false;
         $createRecord = false;
         $fixedOTP = false;
 
-        if (in_array($user->mobile, $fixedOTPNumbers))
+        if (in_array($user->mobile, $fixedOTPNumbers)) {
             $fixedOTP = true;
+        }
         if (is_null($user->latestOTPToken) || !$user->latestOTPToken->isValid()) {
             $user->OTP = $fixedOTP ? "1234" : randomCode(4, 1);
             $sendSMS = true;
@@ -220,13 +238,14 @@ abstract class AuthAbstract
     protected function handelMailOTP($user)
     {
         $user->loadMissing('latestOTPToken');
-        $fixedOTPMails = json_decode(Storage::disk('local')->get('fixed_otp_emails.json'),true);
+        $fixedOTPMails = json_decode(Storage::disk('local')->get('fixed_otp_emails.json'), true);
         $sendMail = false;
         $createRecord = false;
         $fixedOTP = false;
 
-        if (!is_null($fixedOTPMails) && in_array($user->email, $fixedOTPMails))
+        if (!is_null($fixedOTPMails) && in_array($user->email, $fixedOTPMails)) {
             $fixedOTP = true;
+        }
 
 
         if (is_null($user->latestOTPToken) || !$user->latestOTPToken->isValid()) {
@@ -254,8 +273,9 @@ abstract class AuthAbstract
     {
         $token = PersonalAccessToken::findToken($user->access_token);
 
-        if(is_null($token))
-            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]],401);
+        if(is_null($token)) {
+            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]], 401);
+        }
 
         return $user->hasRole(['super-admin','admin']) ? $this->handelMailOTP($user) : $this->handelMobileOTP($user);
     }
@@ -274,21 +294,25 @@ abstract class AuthAbstract
     {
         $isExpired = false;
         $expirationTime = $personalAccessToken->expires_at;
-        if ($expirationTime == null)
+        if ($expirationTime == null) {
             $isExpired = true;
-        if ($expirationTime instanceof Carbon && $expirationTime->isPast())
+        }
+        if ($expirationTime instanceof Carbon && $expirationTime->isPast()) {
             $isExpired = true;
+        }
         return $isExpired;
     }
 
-    public function deleteAccount(Request $request){
+    public function deleteAccount(Request $request)
+    {
         $user = $request->user();
-        if(is_null($user))
-            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]],401);
+        if(is_null($user)) {
+            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]], 401);
+        }
         $user->tokens()->delete();
         $user->delete();
         $this->respondWithSuccess(__('Deleted Successfully'));
     }
 
-    abstract public function register(FormRequest $request,$abilities = null);
+    abstract public function register(FormRequest $request, $abilities = null);
 }

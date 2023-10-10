@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 
 trait ApiResponseTrait
 {
-    protected ?int $statusCode = NULL;
+    protected ?int $statusCode = null;
 
     /**
      * setStatusCode() set status code value
@@ -92,7 +92,7 @@ trait ApiResponseTrait
                 E_USER_WARNING
             );
         }
-        return $this->respondWithErrors($message, $this->statusCode,[],$message);
+        return $this->respondWithErrors($message, $this->statusCode, [], $message);
     }
 
     /**
@@ -106,11 +106,10 @@ trait ApiResponseTrait
      */
     protected function respondWithErrors(
         string $errors = 'messages.error',
-               $statusCode = null,
+        $statusCode = null,
         array  $data = [],
-               $message = null
-    ): JsonResponse
-    {
+        $message = null
+    ): JsonResponse {
         $statusCode = !empty($statusCode) ? $statusCode : 400;
         if (is_string($errors)) {
             $errors = __($errors);

@@ -21,8 +21,8 @@ class NotificationConcrete extends BaseConcrete implements NotificationContract
      * @param Notification $model
      * @return int
      */
-     public function relatedData(Notification $model)
-     {
+    public function relatedData(Notification $model)
+    {
         return 0;
-     }
+    }
 }

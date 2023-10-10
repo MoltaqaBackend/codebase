@@ -8,4 +8,3 @@ interface PermissionContract extends BaseContract
 {
     public function relatedData(Permission $model);
 }
-

@@ -13,9 +13,9 @@ class ApiBaseException extends Exception
     use ApiResponseTrait;
     protected $errors;
 
-    public function __construct(array $errors,string $message = "", int $code = 0, ?Throwable $previous = null)
+    public function __construct(array $errors, string $message = "", int $code = 0, ?Throwable $previous = null)
     {
-        parent::__construct($message,$code,$previous);
+        parent::__construct($message, $code, $previous);
         $this->errors = $errors;
     }
 
@@ -41,7 +41,8 @@ class ApiBaseException extends Exception
         );
     }
 
-    public static function wrongImplementation($errors,$code = null){
-        return new self($errors,__("Failed Operation"),$code ?? 500);
-     }
+    public static function wrongImplementation($errors, $code = null)
+    {
+        return new self($errors, __("Failed Operation"), $code ?? 500);
+    }
 }

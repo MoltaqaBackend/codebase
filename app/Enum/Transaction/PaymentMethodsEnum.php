@@ -2,10 +2,9 @@
 
 namespace App\Enum\Transaction;
 
-enum PaymentMethodsEnum:string
+enum PaymentMethodsEnum: string
 {
-
-    const CASH = 'cash';
-    const ONLINE = 'online';
-    const PAY_ORDER = 'wallet_money';
+    public const CASH = 'cash';
+    public const ONLINE = 'online';
+    public const PAY_ORDER = 'wallet_money';
 }

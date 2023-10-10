@@ -2,10 +2,9 @@
 
 namespace App\Enum;
 
-enum UserTypeEnum:string
+enum UserTypeEnum: string
 {
-
-    const ADMIN = 'admin';
-    const CLIENT = 'client';
-    const PROVIDER = 'provider';
+    public const ADMIN = 'admin';
+    public const CLIENT = 'client';
+    public const PROVIDER = 'provider';
 }

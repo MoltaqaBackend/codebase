@@ -15,7 +15,7 @@ class PermissionController extends BaseApiController
      */
     public function __construct(PermissionContract $repository)
     {
-        parent::__construct($repository, PermissionResource::class,'permission');
+        parent::__construct($repository, PermissionResource::class, 'permission');
     }
 
     public function __invoke()

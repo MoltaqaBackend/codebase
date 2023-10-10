@@ -4,7 +4,6 @@ namespace App\Enum;
 
 enum WalletTransactionTypeEnum: string
 {
-
-    const DEPOSIT = 'deposit';
-    const WITHDRAWAL = 'withdrawal';
+    public const DEPOSIT = 'deposit';
+    public const WITHDRAWAL = 'withdrawal';
 }

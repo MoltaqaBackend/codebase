@@ -8,4 +8,3 @@ interface SettingContract extends BaseContract
 {
     public function relatedData(Setting $model);
 }
-

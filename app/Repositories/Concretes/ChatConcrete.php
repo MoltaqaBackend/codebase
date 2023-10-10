@@ -20,8 +20,8 @@ class ChatConcrete extends BaseConcrete implements ChatContract
      * @param Chat $model
      * @return int
      */
-     public function relatedData(Chat $model)
-     {
+    public function relatedData(Chat $model)
+    {
         return 0;
-     }
+    }
 }

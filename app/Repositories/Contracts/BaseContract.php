@@ -8,9 +8,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseContract
 {
-    const LIMIT = 10;
-    const ORDER_BY = 'id';
-    const ORDER_DIR = 'desc';
+    public const LIMIT = 10;
+    public const ORDER_BY = 'id';
+    public const ORDER_DIR = 'desc';
 
     /**
      * @param array $attributes
@@ -153,8 +153,8 @@ interface BaseContract
         string $orderDir = self::ORDER_DIR,
         array  $conditions = [],
         bool   $customizePaginationURI = false,
-               $paginationURI = null,
-               $withQueryString = false,
+        $paginationURI = null,
+        $withQueryString = false,
     ): mixed;
 
     /**

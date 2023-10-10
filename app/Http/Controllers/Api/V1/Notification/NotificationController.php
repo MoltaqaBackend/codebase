@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Notification;
 
 /**
  * @group Base Notification
- * 
+ *
  * @subgroup Notification
  * @subgroupDescription Notification Apis
  */
@@ -35,21 +35,21 @@ class NotificationController extends Controller
 
     /**
      * List Notification
-     * 
+     *
      * an API which Offers a mean to list notifications
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
      * @header Accept-Language ar
-     * 
+     *
      * @queryParam unread bool reqired.Example: false
      */
     public function index(Request $request): mixed
     {
-        $request->validate(['unread'=>'nullable|boolean']);
+        $request->validate(['unread' => 'nullable|boolean']);
         $notifications = auth(activeGuard())->user()->notifications;
 
-        if(isset($request->unread)){
+        if(isset($request->unread)) {
             $notifications = auth(activeGuard())->user()->unreadNotifications;
         }
 
@@ -58,7 +58,7 @@ class NotificationController extends Controller
 
     /**
      * List Notification
-     * 
+     *
      * an API which Offers a mean to list notifications
      * @authenticated
      * @header Api-Key xx
@@ -82,12 +82,12 @@ class NotificationController extends Controller
                     Notification::send(User::all(), new BaseNotification($notificationData));
                     break;
                 case 'admin':
-                    Notification::send(UserModel::whereHas("roles", function($q){ $q->whereIn("name", ["admin"]); })->get(), new AdminNotification($notificationData));
+                    Notification::send(UserModel::whereHas("roles", function ($q) { $q->whereIn("name", ["admin"]); })->get(), new AdminNotification($notificationData));
                     break;
                 case 'client':
                     $notificationData['tokenModel'] = UserModel::class;
                     $notificationData['sendForUsers'] = true;
-                    Notification::send(UserModel::whereHas("roles", function($q){ $q->whereIn("name", ["client"]); })->get(), new ClientNotification($notificationData));
+                    Notification::send(UserModel::whereHas("roles", function ($q) { $q->whereIn("name", ["client"]); })->get(), new ClientNotification($notificationData));
                     break;
                 default:
                     break;

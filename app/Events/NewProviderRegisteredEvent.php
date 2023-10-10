@@ -10,7 +10,9 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 class NewProviderRegisteredEvent implements ShouldBroadcastNow
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public $user;
     /**

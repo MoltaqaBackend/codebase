@@ -20,7 +20,8 @@ class RolesPermissionGenerator
                     'guard_name' => $guard_name,
                     'model' => $model,
                     'parent_id' => null,
-                ]);
+                ]
+            );
 
             foreach ($methods as $method) {
                 $permissions[] = Permission::firstOrCreate([

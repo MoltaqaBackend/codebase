@@ -7,10 +7,10 @@ use ReflectionClass;
 class AbilitiesConstant
 {
     // Roles
-    const SUPERADMIN = "as-super-admin";
-    const ADMIN = "as-admin";
-    const PROVIDER = "as-provider";
-    const CLIENT = "as-client";
+    public const SUPERADMIN = "as-super-admin";
+    public const ADMIN = "as-admin";
+    public const PROVIDER = "as-provider";
+    public const CLIENT = "as-client";
 
     public static function getAbilities()
     {

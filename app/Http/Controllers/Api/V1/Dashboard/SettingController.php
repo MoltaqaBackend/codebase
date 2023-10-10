@@ -18,7 +18,7 @@ class SettingController extends BaseApiController
      */
     public function __construct(SettingContract $repository)
     {
-       parent::__construct($repository, SettingResource::class, 'setting');
+        parent::__construct($repository, SettingResource::class, 'setting');
     }
 
     /**
@@ -28,10 +28,10 @@ class SettingController extends BaseApiController
     public function store(SettingRequest $request): JsonResponse
     {
         cache()->clear();
-        $setting = $this->repository->defaultUpdateOrCreate([
+        $setting = $this->repository->defaultUpdateOrCreate(
+            [
             'key' => $request->key,
         ],
-
             [
                 'key' => $request->key,
                 'name' => $request->key,

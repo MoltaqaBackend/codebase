@@ -13,9 +13,11 @@ class MyFatoorahAction extends PaymentMyfatoorahApiV2
     {
         defined('MYFATOORAH_LARAVEL_PACKAGE_VERSION') or define('MYFATOORAH_LARAVEL_PACKAGE_VERSION', '2.0.2');
 
-        return new self(config('myfatoorah.api_key'),
+        return new self(
+            config('myfatoorah.api_key'),
             config('myfatoorah.country_iso'),
-            config('myfatoorah.test_mode'));
+            config('myfatoorah.test_mode')
+        );
     }
 
     public function makeInvoice(Transaction $transaction): array

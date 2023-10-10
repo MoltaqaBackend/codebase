@@ -16,6 +16,7 @@ Roles, Permissions, Wallet, Chat, Notification(Mail,Pusher,Firebase,database), s
 3. [x] Driver
 
 # MyFatoorah Payment Using Example
+
     myFatoorahTransaction(array: $data, float|int $amount);
     # This Will Return A Response Of Transaction If (Failed Or Successed)
 
@@ -29,18 +30,18 @@ Roles, Permissions, Wallet, Chat, Notification(Mail,Pusher,Firebase,database), s
 
 # Send Notification Firebase Example
 
-     (new SendFCM(User::class))
+    (new SendFCM(User::class))
         ->sendForAdmin(true)
         ->sendForUsers(false)
         ->sendNotification('test title','test body',User::first());
 
 # Send Notification Example
 
-     ADMIN => Notification::sendnow($notifiables,new AdminNotification($notificationData)); >> will send via mail and database
-     CLIENT => Notification::sendnow($notifiables,new ClientNotification($notificationData)); >> will send via firebase and database
-     Notes
-     Supported Mediums in BaseNotification Class => ['mail', 'sms', 'firebase','pusher', 'database']
-     In BasNotification Class you can modify how each Medium Process or What it should transmit
+    ADMIN => Notification::send($notifiables,new AdminNotification($notificationData)); >> will send via mail and database
+    CLIENT => Notification::send($notifiables,new ClientNotification($notificationData)); >> will send via firebase and database
+    Notes
+    Supported Mediums in BaseNotification Class => ['mail', 'sms', 'firebase','pusher', 'database']
+    In BasNotification Class you can modify how each Medium Process or What it should transmit
 
 # Setting Module Example Set And Get
 
@@ -94,7 +95,20 @@ Start the server
   php artisan serve
 ```
 
+## PHP Coding Style Fixer
 
+```bash
+  ./vendor/bin/php-cs-fixer fix app
+```
+
+## Laravel Static Analysis Tool (larastan)
+
+    Analysis levels range from 1 : 9
+
+```bash
+  ./vendor/bin/phpstan analyse app --level=5
+```
+    Note: for increasing memory limit add flag (--memory-limit=2G)
 
 ## Github Commit Style Guide
 

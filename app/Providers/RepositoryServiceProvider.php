@@ -23,7 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
         //
     }
 
-    
+
     protected function getModels(): Collection
     {
         $files = Storage::disk('app')->files('Models');

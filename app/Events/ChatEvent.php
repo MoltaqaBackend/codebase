@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 
 class ChatEvent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
     public mixed $message;
 
     public $chat;
@@ -34,7 +36,8 @@ class ChatEvent implements ShouldBroadcast
         return new PrivateChannel('chat.'.$this->getAuthorizedUserId($this->toType));
     }
 
-    private function getAuthorizedUserId($type){
+    private function getAuthorizedUserId($type)
+    {
         return match ($type) {
             ChatUsersTypeEnum::User => $this->chat->user_id,
             ChatUsersTypeEnum::Provider => $this->chat->provider_id,

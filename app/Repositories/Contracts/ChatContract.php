@@ -8,4 +8,3 @@ interface ChatContract extends BaseContract
 {
     public function relatedData(Chat $model);
 }
-

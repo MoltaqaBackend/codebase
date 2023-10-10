@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Traits;
 
-trait ActivityLogTrait{
-
-    public function logActivity($model,$user,$message): void
+trait ActivityLogTrait
+{
+    public function logActivity($model, $user, $message): void
     {
         activity()
             ->performedOn($model)
@@ -11,7 +12,7 @@ trait ActivityLogTrait{
             ->log($message);
     }
 
-    public function propertyLogActivity($model, $user, $message, array $property=['key' => 'value']): void
+    public function propertyLogActivity($model, $user, $message, array $property = ['key' => 'value']): void
     {
         activity()
             ->performedOn($model)
@@ -21,5 +22,3 @@ trait ActivityLogTrait{
     }
 
 }
-
- ?>

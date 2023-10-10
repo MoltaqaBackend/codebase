@@ -5,7 +5,6 @@ namespace App\Http\Requests\Api\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-
 /**
  * @bodyParam old_password string required The user old password.Example: 12345678
  * @bodyParam password string required The User bew password.Example: 123456789

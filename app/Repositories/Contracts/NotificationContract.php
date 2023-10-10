@@ -8,4 +8,3 @@ interface NotificationContract extends BaseContract
 {
     public function relatedData(Notification $model);
 }
-

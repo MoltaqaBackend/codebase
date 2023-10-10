@@ -19,8 +19,8 @@ class SettingConcrete extends BaseConcrete implements SettingContract
      * @param Setting $model
      * @return int
      */
-     public function relatedData(Setting $model)
-     {
+    public function relatedData(Setting $model)
+    {
         return 0;
-     }
+    }
 }

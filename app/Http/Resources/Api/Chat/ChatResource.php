@@ -14,7 +14,7 @@ class ChatResource extends JsonResource
             'type' => (string) $this->type,
             'order_id' => (string) $this->order_id,
             'last_message' => MessageResource::make($this->last_message),
-            'messages' => $this->whenLoaded('messages',MessageResource::collection($this->messages)),
+            'messages' => $this->whenLoaded('messages', MessageResource::collection($this->messages)),
             #'driver' => UserResource::make($this->driver),
             'user' => UserResource::make($this->user),
             #'store' => UserResource::make($this->store),

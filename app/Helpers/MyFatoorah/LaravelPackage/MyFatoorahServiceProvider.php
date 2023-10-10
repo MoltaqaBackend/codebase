@@ -33,7 +33,8 @@ class MyFatoorahServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/config/myfatoorah.php', 'myfatoorah'
+            __DIR__.'/config/myfatoorah.php',
+            'myfatoorah'
         );
     }
 }

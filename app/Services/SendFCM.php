@@ -7,12 +7,11 @@ use Carbon\Carbon;
 
 class SendFCM
 {
-
     public bool $shouldSendForAdmin = false;
     public bool $shouldSendForUsers = false;
     public function __construct(
-        protected $tokenModel)
-    {
+        protected $tokenModel
+    ) {
     }
 
     public function setLocale($locale = ''): string
@@ -42,7 +41,7 @@ class SendFCM
         if ($this->shouldSendForAdmin) {
             $tokens[] = DeviceToken::query()->where('tokenable_type', class_basename($this->tokenModel) ?? '')
                 ->whereHas('tokenable', function ($q) {
-                    $q->whereHas('roles',function($q){ $q->whereIn("name", ["admin"]);});
+                    $q->whereHas('roles', function ($q) { $q->whereIn("name", ["admin"]);});
                 })->pluck('device_token')->toArray();
         }
 
@@ -50,7 +49,7 @@ class SendFCM
             $tokens[] = DeviceToken::query()->where('tokenable_type', class_basename($this->tokenModel) ?? '')
                 ->whereHas('tokenable', function ($q) {
                     $q->whereDoesntHave('roles')
-                    ->orWhereHas('roles',function($q){ $q->whereIn("name", ["admin"]);});
+                    ->orWhereHas('roles', function ($q) { $q->whereIn("name", ["admin"]);});
                 })->pluck('device_token')->toArray();
         }
 

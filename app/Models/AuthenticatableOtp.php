@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AuthenticatableOtp extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
     protected $table = "authenticatable_otp";
 
-    const EXPIRATION_TIME = 3; // minutes
+    public const EXPIRATION_TIME = 3; // minutes
 
     protected $guarded = [];
 

@@ -12,7 +12,8 @@ use Illuminate\Queue\SerializesModels;
 
 class OTPMail extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     protected mixed $code;
     /**
@@ -29,8 +30,8 @@ class OTPMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'),__(env('APP_NAME'),[],'ar').' | ' .__(env('APP_NAME'),[],'en')),
-            subject: __('OTP Code',[],'ar').' | '.__('OTP Code',[],'en'),
+            from: new Address(config('mail.from.address'), __(env('APP_NAME'), [], 'ar').' | ' .__(env('APP_NAME'), [], 'en')),
+            subject: __('OTP Code', [], 'ar').' | '.__('OTP Code', [], 'en'),
         );
     }
 

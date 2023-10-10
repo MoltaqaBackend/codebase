@@ -18,15 +18,16 @@ class AuthProviderService extends AuthAbstract
         parent::__construct(new User());
     }
 
-    public function deleteAccount(Request $request):JsonResponse
+    public function deleteAccount(Request $request): JsonResponse
     {
         $user = $request->user();
-        if(is_null($user))
-            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]],401);
+        if(is_null($user)) {
+            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]], 401);
+        }
 
         DB::beginTransaction();
         $user->tokens()->delete();
-        if($user->delete()){
+        if($user->delete()) {
             DB::commit();
             return $this->respondWithSuccess(__('Deleted Successfully'));
         }
@@ -34,10 +35,11 @@ class AuthProviderService extends AuthAbstract
         return $this->setStatusCode(400)->respondWithError(__('Failed Operation'));
     }
 
-    public function register(FormRequest $request,$abilities = null): User
+    public function register(FormRequest $request, $abilities = null): User
     {
-        if(!($request instanceof RegisterProviderRequest))
+        if(!($request instanceof RegisterProviderRequest)) {
             throw AuthException::wrongImplementation('wrong_implementation**' . __("Failed Operation"));
+        }
         DB::beginTransaction();
         $user = User::create([
             'name' => $request->name,
@@ -46,12 +48,12 @@ class AuthProviderService extends AuthAbstract
             'password' => $request->password,
         ]);
         $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
-        if(is_null($user)){
+        if(is_null($user)) {
             DB::rollBack();
-            throw AuthException::userFailedRegistration("generation_failed**".__('Failed Operation'),500);
+            throw AuthException::userFailedRegistration("generation_failed**".__('Failed Operation'), 500);
         }
         DB::commit();
-        $user->access_token = $user->createToken('snctumToken',$abilities ?? [])->plainTextToken;
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
         $this->addTokenExpiration($user->access_token);
         return $this->handelMobileOTP($user);
     }

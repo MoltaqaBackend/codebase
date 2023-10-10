@@ -33,8 +33,9 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
-        if(config('global.should_use_api_key_middleware'))
-            array_push($this->apiMiddlewares,'apikey');
+        if(config('global.should_use_api_key_middleware')) {
+            array_push($this->apiMiddlewares, 'apikey');
+        }
         $this->routes(function () {
             Route::middleware($this->apiMiddlewares)
             ->prefix('dashboard-api/v1')

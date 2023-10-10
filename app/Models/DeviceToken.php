@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class DeviceToken extends Model
 {
-
     protected $guarded = [];
 
     # Relations

@@ -31,7 +31,9 @@ if (!function_exists('activeGuard')) {
 
         foreach (array_keys(config('auth.guards')) as $guard) {
 
-            if (auth()->guard($guard)->check()) return $guard;
+            if (auth()->guard($guard)->check()) {
+                return $guard;
+            }
 
         }
         return null;
@@ -74,8 +76,9 @@ if (!function_exists('formattedCreatedAt')) {
      */
     function formattedCreatedAt($created_at, $shouldParse = false)
     {
-        if ($shouldParse)
+        if ($shouldParse) {
             $created_at = Carbon::parse($created_at);
+        }
         return $created_at->toDayDateTimeString() . ' - ' . $created_at->diffForHumans();
     }
 }
@@ -84,22 +87,28 @@ if (!function_exists('retrieveFromCache')) {
     function retrieveFromCache(string $key, $model = null, $quries = null, $relations = null, $order = "ASC", $isCollection = true)
     {
         return cache()->rememberForever($key, function () use ($model, $quries, $relations, $order, $isCollection) {
-            if ($model == null)
+            if ($model == null) {
                 return null;
+            }
             $records = $model::query();
-            if ($relations != null)
+            if ($relations != null) {
                 $records = $records->with($relations);
-            if (is_array($quries))
+            }
+            if (is_array($quries)) {
                 foreach ($quries as $query) {
-                    if (array_key_exists('attr', $query))
+                    if (array_key_exists('attr', $query)) {
                         $records = $records->{$query['fn']}($query['attr']);
-                    else
+                    } else {
                         $records = $records->{$query['fn']}();
+                    }
                 }
-            if ($order != "ASC")
+            }
+            if ($order != "ASC") {
                 $records = $records->latest();
-            if (!$isCollection)
+            }
+            if (!$isCollection) {
                 return $records->first();
+            }
             return $records->get();
         });
     }
@@ -208,7 +217,7 @@ if (!function_exists('zipFiles')) {
     function zipFiles($folder, $files)
     {
         $zip = new ZipArchive();
-        if ($zip->open(public_path($folder), ZipArchive::CREATE | ZipArchive::OVERWRITE) == TRUE) {
+        if ($zip->open(public_path($folder), ZipArchive::CREATE | ZipArchive::OVERWRITE) == true) {
             foreach ($files as $value) {
                 $relativeName = basename($value);
                 $zip->addFile($value, $relativeName);
@@ -402,7 +411,7 @@ if (!function_exists('setting')) {
 
 # Start Transaction
 if (!function_exists('myFatoorahTransaction')) {
-    function myFatoorahTransaction(array $data,float|int $amount)
+    function myFatoorahTransaction(array $data, float|int $amount)
     {
         $transaction = getTransaction(
             transactionData: $data,
@@ -418,7 +427,7 @@ if (!function_exists('myFatoorahTransaction')) {
 
 if (!function_exists('getTransaction')) {
 
-    function getTransaction(array $transactionData,float|int $amount)
+    function getTransaction(array $transactionData, float|int $amount)
     {
         $invoice_number = str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
         $transactionData['invoice_number'] = $invoice_number;

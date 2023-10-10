@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chat extends Model
 {
-    use ModelTrait, SoftDeletes;
+    use ModelTrait;
+    use SoftDeletes;
 
     protected $fillable = [
         'last_message_id', 'user_id', 'provider_id',

@@ -19,8 +19,14 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable,SoftDeletes, InteractsWithMedia,HasRoles
-        ,Walletable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
+    use InteractsWithMedia;
+    use HasRoles
+    ;
+    use Walletable;
 
     protected $guarded = ['avatar'];
 
@@ -81,12 +87,12 @@ class User extends Authenticatable implements HasMedia
     }
     public function latestOTPToken(): MorphOne
     {
-        return $this->morphOne(AuthenticatableOtp::class,'authenticatable')->latestOfMany();
+        return $this->morphOne(AuthenticatableOtp::class, 'authenticatable')->latestOfMany();
     }
 
     public function OTPTokens(): MorphMany
     {
-        return $this->morphMany(AuthenticatableOtp::class,'authenticatable')->whereActive(true)->latest();
+        return $this->morphMany(AuthenticatableOtp::class, 'authenticatable')->whereActive(true)->latest();
     }
 
     public function transactions()

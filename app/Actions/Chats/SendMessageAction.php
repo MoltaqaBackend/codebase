@@ -14,8 +14,8 @@ class SendMessageAction
         User $to,
         string $messageText,
         array $images,
-        $toType)
-    {
+        $toType
+    ) {
         $message = $chat->messages()->create([
             'message_text' => $messageText,
             'from_id' => $from->id,

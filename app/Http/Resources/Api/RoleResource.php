@@ -19,15 +19,15 @@ class RoleResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'created_at' => $this->created_at->format('Y-m-d H:i'),
-            'permissions' => 
+            'permissions' =>
                  $this->permissions->isNotEmpty() ? $this->customizePermissions() : (object)null,
-            
-            'permissions_names' => 
+
+            'permissions_names' =>
                  $this->permissions->isNotEmpty() ? $this->permissions->pluck('name') : (object)null,
-            
-            'grouped_permissions_names' => 
+
+            'grouped_permissions_names' =>
                  $this->permissions->isNotEmpty() ? $this->groupedPermissions() : (object)null,
-            
+
         ];
     }
 

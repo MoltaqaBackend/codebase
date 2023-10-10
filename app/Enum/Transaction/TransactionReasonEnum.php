@@ -2,8 +2,7 @@
 
 namespace App\Enum\Transaction;
 
-enum TransactionReasonEnum:string
+enum TransactionReasonEnum: string
 {
-
-    const PAY_ORDER = 'pay_order'; # Example
+    public const PAY_ORDER = 'pay_order'; # Example
 }

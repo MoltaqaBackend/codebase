@@ -64,7 +64,8 @@ class AuthController extends Controller
      */
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
-        return $this->respondWithArray([
+        return $this->respondWithArray(
+            [
             "verification_code" =>
                 $this->authAdminService->sendOTP($request)->OTP
             ]
@@ -82,7 +83,8 @@ class AuthController extends Controller
      */
     public function resendOTP(Request $request): JsonResponse
     {
-        return $this->respondWithArray([
+        return $this->respondWithArray(
+            [
                 "verification_code" =>
                     $this->authAdminService->resendOTP($request)->OTP
             ]

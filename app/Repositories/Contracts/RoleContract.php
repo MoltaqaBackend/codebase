@@ -8,4 +8,3 @@ interface RoleContract extends BaseContract
 {
     public function relatedData(Role $model);
 }
-

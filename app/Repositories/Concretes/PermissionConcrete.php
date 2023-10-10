@@ -21,8 +21,8 @@ class PermissionConcrete extends BaseConcrete implements PermissionContract
      * @param Permission $model
      * @return int
      */
-     public function relatedData(Permission $model)
-     {
+    public function relatedData(Permission $model)
+    {
         return 0;
-     }
+    }
 }

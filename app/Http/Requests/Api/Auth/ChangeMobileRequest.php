@@ -4,7 +4,6 @@ namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 /**
  * @bodyParam mobile string required The new Mobile Number of the user.Example: 0564776688
  */

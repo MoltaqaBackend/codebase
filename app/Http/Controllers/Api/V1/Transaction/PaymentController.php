@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 /**
  * @group Payment
- * 
+ *
  * @subgroup My-Fatorah
  * @subgroupDesription My-Fatorah Payment
  */
@@ -31,9 +31,9 @@ class PaymentController extends Controller
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
-     * @header Accept-Language ar 
-     * 
-     * @bodyParam pay_id required unique identitfer.Example: dbkdjfbskdbfnkj4hrkb4khb43 
+     * @header Accept-Language ar
+     *
+     * @bodyParam pay_id required unique identitfer.Example: dbkdjfbskdbfnkj4hrkb4khb43
      */
     public function createInvoice(Request $request)
     {
@@ -53,10 +53,10 @@ class PaymentController extends Controller
      * @authenticated
      * @header Api-Key xx
      * @header Api-Version v1
-     * @header Accept-Language ar 
-     * 
-     * @bodyParam paymentId required.Example: dbkdjfbskdbfnkj4hrkb4khb43 
-     */    
+     * @header Accept-Language ar
+     *
+     * @bodyParam paymentId required.Example: dbkdjfbskdbfnkj4hrkb4khb43
+     */
     public function callbackPayInvoice(Request $request)
     {
         $request->validate(['paymentId' => 'required']);
@@ -67,7 +67,7 @@ class PaymentController extends Controller
         if (data_get($paymentData, 'InvoiceStatus') == 'Paid') {
             # Update Transaction Table Data
             $this->payServices($transaction, $paymentData);
-            
+
 
         }
 

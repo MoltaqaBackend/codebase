@@ -18,13 +18,12 @@ use App\Traits\ApiResponseTrait;
 
 /**
  * @group chat
- * 
+ *
  * @subgroup Chat
  * @subgroupDescription Chat Apis
  */
 class ChatController extends BaseApiController
 {
-
     use ApiResponseTrait;
 
     protected mixed $modelResource = ChatResource::class;
@@ -36,7 +35,7 @@ class ChatController extends BaseApiController
 
     /**
      * List Chats
-     * 
+     *
      * an API which Offers a mean to list Chats
      * @authenticated
      * @header Api-Key xx
@@ -51,7 +50,7 @@ class ChatController extends BaseApiController
 
     /**
      * show chat
-     * 
+     *
      * an API which Offers a mean to show chat
      * @authenticated
      * @header Api-Key xx
@@ -68,7 +67,7 @@ class ChatController extends BaseApiController
 
     /**
      * send message
-     * 
+     *
      * an API which Offers a mean to send message
      * @authenticated
      * @header Api-Key xx
