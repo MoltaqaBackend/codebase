@@ -3,7 +3,6 @@
 namespace App\Repositories\Concretes;
 
 use App\Traits\ActivityLogTrait;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
@@ -33,7 +32,7 @@ abstract class BaseConcrete implements BaseContract
         $this->modelName = class_basename($this->model);
     }
 
-    public function freshRepo(): static
+    public function freshQuery(): static
     {
         $this->query = $this->model->query();
         return $this;
@@ -51,7 +50,6 @@ abstract class BaseConcrete implements BaseContract
     public function create(array $attributes = []): mixed
     {
         if (!empty($attributes)) {
-            // Clean the attributes from unnecessary inputs
             $filtered = $this->cleanUpAttributes($attributes);
             $model = $this->query->create($filtered);
             $this->propertyLogActivity(
@@ -74,7 +72,6 @@ abstract class BaseConcrete implements BaseContract
     public function update(Model $model, array $attributes = []): mixed
     {
         if (!empty($attributes)) {
-            // Clean the attributes from unnecessary inputs
             $filtered = $this->cleanUpAttributes($attributes);
             $model = tap($model)->update($filtered)->fresh();
             $this->propertyLogActivity(
@@ -134,33 +131,20 @@ abstract class BaseConcrete implements BaseContract
     }
 
     /**
-     * @param array $attributes
-     *
-     * @return mixed
-     */
-    public function updateAll(array $attributes = []): mixed
-    {
-        if (!empty($attributes)) {
-            // Clean the attributes from unnecessary inputs
-            $filtered = $this->cleanUpAttributes($attributes);
-            return $this->query->update($filtered);
-        }
-        return false;
-    }
-
-    /**
-     * @param $key
-     * @param $values
+     * @param null $key
+     * @param array $values
      * @param array $attributes
      *
      * @return int|bool
      */
-    public function updateAllByKey($key, array $values = [], array $attributes = []): int|bool
+    public function updateAll($key = null, array $values = [], array $attributes = []): int|bool
     {
-        if (!empty($attributes) && !empty($values)) {
-            // Clean the attributes from unnecessary inputs
+        if (!empty($attributes)) {
             $filtered = $this->cleanUpAttributes($attributes);
-            return $this->query->whereIn($key, $values)->update($filtered);
+            if ($key && !empty($values)){
+                return $this->query->whereIn($key, $values)->update($filtered);
+            }
+            return $this->query->update($filtered);
         }
         return false;
     }
@@ -176,7 +160,7 @@ abstract class BaseConcrete implements BaseContract
         if (empty($attributes)) {
             return false;
         }
-        // Clean the attributes from unnecessary inputs
+
         $filtered = $this->cleanUpAttributes($attributes);
         if ($id) {
             $model = $this->query->find($id);
@@ -250,73 +234,11 @@ abstract class BaseConcrete implements BaseContract
     }
 
 
-    /**
-     * @param array $relations
-     * @return $this
-     */
-    public function doesntHave(array $relations = []): static
-    {
-        foreach ($relations as $relation) {
-            $this->query->has($relation);
-        }
-        return $this;
-    }
-
     public function havingRaw($sql): static
     {
         $this->query->havingRaw($sql);
         return $this;
     }
-
-    /**
-     * @param array $relations
-     * @return $this
-     */
-    public function whereHas(array $relations = []): static
-    {
-        foreach ($relations as $relationName => $filters) {
-            //            info($relationName);
-            if (!method_exists($this->model, $relationName)) {
-                //                info("no relation");
-                return $this;
-            }
-            $this->query->whereHas($relationName, function ($query) use ($relationName, $filters) {
-                if (!empty($filters)) {
-                    //                    info($filters);
-                    $relatedModel = $this->getRelatedModel($relationName);
-                    if (!$relatedModel) {
-                        //                        info("no model");
-                        return $this;
-                    }
-                    foreach ($relatedModel->getFilters() as $filter) {
-                        //                        info($filter);
-                        if (isset($filters[$filter])) {
-                            $withFilter = "of" . ucfirst($filter);
-                            $query->$withFilter($filters[$filter]);
-                        }
-                    }
-                }
-            });
-        }
-        return $this;
-    }
-
-
-    /**
-     * @param array $columns
-     * @return $this
-     */
-    public function withSum(array $columns = []): static
-    {
-        foreach ($columns as $column) {
-            $split = explode('.', $column);
-            if (count($split) == 2) {
-                $this->query->withSum($split[0], $split[1]);
-            }
-        }
-        return $this;
-    }
-
 
     /**
      * @param array $relations
@@ -344,7 +266,7 @@ abstract class BaseConcrete implements BaseContract
      */
     public function countWithFilters($filters): int
     {
-        $query = $this->query;
+        $query = $this->freshQuery();
         foreach ($this->model->getFilters() as $filter) {
             if (isset($filters[$filter])) {
                 $withFilter = "of" . ucfirst($filter);
@@ -420,15 +342,6 @@ abstract class BaseConcrete implements BaseContract
     }
 
     /**
-     * @param $ids
-     * @return mixed
-     */
-    public function findIds($ids): mixed
-    {
-        return $this->query->findOrFail($ids);
-    }
-
-    /**
      * @param int $id
      * @param array $relations
      *
@@ -479,26 +392,6 @@ abstract class BaseConcrete implements BaseContract
         $model = $this->query->where($key, $value);
         return $fail ? $model->firstOrFail() : $model->first();
     }
-    /**
-     * @param mixed $fields
-     *
-     * @return mixed
-     */
-    public function findByFields(array $fields): mixed
-    {
-        $query = $this->query;
-        if (isset($fields['and'])) {
-            $query = $query->where($fields['and']);
-        }
-        if (isset($fields['or'])) {
-            $query = $query->orWhere(function (Builder $query) use ($fields) {
-                foreach ($fields['or'] as $condition) {
-                    $query = $query->orWhere($condition[0], $condition[1]);
-                }
-            });
-        }
-        return $query->first();
-    }
 
     /**
      * @param array $wheres
@@ -508,81 +401,6 @@ abstract class BaseConcrete implements BaseContract
     public function whereOrCreate(array $wheres, array $data = null): mixed
     {
         return $this->query->firstOrCreate($data ?? $wheres, $wheres);
-    }
-
-    /**
-     * @param string|null $labelField
-     * @param string $valueField
-     * @param bool $applyOrder
-     * @param string $orderBy
-     * @param string $orderDir
-     * @param array $conditions
-     *
-     * @return mixed
-     */
-    public function findAllForFormSelect(
-        string $labelField = null,
-        string $valueField = 'id',
-        bool $applyOrder = false,
-        string $orderBy = self::ORDER_BY,
-        string $orderDir = self::ORDER_DIR,
-        array $conditions = []
-    ): mixed {
-        $query = $this->query;
-        if ($applyOrder) {
-            $query = $query->orderBy($orderBy, $orderDir);
-        }
-        if (!empty($conditions)) {
-            foreach ($conditions as $conditionType => $whereConditions) {
-                if ($conditionType == 'where' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->where($field, $value);
-                    }
-                }
-
-                if ($conditionType == 'whereNot' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->where($field, '!=', $value);
-                    }
-                }
-
-                if ($conditionType == 'whereDateLess' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereDate($field, '<=', Carbon::parse($value));
-                    }
-                }
-                if ($conditionType == 'whereDateMore' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereDate($field, '>=', Carbon::parse($value));
-                    }
-                }
-
-                if ($conditionType == 'whereIn' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereIn($field, $value);
-                    }
-                }
-
-                if ($conditionType == 'whereNotIn' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereNotIn($field, $value);
-                    }
-                }
-
-                if ($conditionType == 'whereLike' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->where($field, 'like', '%' . $value . '%');
-                    }
-                }
-
-                if ($conditionType == 'whereBetween' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereBetween($field, $value);
-                    }
-                }
-            }
-        }
-        return $query->pluck($valueField, $labelField);
     }
 
     /**
@@ -634,7 +452,6 @@ abstract class BaseConcrete implements BaseContract
         }
         if (!empty($filters)) {
             foreach ($this->model->getFilters() as $filter) {
-                //if (isset($filters[$filter]) and !empty($filters[$filter])) {
                 if (isset($filters[$filter])) {
                     $withFilter = "of" . ucfirst($filter);
                     $query = $query->$withFilter($filters[$filter]);
@@ -657,17 +474,6 @@ abstract class BaseConcrete implements BaseContract
                     }
                 }
 
-                if ($conditionType == 'whereDateLess' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereDate($field, '<=', Carbon::parse($value));
-                    }
-                }
-                if ($conditionType == 'whereDateMore' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereDate($field, '>=', Carbon::parse($value));
-                    }
-                }
-
                 if ($conditionType == 'whereIn' && !empty($whereConditions)) {
                     foreach ($whereConditions as $field => $value) {
                         $query = $query->whereIn($field, $value);
@@ -683,12 +489,6 @@ abstract class BaseConcrete implements BaseContract
                 if ($conditionType == 'whereLike' && !empty($whereConditions)) {
                     foreach ($whereConditions as $field => $value) {
                         $query = $query->where($field, 'like', '%' . $value . '%');
-                    }
-                }
-
-                if ($conditionType == 'whereBetween' && !empty($whereConditions)) {
-                    foreach ($whereConditions as $field => $value) {
-                        $query = $query->whereBetween($field, $value);
                     }
                 }
             }
@@ -840,60 +640,6 @@ abstract class BaseConcrete implements BaseContract
     }
 
     /**
-     * @param null $groupBy
-     * @param array $fields
-     * @param array $filters
-     * @param array $relations
-     * @param bool $applyOrder
-     * @param bool $page
-     * @param bool $limit
-     * @param string $orderBy
-     * @param string $orderDir
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
-     */
-    public function searchBySelected(
-        $groupBy = null,
-        array $fields = [],
-        array $filters = [],
-        array $relations = [],
-        bool $applyOrder = false,
-        bool $page = false,
-        bool $limit = false,
-        string $orderBy = self::ORDER_BY,
-        string $orderDir = self::ORDER_DIR
-    ): array|\Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator|Collection {
-        $query = $this->query;
-        if (!empty($relations)) {
-            $query = $query->with($relations);
-        }
-        if (!empty($filters)) {
-            foreach ($this->model->getFilters() as $filter) {
-                //if (isset($filters[$filter]) and !empty($filters[$filter])) {
-                if (isset($filters[$filter])) {
-                    $withFilter = "of" . ucfirst($filter);
-                    $query = $query->$withFilter($filters[$filter]);
-                }
-            }
-        }
-        if (!empty($fields)) {
-            $query = $query->selectRaw(implode(',', $fields));
-        }
-        if (!empty($groupBy)) {
-            $query = $query->groupBy(implode(',', $groupBy));
-        }
-        if ($applyOrder) {
-            $query = $query->orderBy($orderBy, $orderDir);
-        }
-        if ($page) {
-            return $query->paginate($limit);
-        }
-        if ($limit) {
-            return $query->take($limit)->get();
-        }
-        return $query->get();
-    }
-
-    /**
      * Create a Pagination From Items Of  array Or collection.
      *
      * @param array|Collection $items
@@ -927,20 +673,18 @@ abstract class BaseConcrete implements BaseContract
 
 
     /**
-     * @param int $id
+     * @param int|string $id
      * @param string $field
      *
      * @return mixed
      */
-    public function toggleField($id, $field)
+    public function toggleField(int|string $id, string $field): mixed
     {
         $model = $this->findOrFail($id);
         $newVal = 1;
         if($model[$field] == 1) {
             $newVal = 0;
         }
-        $model = $this->update($model, [$field => $newVal]);
-
-        return $model;
+        return $this->update($model, [$field => $newVal]);
     }
 }

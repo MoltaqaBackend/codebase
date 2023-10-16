@@ -12,7 +12,7 @@ class BaseApiController extends Controller
     use ApiResponseTrait;
 
     protected bool $order = true;
-    protected $orderBy = 'id';
+    protected string $orderBy = 'id';
     protected BaseContract $repository;
     protected mixed $modelResource;
     protected array $relations = [];
@@ -31,13 +31,12 @@ class BaseApiController extends Controller
         $this->middleware(['role_or_permission:' . Str::plural($model) . ' create|'.activeGuard()])->only('create');
         $this->middleware(['role_or_permission:' . Str::plural($model) . ' delete|'.activeGuard()])->only('destroy');
 
-
         $this->repository = $repository;
         $this->modelResource = $modelResource;
 
-        // Include embedded data
-        if (request()->has('embed')) {
-            $this->parseIncludes(request('embed'));
+        // Include relations data
+        if (request()->has('loadRelations')) {
+            $this->includeRelations(request('loadRelations'));
         }
     }
 
@@ -71,13 +70,12 @@ class BaseApiController extends Controller
 
 
     /**
-     * parseIncludes() used to explode embed relations array
      *
-     * @param $embed
+     * @param $relations
      */
-    protected function parseIncludes($embed): void
+    protected function includeRelations($relations): void
     {
-        $this->relations = explode(',', $embed);
+        $this->relations = is_array($relations) ? $relations : explode(',', $relations);
     }
 
     /**
@@ -123,7 +121,7 @@ class BaseApiController extends Controller
     protected function respondWithModel($model, int $statusCode = null, array $headers = []): mixed
     {
         $statusCode = $statusCode ?? 200;
-        $resource = new $this->modelResource($model->load($this->relations)); // ???
+        $resource = forward_static_call([$this->modelResource, 'make'], $model->load($this->relations));
         return $this->setStatusCode($statusCode)->respond($resource, $headers);
     }
 

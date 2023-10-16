@@ -32,7 +32,7 @@ interface BaseContract
      *
      * @return mixed
      */
-    public function updateAll(array $attributes = []): mixed;
+    public function updateAll($key = null,array $values = [],array $attributes = []): mixed;
 
     /**
      * @param array $attributes
@@ -83,12 +83,6 @@ interface BaseContract
      */
     public function findBy(string $key, mixed $value): mixed;
 
-    /**
-     * @param mixed $fields
-     *
-     * @return mixed
-     */
-    public function findByFields(array $fields): mixed;
 
     /**
      * @param array $wheres
@@ -97,24 +91,6 @@ interface BaseContract
      */
     public function whereOrCreate(array $wheres, array $data = null): mixed;
 
-    /**
-     * @param string|null $labelField
-     * @param string $valueField
-     * @param bool $applyOrder
-     * @param string $orderBy
-     * @param string $orderDir
-     * @param array $conditions
-     *
-     * @return mixed
-     */
-    public function findAllForFormSelect(
-        string $labelField = null,
-        string $valueField = 'id',
-        bool   $applyOrder = false,
-        string $orderBy = self::ORDER_BY,
-        string $orderDir = self::ORDER_DIR,
-        array $conditions = []
-    ): mixed;
 
     /**
      * @param array $fields
@@ -195,10 +171,10 @@ interface BaseContract
     /**
      * toggle boolean field in model.
      *
-     * @param int $id
+     * @param int|string $id
      * @param string $field
      *
      * @return mixed
      */
-    public function toggleField(int $id, $field);
+    public function toggleField(int|string $id, string $field): mixed;
 }
