@@ -24,8 +24,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use SoftDeletes;
     use InteractsWithMedia;
-    use HasRoles
-    ;
+    use HasRoles;
     use Walletable;
 
     protected $guarded = ['avatar'];

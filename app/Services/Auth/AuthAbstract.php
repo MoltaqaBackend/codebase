@@ -43,26 +43,28 @@ abstract class AuthAbstract
 
         # TODO handel Cloud messaging
 
-        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($user->access_token);
+        $accessToken = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
+        $this->addTokenExpiration($accessToken);
 
         if ($this->loginRequireSendOTP) {
+            tap($user)->update([
+                'email_verified_at' => NULL,
+            ])->fresh();
+            $user->access_token = $accessToken;
             return $this->handelOTPMethod($user);
         }
-
+        $user->access_token = $accessToken;
         return $user;
     }
-
 
     public function sendOTP(SendOTPRequest $request)
     {
         $user = $this->model::query()->whereMobile($request->mobile)->first();
-        if (is_null($user)) {
+        if (is_null($user))
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
-        }
+        $user->access_token = $request->bearerToken();
         return $this->handelOTPMethod($user);
     }
-
 
     public function resendOTP(Request $request)
     {
@@ -78,10 +80,10 @@ abstract class AuthAbstract
      */
     public function verifyOTP(VerifyOTPRequest $request): JsonResponse
     {
-        $user = $request->user()->load('latestOTPToken');
-        if (is_null($user->latestOTPToken)) {
+        $user = $request->user()->loadMissing('latestOTPToken');
+        if (is_null($user->latestOTPToken))
             throw AuthException::otpNotGenerated(['genration_failed' => [__("Failed Operation")]]);
-        }
+
         if ($user->latestOTPToken?->isValid()) {
             if ($request->code == $user->latestOTPToken->code) {
                 $user->latestOTPToken->update([
@@ -161,7 +163,7 @@ abstract class AuthAbstract
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
         }
 
-        $user->password = Hash::make($request->password);
+        $user->password = $request->password;
         $user->save();
         $user->currentAccessToken()->delete();
         $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
@@ -185,11 +187,12 @@ abstract class AuthAbstract
         $user = $request->user();
         if (is_null($user))
             throw AuthException::userNotFound(['not_found' => [__("Data Not Found")]]);
-        $user->mobile = $request->mobile;
-        $user->access_token = str_replace('Bearer ', '', $request->header('Authorization'));
+
         tap($user)->update([
             'email_verified_at' => NULL,
         ])->fresh();
+        $user->mobile = $request->mobile;
+        $user->access_token = $request->bearerToken();
         return $this->handelOTPMethod($user);
     }
 
@@ -207,6 +210,7 @@ abstract class AuthAbstract
         tap($user)->update([
             'mobile' => $request->mobile,
         ])->fresh();
+        $user->access_token = $request->bearerToken();
         return $this->handelOTPMethod($user);
     }
 
@@ -226,7 +230,7 @@ abstract class AuthAbstract
      */
     public function validateMobileorEmail(FormRequest $request): JsonResponse
     {
-        return apiSuccess(array(), [], [], __('Valid to use'));
+        return $this->respondWithSuccess(__('Valid to use'));
     }
 
     protected function handelMobileOTP($user)

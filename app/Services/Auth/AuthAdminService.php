@@ -9,6 +9,7 @@ use App\Http\Requests\Api\Auth\RegisterAdminRequest;
 use App\Services\Auth\AuthAbstract;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
 
 class AuthAdminService extends AuthAbstract
 {
@@ -29,13 +30,17 @@ class AuthAdminService extends AuthAbstract
         $request->authenticate();
         $user = $request->user();
 
-        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($user->access_token);
+        $accessToken = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
+        $this->addTokenExpiration($accessToken);
 
         if ($this->loginRequireSendOTP) {
+            tap($user)->update([
+                'email_verified_at' => NULL,
+            ])->fresh();
+            $user->access_token = $accessToken;
             return $this->handelOTPMethod($user);
         }
-
+        $user->access_token = $accessToken;
         return $user;
     }
 
@@ -44,7 +49,7 @@ class AuthAdminService extends AuthAbstract
      *
      * @return JsonResponse
      */
-    public function forgetPassword(FormRequest $request, $abilities = null)
+    public function forgetPassword(FormRequest $request, $abilities = null):JsonResponse
     {
         if (!($request instanceof ForgetPasswordDashboardRequest)) {
             throw AuthException::wrongImplementation(['wrong_implementation' => [__('Wrong Implementation')]]);
