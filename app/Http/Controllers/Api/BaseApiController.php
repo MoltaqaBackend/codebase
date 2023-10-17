@@ -26,10 +26,10 @@ class BaseApiController extends Controller
     public function __construct(BaseContract $repository, mixed $modelResource, $model = null)
     {
 
-        $this->middleware(['role_or_permission:' . Str::plural($model) . ' index|'.activeGuard()])->only(['__invoke', 'index']);
-        $this->middleware(['role_or_permission:' . Str::plural($model) . ' edit|'.activeGuard()])->only('update');
-        $this->middleware(['role_or_permission:' . Str::plural($model) . ' create|'.activeGuard()])->only('create');
-        $this->middleware(['role_or_permission:' . Str::plural($model) . ' delete|'.activeGuard()])->only('destroy');
+        $this->middleware(['permission:' . Str::plural($model) . ' index|'.activeGuard()])->only(['__invoke', 'index']);
+        $this->middleware(['permission:' . Str::plural($model) . ' edit|'.activeGuard()])->only('update');
+        $this->middleware(['permission:' . Str::plural($model) . ' create|'.activeGuard()])->only('create');
+        $this->middleware(['permission:' . Str::plural($model) . ' delete|'.activeGuard()])->only('destroy');
 
         $this->repository = $repository;
         $this->modelResource = $modelResource;

@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\V1\Dashboard\{PermissionController, RoleController,
 */
 
 Route::prefix("auth")->group(function () {
-    Route::middleware(["auth:admin"])->group(function () {
+    Route::middleware(["auth:sanctum"])->group(function () {
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
         Route::post('verify-otp', [AuthController::class, 'verifyOTP']);
         Route::post('logout', [AuthController::class, 'logout']);
@@ -32,7 +32,7 @@ Route::prefix("auth")->group(function () {
 });
 
 
-Route::middleware(["auth:admin"])->group(function () {
+Route::middleware(["auth:sanctum"])->group(function () {
     # Roles
     Route::apiResource('roles',RoleController::class);
 

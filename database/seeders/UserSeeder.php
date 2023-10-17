@@ -25,10 +25,11 @@ class UserSeeder extends Seeder
         DB::table('model_has_roles')->truncate();
         DB::table('model_has_permissions')->truncate();
 
-        $permissions = Permission::where('guard_name', 'admin')->get();
+        $permissions = Permission::all();
+        $clientPermissions = Permission::where('for_users',1)->get();
 
         # Admin
-        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN, 'admin');
+        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN);
         $adminRole->givePermissionTo($permissions);
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@admin.com'],
@@ -49,8 +50,8 @@ class UserSeeder extends Seeder
 
 
         # Client
-        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT, 'client');
-        $clientRole->givePermissionTo([]);
+        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT);
+        $clientRole->givePermissionTo($clientPermissions);
         $clientUser = User::firstOrCreate(
             ['email' => 'client@client.com'],
             [

@@ -13,26 +13,24 @@ class RolesPermissionGenerator
             $permission = Permission::firstOrCreate(
                 [
                     'name' => $model,
-                    'guard_name' => $guard_name
                 ],
                 [
                     'name' => $model,
-                    'guard_name' => $guard_name,
                     'model' => $model,
                     'parent_id' => null,
+                    'for_users' => $guard_name != 'admin' ? 1 : 0
                 ]
             );
 
             foreach ($methods as $method) {
                 $permissions[] = Permission::firstOrCreate([
                     'name' => "$model $method",
-                    'guard_name' => $guard_name,
                     'parent_id' => $permission->id,
                 ], [
                     'name' => "$model $method",
-                    'guard_name' => $guard_name,
                     'model' => $model,
                     'parent_id' => $permission->id,
+                    'for_users' => $guard_name != 'admin' ? 1 : 0
                 ]);
             }
         }
@@ -42,11 +40,10 @@ class RolesPermissionGenerator
             foreach ($additionalAdminPermissions as $additionalAdminPermission) {
                 $permissionMore = Permission::firstOrCreate([
                     'name' => $additionalAdminPermission,
-                    'guard_name' => $guard_name,
                 ], [
                     'name' => $additionalAdminPermission,
-                    'guard_name' => $guard_name,
                     'parent_id' => $parent,
+                    'for_users' => $guard_name != 'admin' ? 1 : 0
                 ]);
 
                 if ($parent == null) {

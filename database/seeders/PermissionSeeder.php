@@ -28,12 +28,21 @@ class PermissionSeeder extends Seeder
         $adminModels = [
             'users', 'roles', 'permissions', 'notifications', 'chats'
         ];
+        $clientModels = [
+
+        ];
 
         # Default Methods
         $methods = ['index', 'create', 'edit', 'delete', 'show', 'activate'];
 
         # Additional Admin Permissions
         $additionalAdminPermissions = [];
+        $rolesPermissionGenerator->handle(
+            $clientModels,
+            $methods,
+            'client',
+            additionalAdminPermissions: $additionalAdminPermissions
+        );
 
         $rolesPermissionGenerator->handle(
             $adminModels,
@@ -41,5 +50,7 @@ class PermissionSeeder extends Seeder
             'admin',
             additionalAdminPermissions: $additionalAdminPermissions
         );
+
+
     }
 }
