@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         $clientPermissions = Permission::where('for_users',1)->get();
 
         # Admin
-        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN);
+        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN,'api');
         $adminRole->givePermissionTo($permissions);
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@admin.com'],
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
 
 
         # Client
-        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT);
+        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT,'api');
         $clientRole->givePermissionTo($clientPermissions);
         $clientUser = User::firstOrCreate(
             ['email' => 'client@client.com'],

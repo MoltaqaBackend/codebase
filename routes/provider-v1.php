@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 # TODO Make Guard (Provider) If Need
 Route::prefix("auth")->group(function () {
-    Route::middleware(["auth:sanctum"])->group(function () {
+    Route::middleware(["auth:api"])->group(function () {
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
         Route::post('verify-otp', [AuthController::class, 'verifyOTP']);
         Route::post('logout', [AuthController::class, 'logout']);
@@ -35,7 +35,7 @@ Route::prefix("auth")->group(function () {
     Route::post('validate-mobile-email', [AuthController::class, 'validateMobileorEmail']);
 });
 
-Route::middleware(["auth:sanctum"])->group(function () {
+Route::middleware(["auth:api"])->group(function () {
 
     # Chat
     include __DIR__ . '/chat.php';
