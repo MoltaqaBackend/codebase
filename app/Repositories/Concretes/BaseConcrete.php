@@ -42,6 +42,7 @@ abstract class BaseConcrete implements BaseContract
     {
         return $this->query->get();
     }
+
     /**
      * @param array $attributes
      *
@@ -141,7 +142,7 @@ abstract class BaseConcrete implements BaseContract
     {
         if (!empty($attributes)) {
             $filtered = $this->cleanUpAttributes($attributes);
-            if ($key && !empty($values)){
+            if ($key && !empty($values)) {
                 return $this->query->whereIn($key, $values)->update($filtered);
             }
             return $this->query->update($filtered);
@@ -363,7 +364,7 @@ abstract class BaseConcrete implements BaseContract
      */
     public function getByKey($column, $data): mixed
     {
-        return $this->query->whereIn($column, (array) $data)->get();
+        return $this->query->whereIn($column, (array)$data)->get();
     }
 
     /**
@@ -423,33 +424,20 @@ abstract class BaseConcrete implements BaseContract
      * @param $query
      * @param array $filters
      * @param array $relations
-     * @param bool $applyOrder
-     * @param bool $page
-     * @param int $limit
-     * @param string $orderBy
-     * @param string $orderDir
      * @param array $conditions
-     * @param bool $customizePaginationURI
-     * @param null $paginationURI
-     *
      * @return mixed
      */
     public function baseSearch(
         $query,
-        array  $filters = [],
-        array  $relations = [],
-        bool   $applyOrder = true,
-        bool   $page = true,
-        int    $limit = self::LIMIT,
-        string $orderBy = self::ORDER_BY,
-        string $orderDir = self::ORDER_DIR,
-        array  $conditions = [],
-        bool   $customizePaginationURI = false,
-        $paginationURI = null,
-    ): mixed {
+        array $filters = [],
+        array $relations = [],
+        array $conditions = [],
+    ): mixed
+    {
         if (!empty($relations)) {
             $query = $query->with($relations);
         }
+
         if (!empty($filters)) {
             foreach ($this->model->getFilters() as $filter) {
                 if (isset($filters[$filter])) {
@@ -505,9 +493,6 @@ abstract class BaseConcrete implements BaseContract
      * @param string $orderBy
      * @param string $orderDir
      * @param array $conditions
-     * @param bool $customizePaginationURI
-     * @param null $paginationURI
-     *
      * @return mixed
      */
     public function search(
@@ -519,24 +504,22 @@ abstract class BaseConcrete implements BaseContract
         string $orderBy = self::ORDER_BY,
         string $orderDir = self::ORDER_DIR,
         array  $conditions = [],
-        bool   $customizePaginationURI = false,
-        $paginationURI = null,
-        $withQueryString = false
-    ): mixed {
-        $query =  $this->baseSearch(
-            $this->query,
-            $filters,
-            $relations,
-            $applyOrder,
-            $page,
-            $limit,
-            $orderBy,
-            $orderDir,
-            $conditions,
-            $customizePaginationURI,
-            $paginationURI,
+    ): mixed
+    {
+        $query = $this->baseSearch(
+            query: $this->query,
+            filters: $filters,
+            relations: $relations,
+            conditions: $conditions,
         );
-        return $this->getQueryResult($query, $applyOrder, $page, $limit, $orderBy, $orderDir, $customizePaginationURI, $paginationURI, $withQueryString);
+        return $this->getQueryResult(
+            query: $query,
+            applyOrder: $applyOrder,
+            page: $page,
+            limit: $limit,
+            orderBy: $orderBy,
+            orderDir: $orderDir
+        );
     }
 
     /**
@@ -548,8 +531,6 @@ abstract class BaseConcrete implements BaseContract
      * @param string $orderBy
      * @param string $orderDir
      * @param array $conditions
-     * @param bool $customizePaginationURI
-     * @param null $paginationURI
      *
      * @return mixed
      */
@@ -562,24 +543,22 @@ abstract class BaseConcrete implements BaseContract
         string $orderBy = self::ORDER_BY,
         string $orderDir = self::ORDER_DIR,
         array  $conditions = [],
-        bool   $customizePaginationURI = false,
-        $paginationURI = null,
-        $withQueryString = false
-    ): mixed {
-        $query =  $this->baseSearch(
-            $this->query->withTrashed(),
-            $filters,
-            $relations,
-            $applyOrder,
-            $page,
-            $limit,
-            $orderBy,
-            $orderDir,
-            $conditions,
-            $customizePaginationURI,
-            $paginationURI,
+    ): mixed
+    {
+        $query = $this->baseSearch(
+            query: $this->query->withTrashed(),
+            filters: $filters,
+            relations: $relations,
+            conditions: $conditions,
         );
-        return $this->getQueryResult($query, $applyOrder, $page, $limit, $orderBy, $orderDir, $customizePaginationURI, $paginationURI, $withQueryString);
+        return $this->getQueryResult(
+            query: $query,
+            applyOrder: $applyOrder,
+            page: $page,
+            limit: $limit,
+            orderBy: $orderBy,
+            orderDir: $orderDir
+        );
     }
 
     /**
@@ -589,9 +568,6 @@ abstract class BaseConcrete implements BaseContract
      * @param int $limit
      * @param string $orderBy
      * @param string $orderDir
-     * @param bool $customizePaginationURI
-     * @param null $paginationURI
-     *
      * @return mixed
      */
     public function getQueryResult(
@@ -601,24 +577,14 @@ abstract class BaseConcrete implements BaseContract
         int $limit = self::LIMIT,
         string $orderBy = self::ORDER_BY,
         string $orderDir = self::ORDER_DIR,
-        bool $customizePaginationURI = false,
-        $paginationURI = null,
-        $withQueryString = false,
-    ): mixed {
+    ): mixed
+    {
         if ($applyOrder) {
             $query = $query->orderBy($orderBy, $orderDir);
         }
 
         if (config('app.query_debug')) {
             info($query->toSql());
-        }
-        if ($customizePaginationURI) {
-            $query = $query->paginate($limit);
-            return $query->withPath($paginationURI);
-        }
-
-        if ($page && $withQueryString) {
-            return $query->paginate($limit)->withQueryString();
         }
 
         if ($page) {
@@ -682,7 +648,7 @@ abstract class BaseConcrete implements BaseContract
     {
         $model = $this->findOrFail($id);
         $newVal = 1;
-        if($model[$field] == 1) {
+        if ($model[$field] == 1) {
             $newVal = 0;
         }
         return $this->update($model, [$field => $newVal]);

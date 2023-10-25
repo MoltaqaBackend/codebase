@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Traits\ModelTrait;
+use Spatie\Translatable\HasTranslations;
 
 class Role extends \Spatie\Permission\Models\Role
 {
     use ModelTrait;
 
-
+    use HasTranslations;
+    public $translatable = ['name'];
 
     public const DEFAULT_ROLE_SUPER_ADMIN = 'admin';
     public const DEFAULT_ROLE_CLIENT = 'client';
@@ -17,6 +19,13 @@ class Role extends \Spatie\Permission\Models\Role
     protected array $filters = [
         'keyword',
     ];
+
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
+
 
     # public array $definedRelations = [];
 

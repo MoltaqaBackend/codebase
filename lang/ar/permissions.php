@@ -12,6 +12,11 @@ return [
         'roles' => 'الأدوار',
         'permissions' => 'الصلاحيات',
         'notifications' => 'الاشعارات',
+        'orders' => 'طلبات',
         'chats' => 'الشات',
+        'roles-models' => [
+            'client' => 'مستخدم',
+            'admin' => 'أدمن',
+        ]
     ]
 ];

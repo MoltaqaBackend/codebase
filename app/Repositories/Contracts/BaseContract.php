@@ -128,9 +128,6 @@ interface BaseContract
         string $orderBy = self::ORDER_BY,
         string $orderDir = self::ORDER_DIR,
         array  $conditions = [],
-        bool   $customizePaginationURI = false,
-        $paginationURI = null,
-        $withQueryString = false,
     ): mixed;
 
     /**
@@ -140,8 +137,6 @@ interface BaseContract
      * @param int $limit
      * @param string $orderBy
      * @param string $orderDir
-     * @param bool $customizePaginationURI
-     * @param null $paginationURI
      * @return mixed
      */
     public function getQueryResult(
@@ -151,8 +146,6 @@ interface BaseContract
         int $limit = self::LIMIT,
         string $orderBy = self::ORDER_BY,
         string $orderDir = self::ORDER_DIR,
-        bool $customizePaginationURI = false,
-        $paginationURI = null
     ): mixed;
 
 

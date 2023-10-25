@@ -12,6 +12,11 @@ return [
         'roles' => 'roles',
         'permissions' => 'permissions',
         'notifications' => 'notifications',
+        'orders' => 'orders',
         'chats' => 'chats',
+        'roles-models' => [
+            'client' => 'client',
+            'admin' => 'admin',
+        ]
     ]
 ];

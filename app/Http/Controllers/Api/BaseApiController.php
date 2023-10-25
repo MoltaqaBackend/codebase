@@ -14,10 +14,12 @@ class BaseApiController extends Controller
     use ApiResponseTrait;
 
     protected bool $order = true;
+    protected int $page = 1;
     protected string $orderBy = 'id';
     protected BaseContract $repository;
     protected mixed $modelResource;
     protected array $relations = [];
+    protected array $conditions = [];
 
     /**
      * BaseApiController constructor.
@@ -30,7 +32,7 @@ class BaseApiController extends Controller
 
         if (auth(activeGuard())->check() && auth(activeGuard())->user()->type == UserTypeEnum::CLIENT) {
             if (!auth(activeGuard())->user()->hasAnyRole(['client']))
-                throw new UnauthorizedException(401,__('messages.responses.role_not_exists'));
+                throw new UnauthorizedException(401, __('messages.responses.role_not_exists'));
         } else {
             $this->middleware(['permission:' . Str::plural($model) . '-index|' . activeGuard()])->only(['__invoke', 'index']);
             $this->middleware(['permission:' . Str::plural($model) . '-edit|' . activeGuard()])->only('update');
@@ -54,7 +56,7 @@ class BaseApiController extends Controller
      */
     public function index(): mixed
     {
-        $page = 1;
+        $page = $this->page;
         $limit = 10;
         $order = $this->order;
         $orderBy = $this->orderBy;
@@ -71,7 +73,16 @@ class BaseApiController extends Controller
         if (request()->has('orderBy')) {
             $orderBy = request('orderBy');
         }
-        $models = $this->repository->search($filters, $this->relations, $order, $page, $limit, $orderBy);
+
+        $models = $this->repository->search(
+            filters: $filters,
+            relations: $this->relations,
+            applyOrder: $order,
+            page: $page,
+            limit: $limit,
+            orderBy: $orderBy,
+            conditions: $this->conditions
+        );
         return $this->respondWithCollection($models);
     }
 

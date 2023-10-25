@@ -26,10 +26,17 @@ class UserSeeder extends Seeder
         DB::table('model_has_permissions')->truncate();
 
         $permissions = Permission::all();
-        $clientPermissions = Permission::where('for_users',1)->get();
+        $clientPermissions = Permission::where('for_users', 1)->get();
 
         # Admin
-        $adminRole = Role::findOrCreate(Role::DEFAULT_ROLE_SUPER_ADMIN,'api');
+        $adminRole = Role::create([
+            'name' => [
+                'ar' => __('permissions.responses.roles-models.' . Role::DEFAULT_ROLE_SUPER_ADMIN, [], 'ar'),
+                'en' => __('permissions.responses.roles-models.' . Role::DEFAULT_ROLE_SUPER_ADMIN, [], 'en')
+            ],
+            'guard_name' => 'api',
+            'slug' => Role::DEFAULT_ROLE_SUPER_ADMIN
+            ]);
         $adminRole->givePermissionTo($permissions);
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@admin.com'],
@@ -48,9 +55,15 @@ class UserSeeder extends Seeder
         $this->command->line('------------------------------------------------------------------------------');
 
 
-
         # Client
-        $clientRole = Role::findOrCreate(Role::DEFAULT_ROLE_CLIENT,'api');
+        $clientRole = Role::create([
+            'name' => [
+                'ar' => __('permissions.responses.roles-models.' . Role::DEFAULT_ROLE_CLIENT, [], 'ar'),
+                'en' => __('permissions.responses.roles-models.' . Role::DEFAULT_ROLE_CLIENT, [], 'en')
+            ],
+            'guard_name' => 'api',
+            'slug' => Role::DEFAULT_ROLE_CLIENT
+            ]);
         $clientRole->givePermissionTo($clientPermissions);
         $clientUser = User::firstOrCreate(
             ['email' => 'client@client.com'],
