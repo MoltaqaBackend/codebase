@@ -13,7 +13,7 @@ return [
          * `Spatie\Permission\Contracts\Permission` contract.
          */
 
-        'permission' => Spatie\Permission\Models\Permission::class,
+        'permission' => \App\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -102,6 +102,7 @@ return [
      */
 
     'register_permission_check_method' => true,
+    'model_key' => 'slug',
 
     /*
      * When set to true the package implements teams using the 'team_foreign_key'. If you want

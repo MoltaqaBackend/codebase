@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\BaseContract;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Support\Str;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class BaseApiController extends Controller
 {
@@ -26,10 +28,15 @@ class BaseApiController extends Controller
     public function __construct(BaseContract $repository, mixed $modelResource, $model = null)
     {
 
-        $this->middleware(['permission:' . Str::plural($model) . ' index|'.activeGuard()])->only(['__invoke', 'index']);
-        $this->middleware(['permission:' . Str::plural($model) . ' edit|'.activeGuard()])->only('update');
-        $this->middleware(['permission:' . Str::plural($model) . ' create|'.activeGuard()])->only('create');
-        $this->middleware(['permission:' . Str::plural($model) . ' delete|'.activeGuard()])->only('destroy');
+        if (auth(activeGuard())->check() && auth(activeGuard())->user()->type == UserTypeEnum::CLIENT) {
+            if (!auth(activeGuard())->user()->hasAnyRole(['client']))
+                throw new UnauthorizedException(401,__('messages.responses.role_not_exists'));
+        } else {
+            $this->middleware(['permission:' . Str::plural($model) . '-index|' . activeGuard()])->only(['__invoke', 'index']);
+            $this->middleware(['permission:' . Str::plural($model) . '-edit|' . activeGuard()])->only('update');
+            $this->middleware(['permission:' . Str::plural($model) . '-create|' . activeGuard()])->only('create');
+            $this->middleware(['permission:' . Str::plural($model) . '-delete|' . activeGuard()])->only('destroy');
+        }
 
         $this->repository = $repository;
         $this->modelResource = $modelResource;

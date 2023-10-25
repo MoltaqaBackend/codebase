@@ -12,6 +12,7 @@ return [
         'WHOLESALE' => 'بالجملة',
         'RETAIL' => 'بالتجزئة',
         'thanks' => 'شكرا',
+        'role_not_exists' => 'المستخدم لا يملك صلاحيات',
         'The auction is canceled and your insurance fees will be refunded' => 'تم إلغاء المزاد وسوف يتم إعادة رسوم التأمين الخاصة بك',
         'LIVE' => 'مباشر',
         'refund' => 'تم الإرتجاع',

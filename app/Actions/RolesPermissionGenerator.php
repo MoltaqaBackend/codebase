@@ -2,7 +2,8 @@
 
 namespace App\Actions;
 
-use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Str;
+use App\Models\Permission;
 
 class RolesPermissionGenerator
 {
@@ -10,13 +11,20 @@ class RolesPermissionGenerator
     {
         $permissions = [];
         foreach ($models as $model) {
+
             $permission = Permission::firstOrCreate(
                 [
-                    'name' => $model,
+                    'slug' => Str::slug($model),
                     'guard_name' => 'api',
                 ],
                 [
-                    'name' => $model,
+                    'name' =>
+                        [
+                            'ar' => trans('permissions.responses.'.$model,[],'ar'),
+                            'en' => trans('permissions.responses.'.$model,[],'en')
+                        ]
+                    ,
+                    'slug' => Str::slug($model),
                     'model' => $model,
                     'guard_name' => 'api',
                     'parent_id' => null,
@@ -26,11 +34,15 @@ class RolesPermissionGenerator
 
             foreach ($methods as $method) {
                 $permissions[] = Permission::firstOrCreate([
-                    'name' => "$model $method",
+                    'slug' => Str::slug("$model $method"),
                     'parent_id' => $permission->id,
                     'guard_name' => 'api',
                 ], [
-                    'name' => "$model $method",
+                    'name' => [
+                        'ar' => trans('permissions.responses.'.$method,[],'ar').' '.trans('permissions.responses.'.$model,[],'ar'),
+                        'en' => trans('permissions.responses.'.$method,[],'en').' '.trans('permissions.responses.'.$model,[],'en')
+                    ],
+                    'slug' => Str::slug("$model $method"),
                     'model' => $model,
                     'guard_name' => 'api',
                     'parent_id' => $permission->id,
@@ -43,10 +55,14 @@ class RolesPermissionGenerator
             $parent = null;
             foreach ($additionalAdminPermissions as $additionalAdminPermission) {
                 $permissionMore = Permission::firstOrCreate([
-                    'name' => $additionalAdminPermission,
+                    'slug' => Str::slug($additionalAdminPermission),
                     'guard_name' => 'api',
                 ], [
-                    'name' => $additionalAdminPermission,
+                    'name' => [
+                        'ar' => trans('permissions.responses.'.$additionalAdminPermission,[],'ar'),
+                        'en' => trans('permissions.responses.'.$additionalAdminPermission,[],'en')
+                    ],
+                    'slug' => Str::slug($additionalAdminPermission),
                     'guard_name' => 'api',
                     'parent_id' => $parent,
                     'for_users' => $guard_name != 'admin' ? 1 : 0

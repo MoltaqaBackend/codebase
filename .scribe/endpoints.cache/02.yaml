@@ -43,7 +43,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer ZD48VvhPd5k6bcgf16aeE3a'
+      - 'Bearer a8h4e61vfVkbdEcDZ5P3ga6'
     controller: null
     method: null
     route: null
@@ -106,7 +106,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6bhDkadge1ZVf68ca4E3P5v'
+      - 'Bearer EvbPfe664DhdVaaZg385kc1'
     controller: null
     method: null
     route: null
@@ -136,12 +136,12 @@ endpoints:
         name: chat_id
         description: 'The ID of the chat.'
         required: true
-        example: 1
+        example: 6
         type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      chat_id: 1
+      chat_id: 6
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -196,7 +196,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 3gh66EPcDb41ZekfaavVd85'
+      - 'Bearer abEfV41eP5hc866Dg3avdZk'
     controller: null
     method: null
     route: null
@@ -241,7 +241,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer aZDac58khbev16fd43g6EVP'
+      - 'Bearer aZcdVh86vDgE13bk5ae6f4P'
     controller: null
     method: null
     route: null
@@ -304,7 +304,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer ked5D1V4Pgf668bc3EZaahv'
+      - 'Bearer 8ekaf16dDZP5vh64b3VcgaE'
     controller: null
     method: null
     route: null
@@ -334,12 +334,12 @@ endpoints:
         name: chat_id
         description: 'The ID of the chat.'
         required: true
-        example: 18
+        example: 9
         type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      chat_id: 18
+      chat_id: 9
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -394,7 +394,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 8a4Da1VP6E6gfd53hZbcvek'
+      - 'Bearer bc46e1EP3Dafg5V6Zdv8hak'
     controller: null
     method: null
     route: null
@@ -439,7 +439,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer bVka3DE1dZvgh58ea46cP6f'
+      - 'Bearer Pfbeh6kd4Ec5Dg1V86aZ3av'
     controller: null
     method: null
     route: null
@@ -502,7 +502,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer f8P6dc154ahbgEk3Vv6eZDa'
+      - 'Bearer ach8b4EPa35gdeD66kZV1fv'
     controller: null
     method: null
     route: null
@@ -532,12 +532,12 @@ endpoints:
         name: chat_id
         description: 'The ID of the chat.'
         required: true
-        example: 11
+        example: 1
         type: integer
         enumValues: []
         custom: []
     cleanUrlParameters:
-      chat_id: 11
+      chat_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -592,7 +592,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer bg514kE3DfaP8v6eVaZdh6c'
+      - 'Bearer P563e6Zcvf1d48habaVkEgD'
     controller: null
     method: null
     route: null

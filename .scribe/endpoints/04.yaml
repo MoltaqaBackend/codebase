@@ -41,7 +41,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer V6fP683DEabvkg41dah5ecZ'
+      - 'Bearer hafPV4EZ66Da853bdcegk1v'
     controller: null
     method: null
     route: null
@@ -95,7 +95,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 3gZ1dcDPvh4aV6Eke68f5ba'
+      - 'Bearer VbZ3dkaD5h46fcva1gP68Ee'
     controller: null
     method: null
     route: null
@@ -134,487 +134,487 @@ endpoints:
           {
               "message": "Call to a member function currentAccessToken() on null",
               "exception": "Error",
-              "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Services\\Auth\\AuthAbstract.php",
-              "line": 175,
+              "file": "/home/vagrant/code/codebase/app/Services/Auth/AuthAbstract.php",
+              "line": 177,
               "trace": [
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Controllers\\Api\\V1\\Client\\AuthController.php",
-                      "line": 222,
+                      "file": "/home/vagrant/code/codebase/app/Http/Controllers/Api/V1/Client/AuthController.php",
+                      "line": 256,
                       "function": "logout",
                       "class": "App\\Services\\Auth\\AuthAbstract",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Controller.php",
                       "line": 54,
                       "function": "logout",
                       "class": "App\\Http\\Controllers\\Api\\V1\\Client\\AuthController",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php",
                       "line": 43,
                       "function": "callAction",
                       "class": "Illuminate\\Routing\\Controller",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
                       "line": 260,
                       "function": "dispatch",
                       "class": "Illuminate\\Routing\\ControllerDispatcher",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
                       "line": 205,
                       "function": "runController",
                       "class": "Illuminate\\Routing\\Route",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 799,
                       "function": "run",
                       "class": "Illuminate\\Routing\\Route",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 141,
                       "function": "Illuminate\\Routing\\{closure}",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\app\\Http\\Middleware\\APILocale.php",
+                      "file": "/home/vagrant/code/codebase/app/Http/Middleware/APILocale.php",
                       "line": 25,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "App\\Http\\Middleware\\APILocale",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
                       "line": 50,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
                       "line": 159,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
                       "line": 135,
                       "function": "handleRequest",
                       "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
                       "line": 87,
                       "function": "handleRequestUsingNamedLimiter",
                       "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php",
                       "line": 25,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 141,
                       "function": "Laravel\\Sanctum\\Http\\Middleware\\{closure}",
                       "class": "Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 116,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php",
                       "line": 26,
                       "function": "then",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 116,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 800,
                       "function": "then",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 777,
                       "function": "runRouteWithinStack",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 741,
                       "function": "runRoute",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 730,
                       "function": "dispatchToRoute",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
                       "line": 200,
                       "function": "dispatch",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 141,
                       "function": "Illuminate\\Foundation\\Http\\{closure}",
                       "class": "Illuminate\\Foundation\\Http\\Kernel",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
                       "line": 21,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
                       "line": 31,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
                       "line": 21,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php",
                       "line": 40,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php",
                       "line": 27,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
                       "line": 89,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php",
                       "line": 49,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Http\\Middleware\\HandleCors",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php",
                       "line": 39,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Http\\Middleware\\TrustProxies",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 116,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
                       "line": 175,
                       "function": "then",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
                       "line": 144,
                       "function": "sendRequestThroughRouter",
                       "class": "Illuminate\\Foundation\\Http\\Kernel",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 299,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Kernel",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 287,
                       "function": "callLaravelOrLumenRoute",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 92,
                       "function": "makeApiCall",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 45,
                       "function": "makeResponseCall",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 35,
                       "function": "makeResponseCallIfConditionsPass",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
                       "line": 209,
                       "function": "__invoke",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
                       "line": 166,
                       "function": "iterateThroughStrategies",
                       "class": "Knuckles\\Scribe\\Extracting\\Extractor",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
                       "line": 95,
                       "function": "fetchResponses",
                       "class": "Knuckles\\Scribe\\Extracting\\Extractor",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
                       "line": 124,
                       "function": "processRoute",
                       "class": "Knuckles\\Scribe\\Extracting\\Extractor",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
                       "line": 71,
                       "function": "extractEndpointsInfoFromLaravelApp",
                       "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
                       "line": 49,
                       "function": "extractEndpointsInfoAndWriteToDisk",
                       "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
+                      "file": "/home/vagrant/code/codebase/vendor/knuckleswtf/scribe/src/Commands/GenerateDocumentation.php",
                       "line": 51,
                       "function": "get",
                       "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
                       "line": 36,
                       "function": "handle",
                       "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Container/Util.php",
                       "line": 41,
                       "function": "Illuminate\\Container\\{closure}",
                       "class": "Illuminate\\Container\\BoundMethod",
                       "type": "::"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
                       "line": 93,
                       "function": "unwrapIfClosure",
                       "class": "Illuminate\\Container\\Util",
                       "type": "::"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
                       "line": 37,
                       "function": "callBoundMethod",
                       "class": "Illuminate\\Container\\BoundMethod",
                       "type": "::"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Container/Container.php",
                       "line": 662,
                       "function": "call",
                       "class": "Illuminate\\Container\\BoundMethod",
                       "type": "::"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Console/Command.php",
                       "line": 211,
                       "function": "call",
                       "class": "Illuminate\\Container\\Container",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\symfony\\console\\Command\\Command.php",
+                      "file": "/home/vagrant/code/codebase/vendor/symfony/console/Command/Command.php",
                       "line": 326,
                       "function": "execute",
                       "class": "Illuminate\\Console\\Command",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Console/Command.php",
                       "line": 181,
                       "function": "run",
                       "class": "Symfony\\Component\\Console\\Command\\Command",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\symfony\\console\\Application.php",
+                      "file": "/home/vagrant/code/codebase/vendor/symfony/console/Application.php",
                       "line": 1081,
                       "function": "run",
                       "class": "Illuminate\\Console\\Command",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\symfony\\console\\Application.php",
+                      "file": "/home/vagrant/code/codebase/vendor/symfony/console/Application.php",
                       "line": 320,
                       "function": "doRunCommand",
                       "class": "Symfony\\Component\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\symfony\\console\\Application.php",
+                      "file": "/home/vagrant/code/codebase/vendor/symfony/console/Application.php",
                       "line": 174,
                       "function": "doRun",
                       "class": "Symfony\\Component\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+                      "file": "/home/vagrant/code/codebase/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php",
                       "line": 201,
                       "function": "run",
                       "class": "Symfony\\Component\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "C:\\laragon\\www\\codebasemoltaqa\\artisan",
+                      "file": "/home/vagrant/code/codebase/artisan",
                       "line": 37,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -633,7 +633,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 86akgZP6V31dfDeh5Ebcv4a'
+      - 'Bearer 4ZaeVk6gDvc1Edaf65b8h3P'
     controller: null
     method: null
     route: null
@@ -678,61 +678,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer aVahgEZDPd53461k8b6vfec'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: client-api/v1/auth/change-mobile
-    metadata:
-      groupName: 'App Client'
-      groupDescription: 'Manage Client App Apis'
-      subgroup: Auth
-      subgroupDescription: 'Auth Cycle Apis'
-      title: 'Client Change Mobile.'
-      description: 'an API which Offers a mean to change client mobile number.'
-      authenticated: true
-      custom: []
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Api-Key: xx
-      Api-Version: v1
-      Accept-Language: ar
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      mobile:
-        name: mobile
-        description: 'The new Mobile Number of the user.'
-        required: true
-        example: '0564776688'
-        type: string
-        enumValues: []
-        custom: []
-    cleanBodyParameters:
-      mobile: '0564776688'
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"status":401,"message":"Unauthenticated.","errors":{"message":["Unauthenticated."]}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer D583ac4VbdE6efZa1gk6vPh'
+      - 'Bearer gEP6Z1a36aVDdvf8b4eh5ck'
     controller: null
     method: null
     route: null
@@ -804,7 +750,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer Za6cg4V6E5v1hDbPad8fe3k'
+      - 'Bearer 6Pk164dfbVecZ38haaED5vg'
     controller: null
     method: null
     route: null
@@ -867,7 +813,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4aDbdv6cgh3P8a16fkZeE5V'
+      - 'Bearer d4ba5gcZ1V3Dfe6P6ahkvE8'
     controller: null
     method: null
     route: null
@@ -912,7 +858,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer a8d136EkfP4vega5hcV6DZb'
+      - 'Bearer Pb8vZ45h6fgVaa3eckEd61D'
     controller: null
     method: null
     route: null
@@ -1052,7 +998,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"verification_code":"2719","access_token":"10|E4Mz0Jy2TCj7N2hZlFJGqqGgIGimK5rOAAugfqAN27e4ca3d","user":{"name":"0564776688","email":"fahmi@moltaqa.net","mobile":"0564776688","image":"https:\/\/codebasemoltaqa.test\/assets\/avatar.png","roles":"","roles_ids":[],"role_id":null,"permissions":[]}},"status":200}'
+        content: '{"data":{"verification_code":"3189","access_token":"13|i2KR1HehXrCrQ5jcguEnpoMyOWsvQszsSbcws0go01c16948","user":{"id":3,"name":"0564776688","email":"fahmi@moltaqa.net","mobile":"0564776688","image":"http:\/\/codebase.test\/assets\/avatar.png","is_verified":false,"roles":"","roles_ids":[],"role_id":null,"permissions":[]}},"status":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -1166,6 +1112,71 @@ endpoints:
         custom: []
     responseFields: []
     auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: client-api/v1/auth/validate-mobile-email
+    metadata:
+      groupName: 'App Client'
+      groupDescription: 'Manage Client App Apis'
+      subgroup: Auth
+      subgroupDescription: 'Auth Cycle Apis'
+      title: 'validate email and mobile.'
+      description: 'an API which Offers a mean to Validate Email and Mobile.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Api-Key: xx
+      Api-Version: v1
+      Accept-Language: ar
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'user email.'
+        required: true
+        example: test@test.com
+        type: string
+        enumValues: []
+        custom: []
+      mobile:
+        name: mobile
+        description: 'The new Mobile Number of the user.'
+        required: true
+        example: '0564776688'
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      email: test@test.com
+      mobile: '0564776688'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":200,"message":"Valid to use"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '50'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 5c8hVbDEgek631a4vZdfa6P'
     controller: null
     method: null
     route: null

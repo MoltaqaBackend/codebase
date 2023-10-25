@@ -2,10 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Permission\Models\Permission as BasePermission;
+use Spatie\Permission\Contracts\Permission as PermissionContract;
+use Spatie\Permission\Exceptions\PermissionDoesNotExist;
+use Spatie\Permission\Guard;
+use Spatie\Permission\Models\Permission as SpatiePermission;
+use Spatie\Translatable\HasTranslations;
 
-class Permission extends BasePermission
+class Permission extends SpatiePermission
 {
-    use HasFactory;
+    use HasTranslations;
+    public $translatable = ['name'];
+
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
+    public static function findByName(string $name, $guardName = null): PermissionContract
+    {
+        $guardName = $guardName ?? Guard::getDefaultName(static::class);
+        $permission = static::getPermission(['slug' => $name, 'guard_name' => $guardName]);
+        if (! $permission) {
+            throw PermissionDoesNotExist::create($name, $guardName);
+        }
+
+        return $permission;
+    }
 }

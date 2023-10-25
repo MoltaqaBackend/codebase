@@ -11,6 +11,7 @@ return [
         'activation' => 'Activation Changed Successfully',
         'activ' => 'Deleted Successfully',
         'WHOLESALE' => 'Wholesale',
+        'role_not_exists' => 'role not exists',
         'thanks' => 'Thanks',
         'paid_successfully' => 'Paid Successfully',
         'open' => 'Open',

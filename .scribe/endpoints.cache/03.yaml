@@ -41,12 +41,12 @@ endpoints:
         name: unread
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         custom: []
     cleanBodyParameters:
-      unread: false
+      unread: true
     fileParameters: []
     responses:
       -
@@ -61,7 +61,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer f8D3e16VPEda4bh56aZvcgk'
+      - 'Bearer 6vhfc3aaD4V1P68gbdEk5Ze'
     controller: null
     method: null
     route: null
@@ -120,7 +120,7 @@ endpoints:
         description: 'string required.'
         required: false
         example:
-          - a
+          - enim
         type: '[]'
         enumValues: []
         custom: []
@@ -139,7 +139,7 @@ endpoints:
       body: message
       topic: offer
       roles:
-        - a
+        - enim
       users:
         - 1
         - 2
@@ -157,7 +157,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer a6e6814VbhvfZE3a5gdDkPc'
+      - 'Bearer g16fda3eVD8aEZb465Phkcv'
     controller: null
     method: null
     route: null

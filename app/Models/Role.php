@@ -8,6 +8,8 @@ class Role extends \Spatie\Permission\Models\Role
 {
     use ModelTrait;
 
+
+
     public const DEFAULT_ROLE_SUPER_ADMIN = 'admin';
     public const DEFAULT_ROLE_CLIENT = 'client';
 

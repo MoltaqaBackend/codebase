@@ -3,7 +3,7 @@
 Api Docs for Code Base System
 
 <aside>
-    <strong>Base URL</strong>: <code>https://codebasemoltaqa.test</code>
+    <strong>Base URL</strong>: <code>http://codebase.test</code>
 </aside>
 
 This documentation aims to provide all the information you need to work with our API.

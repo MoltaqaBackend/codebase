@@ -43,7 +43,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 1cd54gfaa6DEZ8k6h3vVbeP'
+      - 'Bearer gkDc4h5dPZa1a6fveE6Vb83'
     controller: null
     method: null
     route: null
@@ -77,12 +77,12 @@ endpoints:
         name: name
         description: 'يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا.'
         required: true
-        example: erv
+        example: mykppttrevxrkrvcafghc
         type: string
         enumValues: []
         custom: []
     cleanBodyParameters:
-      name: erv
+      name: mykppttrevxrkrvcafghc
     fileParameters: []
     responses:
       -
@@ -97,7 +97,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer haakE1fPe56DVdgb8364cvZ'
+      - 'Bearer a6aeD538cZk6hfVvg41dEPb'
     controller: null
     method: null
     route: null
@@ -151,7 +151,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6Zk1a8E5h6VDvfcdgae4b3P'
+      - 'Bearer 61ZaD48gvPE6hkd3ebfaV5c'
     controller: null
     method: null
     route: null
@@ -195,12 +195,12 @@ endpoints:
         name: name
         description: 'يجب أن يكون طول نص value على الأقل 1 حروفٍ/حرفًا يجب أن لا يتجاوز طول نص value 250 حروفٍ/حرفًا.'
         required: true
-        example: oeaeoawbkl
+        example: pljpfdxejsi
         type: string
         enumValues: []
         custom: []
     cleanBodyParameters:
-      name: oeaeoawbkl
+      name: pljpfdxejsi
     fileParameters: []
     responses:
       -
@@ -215,7 +215,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer g8fdh3bD51e6Z4a6VaPckEv'
+      - 'Bearer 4VZak58E6acP3gf6edbDvh1'
     controller: null
     method: null
     route: null
@@ -269,7 +269,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer cah61v56bagPEZ34De8dfkV'
+      - 'Bearer fvgbkc16D83Z6dV4PhEaea5'
     controller: null
     method: null
     route: null
@@ -314,7 +314,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer EPfhV1vk4gd365eb8Da6cZa'
+      - 'Bearer Ev6af4dg58ZbDck1aV3ehP6'
     controller: null
     method: null
     route: null
@@ -359,7 +359,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer v5Zk346da1abecfgPE8hDV6'
+      - 'Bearer ce6PaVv5h36a4bDZ1kgdfE8'
     controller: null
     method: null
     route: null
@@ -393,7 +393,7 @@ endpoints:
         name: key
         description: ''
         required: true
-        example: mollitia
+        example: dolorem
         type: string
         enumValues: []
         custom: []
@@ -406,7 +406,7 @@ endpoints:
         enumValues: []
         custom: []
     cleanBodyParameters:
-      key: mollitia
+      key: dolorem
       value: []
     fileParameters: []
     responses:
@@ -422,7 +422,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 5ed4kb36aVZD16v8fPachEg'
+      - 'Bearer f61cbEahPvD3a8Vk6Zge4d5'
     controller: null
     method: null
     route: null
