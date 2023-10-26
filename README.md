@@ -101,6 +101,21 @@ Start the server
   ./vendor/bin/php-cs-fixer fix app
 ```
 
+## Command To Create A Full Module
+    
+    php artisan app:generate-module {model} {namespace}
+    # Ex: php artisan app:generate-module user Api/V1/Dashboard
+    # Note: if namespace is empty, it will be in (Api/V1)
+    # This Command Will Create:
+        * Controlelr
+        * Concrete
+        * Contract
+        * Model
+        * Migration
+        * Resource
+        * Request
+
+
 ## Laravel Static Analysis Tool (larastan)
 
     Analysis levels range from 1 : 9

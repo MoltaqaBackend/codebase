@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -76,6 +77,8 @@ class CreateConcreteModuleCommand extends Command
         $templateReplaced = $this->replaceTemplate($stub, $modelName);
 
         $path = $this->checkDir('Models');
+
+        Artisan::call('make:migration create_'.lcfirst(Str::plural($modelName)).'_table');
 
         file_put_contents($path . DIRECTORY_SEPARATOR . $modelName . '.php', $templateReplaced);
 
