@@ -137,7 +137,7 @@ abstract class AuthAbstract
         }
         if (Hash::check($request->old_password, $user->password)) {
 
-            $user->password = Hash::make($request->password);
+            $user->password = $request->password;
             $user->save();
 
             $user->currentAccessToken()->delete();
