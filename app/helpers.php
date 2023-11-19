@@ -6,6 +6,7 @@ use App\Enum\Transaction\TransactionReasonEnum;
 use App\Mail\OTPMail;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Mail\SentMessage;
 use Illuminate\Support\Facades\App;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Helpers\Setting;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 if (!function_exists('getLocales')) {
     /**
@@ -402,10 +405,10 @@ if (!function_exists('setting')) {
     function setting($key, $value = null, $default = null)
     {
         if ($value) {
-            return data_get((new App\Helpers\Setting())->{$key}, $value, $default);
+            return data_get((new Setting())->{$key}, $value, $default);
         }
 
-        return (new App\Helpers\Setting())->{$key};
+        return (new Setting())->{$key};
     }
 }
 

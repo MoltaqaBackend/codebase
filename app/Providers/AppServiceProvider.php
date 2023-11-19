@@ -42,19 +42,6 @@ class AppServiceProvider extends ServiceProvider
             ]);
         }
 
-
-        Response::macro('apiResponse', function ($data, $error, $pagination, $extras, $message, $success, $code) {
-            $response = array(
-                "success" => $success,
-                "data" => $data,
-                "error" => $error,
-                "pagination" => $pagination,
-                "extras" => $extras,
-                "message" => $message,
-            );
-            return response()->json($response, $code, [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-        });
-
         /**
          * Paginate a standard Laravel Collection.
          *

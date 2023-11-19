@@ -42,12 +42,12 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->dashboardApiNamespace)
             ->group(base_path('routes/dashboard-v1.php'));
 
-            Route::middleware(['api','apilocale'])
+            Route::middleware($this->apiMiddlewares)
                 ->namespace($this->apiClientNamespace)
                 ->prefix('client-api/v1')
                 ->group(base_path('routes/api-v1.php'));
 
-            Route::middleware(['api','apilocale'])
+            Route::middleware($this->apiMiddlewares)
                 ->namespace($this->apiProviderNamespace)
                 ->prefix('provider-api/v1')
                 ->group(base_path('routes/provider-v1.php'));
