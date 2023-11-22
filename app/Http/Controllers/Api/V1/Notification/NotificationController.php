@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api\V1\Notification;
 use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Notification\SendNotificationRequest;
-use App\Http\Resources\Api\Auth\UserResource;
 use App\Http\Resources\Api\Notification\NotificationResource;
+use App\Http\Resources\Api\V1\Dashboard\UserResource;
 use App\Notifications\AdminNotification;
+use App\Notifications\DashboardNotification;
 use App\Repositories\Contracts\UserContract;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class NotificationController extends Controller
     {
         $request->validate(['unread' => 'nullable|boolean']);
         $notifications = \App\Models\Notification::with('notifiable')
+            ->where('type',get_class(new DashboardNotification()))
             ->when($request->has('title'), function ($query) use ($request) {
                 $name = 'data';
                 $query->whereRaw("JSON_VALID({$name}) AND JSON_EXTRACT({$name}, '$.title.ar') like '%{$request->title}%'")
@@ -42,6 +44,15 @@ class NotificationController extends Controller
                 $query->whereNull('read_at');
             })->get();
 
+        return $this->respondWithCollection(NotificationResource::collection($notifications));
+    }
+
+    public function userNotifications()
+    {
+        $notifications = auth('api')->user()->notifications()
+            ->with(['notifiable'])
+            ->where('type','!=',get_class(new DashboardNotification()))
+            ->get();
         return $this->respondWithCollection(NotificationResource::collection($notifications));
     }
 
@@ -72,7 +83,7 @@ class NotificationController extends Controller
 
         if ($request->to_all || (empty($request->ids && !$request->to_all))) {
             $notifabels = $this->userRepository->search(
-                filters: ['type' => [UserTypeEnum::PROVIDER, UserTypeEnum::CLIENT], 'status' => true],
+                filters: ['type' => [UserTypeEnum::DRIVER, UserTypeEnum::CLIENT], 'status' => true],
                 page: 0,
                 limit: 0
             );
@@ -84,7 +95,7 @@ class NotificationController extends Controller
                 limit: 0
             );
         }
-        Notification::send($notifabels, new AdminNotification($notificationData, ['database','mail']));
+        Notification::send($notifabels, new DashboardNotification($notificationData, ['database','firebase']));
 
         return $this->respondWithSuccess(__('Notification Sent Successfully'));
     }
@@ -94,7 +105,7 @@ class NotificationController extends Controller
     {
         $notifabelType = [$type];
         if ($type == 'all') {
-            $notifabelType = [UserTypeEnum::PROVIDER, UserTypeEnum::CLIENT];
+            $notifabelType = [UserTypeEnum::DRIVER, UserTypeEnum::CLIENT];
         }
 
         $notifabels = $this->userRepository->search(
