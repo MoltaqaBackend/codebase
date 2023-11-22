@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Api\Notification;
 
-use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 /**
  * @bodyParam title string required Notification title.Example: title
@@ -32,15 +30,12 @@ class SendNotificationRequest extends FormRequest
      */
     public function rules()
     {
-        $roles = Role::pluck('name')->toArray();
-        array_push($roles, 'all');
         return [
-            'title' => ['required', 'string'],
+            'title_ar' => ['required', 'string'],
+            'title_en' => ['required', 'string'],
             'body' => ['required', 'string'],
-            'topic' => ['nullable','string'],
-            'roles' => ['required', 'array', 'min:1'],
-            'roles.*' => ['required', Rule::in($roles)],
-            'users' => ['nullable', 'array'],
+            'ids' => ['nullable', 'array'],
+            'to_all' => ['required', 'in:0,1'],
         ];
     }
 
@@ -49,8 +44,6 @@ class SendNotificationRequest extends FormRequest
         return [
             'title' => __('Title'),
             'body' => __('Message'),
-            'topic' => __('Topic'),
-            'roles' => __('User Roles'),
             'users' => __('Users'),
         ];
     }
