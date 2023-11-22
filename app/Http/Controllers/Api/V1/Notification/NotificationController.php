@@ -2,56 +2,45 @@
 
 namespace App\Http\Controllers\Api\V1\Notification;
 
+use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Notification\SendNotificationRequest;
+use App\Http\Resources\Api\Auth\UserResource;
 use App\Http\Resources\Api\Notification\NotificationResource;
-use App\Models\User as UserModel;
 use App\Notifications\AdminNotification;
-use App\Notifications\BaseNotification;
-use App\Notifications\ClientNotification;
+use App\Repositories\Contracts\UserContract;
 use App\Traits\ApiResponseTrait;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
-/**
- * @group Base Notification
- *
- * @subgroup Notification
- * @subgroupDescription Notification Apis
- */
 class NotificationController extends Controller
 {
     use ApiResponseTrait;
 
     protected mixed $modelResource = NotificationResource::class;
 
-    public function __construct()
+    public function __construct(protected UserContract $userRepository)
     {
-        $this->middleware(['role_or_permission:notification index|'.activeGuard()])->only(['__invoke', 'index']);
-        $this->middleware(['role_or_permission:notification create|'.activeGuard()])->only('store');
+        $this->middleware(['role_or_permission:notifications-index|' . activeGuard()])->only(['__invoke', 'index']);
+        $this->middleware(['role_or_permission:notifications-create|' . activeGuard()])->only('store');
     }
 
-
-    /**
-     * List Notification
-     *
-     * an API which Offers a mean to list notifications
-     * @authenticated
-     * @header Api-Key xx
-     * @header Api-Version v1
-     * @header Accept-Language ar
-     *
-     * @queryParam unread bool reqired.Example: false
-     */
     public function index(Request $request): mixed
     {
         $request->validate(['unread' => 'nullable|boolean']);
-        $notifications = auth(activeGuard())->user()->notifications;
-
-        if(isset($request->unread)) {
-            $notifications = auth(activeGuard())->user()->unreadNotifications;
-        }
+        $notifications = \App\Models\Notification::with('notifiable')
+            ->when($request->has('title'), function ($query) use ($request) {
+                $name = 'data';
+                $query->whereRaw("JSON_VALID({$name}) AND JSON_EXTRACT({$name}, '$.title.ar') like '%{$request->title}%'")
+                    ->orWhereRaw("JSON_VALID({$name}) AND lower(JSON_EXTRACT({$name}, '$.title.en')) like '%{$request->title}%'");
+            })->when($request->has('sendType'), function ($query) use ($request) {
+                $query->whereHas('notifiable', function ($query) use ($request) {
+                    $name = 'data';
+                    $query->whereRaw("JSON_VALID({$name}) AND JSON_EXTRACT({$name}, '$.anotherData.notify_type') like '%{$request->sendType}%'");
+                });
+            })->when($request->has('unread'), function ($query) use ($request) {
+                $query->whereNull('read_at');
+            })->get();
 
         return $this->respondWithCollection(NotificationResource::collection($notifications));
     }
@@ -68,32 +57,51 @@ class NotificationController extends Controller
     protected function store(SendNotificationRequest $request)
     {
         $notificationData = [
-            'title' => $request->title,
-            'body' => $request->body,
-            'topic' => $request->title,
+            'title' => json_encode(['en' => $request->title_en, 'ar' => $request->title_ar]),
+            'body' => json_encode(
+                [
+                    'data' => $request->body,
+                    'anotherData' => [
+                        'type' => 'send_notification',
+                        'id' => null,
+                        'notify_type' => 'admin',
+                    ]
+                ]
+            ),
         ];
 
-        foreach ($request->roles as $role) {
-            switch ($role) {
-                case 'all':
-                    $notificationData['tokenModel'] = User::class;
-                    $notificationData['sendForAdmin'] = true;
-                    $notificationData['sendForUsers'] = true;
-                    Notification::send(User::all(), new BaseNotification($notificationData));
-                    break;
-                case 'admin':
-                    Notification::send(UserModel::whereHas("roles", function ($q) { $q->whereIn("name", ["admin"]); })->get(), new AdminNotification($notificationData));
-                    break;
-                case 'client':
-                    $notificationData['tokenModel'] = UserModel::class;
-                    $notificationData['sendForUsers'] = true;
-                    Notification::send(UserModel::whereHas("roles", function ($q) { $q->whereIn("name", ["client"]); })->get(), new ClientNotification($notificationData));
-                    break;
-                default:
-                    break;
-            }
+        if ($request->to_all || (empty($request->ids && !$request->to_all))) {
+            $notifabels = $this->userRepository->search(
+                filters: ['type' => [UserTypeEnum::PROVIDER, UserTypeEnum::CLIENT], 'status' => true],
+                page: 0,
+                limit: 0
+            );
+
+        } else {
+            $notifabels = $this->userRepository->search(
+                filters: ['id' => $request->ids, 'status' => true],
+                page: 0,
+                limit: 0
+            );
+        }
+        Notification::send($notifabels, new AdminNotification($notificationData, ['database','mail']));
+
+        return $this->respondWithSuccess(__('Notification Sent Successfully'));
+    }
+
+
+    public function getNotifables($type)
+    {
+        $notifabelType = [$type];
+        if ($type == 'all') {
+            $notifabelType = [UserTypeEnum::PROVIDER, UserTypeEnum::CLIENT];
         }
 
-        return $this->respondWithSuccess(__('Sent Successfully'));
+        $notifabels = $this->userRepository->search(
+            filters: ['type' => $notifabelType, 'status' => true],
+            page: 0,
+            limit: 0
+        );
+        return $this->respondWithCollection(UserResource::collection($notifabels));
     }
 }

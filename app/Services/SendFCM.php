@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enum\UserTypeEnum;
 use App\Models\DeviceToken;
 use Carbon\Carbon;
 
@@ -9,12 +10,12 @@ class SendFCM
 {
     public bool $shouldSendForAdmin = false;
     public bool $shouldSendForUsers = false;
-    public function __construct(
-        protected $tokenModel
-    ) {
+
+    public function __construct()
+    {
     }
 
-    public function setLocale($locale = ''): string
+    public function setLocale($locale = null): string
     {
         return $locale ?? app()->getLocale();
     }
@@ -39,18 +40,19 @@ class SendFCM
         }
 
         if ($this->shouldSendForAdmin) {
-            $tokens[] = DeviceToken::query()->where('tokenable_type', class_basename($this->tokenModel) ?? '')
-                ->whereHas('tokenable', function ($q) {
-                    $q->whereHas('roles', function ($q) { $q->whereIn("name", ["admin"]);});
-                })->pluck('device_token')->toArray();
+            $tokens[] = DeviceToken::query()->whereHas('tokenable', function ($q) {
+                $q->whereHas('roles', function ($q) {
+                    $q->whereIn("name", ["admin"]);
+                })
+                    ->orWhereIn("type", [UserTypeEnum::EMPLOYEE, UserTypeEnum::ADMIN]);
+            })->pluck('device_token')->toArray();
         }
 
         if ($this->shouldSendForUsers) {
-            $tokens[] = DeviceToken::query()->where('tokenable_type', class_basename($this->tokenModel) ?? '')
-                ->whereHas('tokenable', function ($q) {
-                    $q->whereDoesntHave('roles')
-                    ->orWhereHas('roles', function ($q) { $q->whereIn("name", ["admin"]);});
-                })->pluck('device_token')->toArray();
+            $tokens[] = DeviceToken::query()->whereHas('tokenable', function ($q) {
+                $q->whereDoesntHave('roles')
+                    ->orWhere("type", UserTypeEnum::EMPLOYEE);
+            })->pluck('device_token')->toArray();
         }
 
         return $tokens ?? [];
@@ -63,16 +65,21 @@ class SendFCM
         return $action;
     }
 
-    public function sendNotification($title, $body, $fcmTokens = null): void
+    public function sendNotification($title, $body, $anotherData = [], $notifiable = null): void
     {
         $body = [
-            'title' => (string)__($title, [], $this->setLocale()),
-            'body' => (string)__($body, [], $this->setLocale()),
+            'title' => $title[$this->setLocale()],
+            'body' => $body ?? $title[$this->setLocale()],
+            'anotherData' => $anotherData ?? [],
             'created_at' => (string)Carbon::now(),
         ];
 
+        if ($notifiable) {
+            $fcmTokens = $notifiable->deviceTokens?->pluck('device_token')->toArray();
+        }
+
         $data = [
-            'registration_ids' => collect($this->registrationIds($fcmTokens))->unique()->toArray(),
+            'registration_ids' => collect($this->registrationIds($fcmTokens ?? []))->flatten()->unique()->toArray(),
             'data' => $body,
             'notification' => $body,
         ];

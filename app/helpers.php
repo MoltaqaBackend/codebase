@@ -444,3 +444,27 @@ if (!function_exists('getTransaction')) {
         ]);
     }
 }
+if (!function_exists('prepareNotification')) {
+    # Example Using
+    /*
+     * $notificationData = prepareNotification(
+        title: 'messages.responses.new_trip',
+        body: [
+            'data' => $Trip,
+            'anotherData' => [
+                'type' => 'new_trip',
+                'id' => $Trip->id,
+                'notify_type' => 'driver',
+            ]
+        ]
+    );
+    */
+    function prepareNotification($title, $body = null): array
+    {
+        return [
+            'title' => json_encode(['en' => __($title, [], 'en'), 'ar' => __($title, [], 'ar'),]),
+            'body' => json_encode($body ?? $title),
+        ];
+    }
+}
+

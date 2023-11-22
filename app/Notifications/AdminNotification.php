@@ -4,5 +4,10 @@ namespace App\Notifications;
 
 class AdminNotification extends BaseNotification
 {
-    protected $notificationVia = ['mail','database'];
+    public function __construct($notificationData, $notificationVia = ['mail', 'database'])
+    {
+        $this->notificationVia = $notificationVia;
+        parent::__construct($notificationData);
+    }
+
 }
