@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Api\V1\Notification;
 use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Notification\SendNotificationRequest;
+use App\Http\Resources\Api\Auth\UserResource;
 use App\Http\Resources\Api\Notification\NotificationResource;
-use App\Http\Resources\Api\V1\Dashboard\UserResource;
-use App\Notifications\AdminNotification;
 use App\Notifications\DashboardNotification;
 use App\Repositories\Contracts\UserContract;
 use App\Traits\ApiResponseTrait;
@@ -83,7 +82,7 @@ class NotificationController extends Controller
 
         if ($request->to_all || (empty($request->ids && !$request->to_all))) {
             $notifabels = $this->userRepository->search(
-                filters: ['type' => [UserTypeEnum::DRIVER, UserTypeEnum::CLIENT], 'status' => true],
+                filters: ['type' => [UserTypeEnum::PROVIDER, UserTypeEnum::CLIENT], 'status' => true],
                 page: 0,
                 limit: 0
             );
@@ -105,7 +104,7 @@ class NotificationController extends Controller
     {
         $notifabelType = [$type];
         if ($type == 'all') {
-            $notifabelType = [UserTypeEnum::DRIVER, UserTypeEnum::CLIENT];
+            $notifabelType = [UserTypeEnum::PROVIDER, UserTypeEnum::CLIENT];
         }
 
         $notifabels = $this->userRepository->search(
