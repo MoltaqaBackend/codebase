@@ -22,8 +22,8 @@ class BaseNotification extends Notification implements ShouldQueue
      */
     public function __construct($notificationData)
     {
-        $this->chackNotificationDataIsValid();
         $this->notificationData = $notificationData;
+        $this->chackNotificationDataIsValid();
     }
 
     /**
@@ -114,10 +114,10 @@ class BaseNotification extends Notification implements ShouldQueue
     private function chackNotificationDataIsValid()
     {
         throw_if(
-            !isset($notificationData['title'][get_current_lang()]) ||
-            !isset($notificationData['body'][get_current_lang()]) ||
-            !isset($notificationData['id']) ||
-            !isset($notificationData['type']),
+            !isset(json_decode($this->notificationData['title'],true)[get_current_lang()]) ||
+            !isset(json_decode($this->notificationData['body'],true)[get_current_lang()]) ||
+            !array_key_exists('id',$this->notificationData) ||
+            !isset($this->notificationData['type']),
             'notification data not valid (title,body,id,type)' . ' at ' . __FILE__ . ' line ' . __LINE__);
 
     }

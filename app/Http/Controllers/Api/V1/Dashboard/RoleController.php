@@ -3,24 +3,35 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Api\BaseApiController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\RoleRequest;
 use App\Http\Resources\Api\RoleResource;
+use App\Http\Resources\Api\V1\Client\NotificationResource;
 use App\Models\Role;
+use App\Models\User;
+use App\Notifications\ClientNotification;
 use App\Repositories\Contracts\RoleContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Notification;
 
-class RoleController extends BaseApiController
+class RoleController extends Controller
 {
     /**
      * RoleController constructor.
      * @param RoleContract $repository
      */
-    public function __construct(RoleContract $repository)
-    {
-        parent::__construct($repository, RoleResource::class, 'role');
-    }
+//    public function __construct(RoleContract $repository)
+//    {
+//        parent::__construct($repository, RoleResource::class, 'role');
+//    }
 
+    public function index()
+    {
+        return response()->json(NotificationResource::collection(User::find(1)->notifications));
+
+
+    }
     /**
      * @param RoleRequest $request
      * @return JsonResponse
