@@ -37,8 +37,14 @@ Roles, Permissions, Wallet, Chat, Notification(Mail,Pusher,Firebase,database), s
 
 # Send Notification Example
 
-    ADMIN => Notification::send($notifiables,new AdminNotification($notificationData)); >> will send via mail and database
-    CLIENT => Notification::send($notifiables,new ClientNotification($notificationData)); >> will send via firebase and database
+       $notificationData = prepareNotification(
+            title: ['en' => __('notifications.title', [], 'en'), 'ar' => __('notifications.title', [], 'ar')],
+            body: ['en' => __('notifications.body', [], 'en'), 'ar' => __('notifications.body', [], 'ar')],
+            id: null,
+            type: 'new_message'
+        );
+
+        Notification::send(User::all(),new ClientNotification($notificationData, ['database','firebase']));
     Notes
     Supported Mediums in BaseNotification Class => ['mail', 'sms', 'firebase','pusher', 'database']
     In BasNotification Class you can modify how each Medium Process or What it should transmit

@@ -15,11 +15,6 @@ class SendFCM
     {
     }
 
-    public function setLocale($locale = null): string
-    {
-        return $locale ?? app()->getLocale();
-    }
-
     public function sendForAdmin(bool $shouldSendForAdmin = false)
     {
         $this->shouldSendForAdmin = $shouldSendForAdmin;
@@ -65,12 +60,19 @@ class SendFCM
         return $action;
     }
 
-    public function sendNotification($title, $body, $anotherData = [], $notifiable = null): void
+    public function sendNotification(
+        $title,
+        $body,
+        $id = null,
+        $type = null,
+        $notifiable = null
+    ): void
     {
         $body = [
-            'title' => $title[$this->setLocale()],
-            'body' => $body ?? $title[$this->setLocale()],
-            'anotherData' => $anotherData ?? [],
+            'title' => $title[get_current_lang()],
+            'body' => $body[get_current_lang()],
+            'id' => $id,
+            'type' => $type,
             'created_at' => (string)Carbon::now(),
         ];
 
@@ -90,7 +92,6 @@ class SendFCM
 
     public function CURLCalling($data): int
     {
-
         $dataString = json_encode($data);
         $headers = [
             'Authorization: key=' . config('app.fcm_server_key'),

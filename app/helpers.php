@@ -459,11 +459,21 @@ if (!function_exists('prepareNotification')) {
         ]
     );
     */
-    function prepareNotification($title, $body = null): array
+//    function prepareNotification($title, $body = null): array
+//    {
+//        return [
+//            'title' => json_encode(['en' => __($title, [], 'en'), 'ar' => __($title, [], 'ar'),]),
+//            'body' => json_encode($body ?? $title),
+//        ];
+//    }
+
+    function prepareNotification($title, $body, $id = null, $type = null): array
     {
         return [
-            'title' => json_encode(['en' => __($title, [], 'en'), 'ar' => __($title, [], 'ar'),]),
-            'body' => json_encode($body ?? $title),
+            'title' => json_encode($title),
+            'body' => json_encode($body),
+            'id' => $id,
+            'type' => $type,
         ];
     }
 }

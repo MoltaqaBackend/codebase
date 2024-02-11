@@ -4,10 +4,8 @@ namespace App\Notifications;
 
 use App\Events\NotificationEvent;
 use App\FCMChannel\FCMChannel;
-use App\Services\SendFCM;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -24,6 +22,7 @@ class BaseNotification extends Notification implements ShouldQueue
      */
     public function __construct($notificationData)
     {
+        $this->chackNotificationDataIsValid();
         $this->notificationData = $notificationData;
     }
 
@@ -31,9 +30,13 @@ class BaseNotification extends Notification implements ShouldQueue
      * Get the notification's delivery channels.
      *
      * @return array<int, string>
+     * @throws \Throwable
      */
     public function via($notifiable)
     {
+        throw_if(!is_array($this->notificationVia),
+            'Notification via must be an array' . ' at ' . __FILE__ . ' line ' . __LINE__);
+
         if (in_array('firebase', $this->notificationVia)) {
             $via[] = FcmChannel::class;
         }
@@ -45,6 +48,7 @@ class BaseNotification extends Notification implements ShouldQueue
             $via[] = 'database';
         }
         return $via ?? [];
+
     }
 
 
@@ -53,9 +57,13 @@ class BaseNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
+        throw_if(!isset(json_decode($this->notificationData['title'], true)[get_current_lang()]) ||
+            !isset(json_decode($this->notificationData['body'], true)[get_current_lang()]),
+            'body and title must be presented (MAIL)' . ' at ' . __FILE__ . ' line ' . __LINE__);
+
         $title = json_decode(data_get($this->notificationData, 'title'), true)[app()->getLocale()] ?? __('messages.responses.notification');
-        $body = json_decode(data_get($this->notificationData, 'body'), true)['data'] ?? [];
-        $body = is_array($body) ? $title : $body;
+        $body = json_decode(data_get($this->notificationData, 'body'), true)[app()->getLocale()] ?? [];
+
         return (new MailMessage())
             ->subject($title)
             ->line($body);
@@ -77,22 +85,40 @@ class BaseNotification extends Notification implements ShouldQueue
         }
 
         return [
-            'title' => json_decode($this->notificationData['title'], true) ?? '',
-            'body' => json_decode($this->notificationData['body'], true)['data'] ?? '',
-            'anotherData' => json_decode($this->notificationData['body'], true)['anotherData'] ?? '',
+            'title' => json_decode($this->notificationData['title'], true),
+            'body' => json_decode($this->notificationData['body'], true),
+            'id' => $this->notificationData['id'],
+            'type' => $this->notificationData['type'],
         ];
     }
 
 
     public function sendToSms(object $notifiable)
     {
-        # Note $notificationData must contain body
-        sendSMS($this->notificationData['body'], $notifiable->mobile);
+
+        throw_if(!isset(json_decode($this->notificationData['body'], true)[get_current_lang()]) || !$notifiable->mobile,
+            'body and notifiable mobile must be presented (SMS)' . ' at ' . __FILE__ . ' line ' . __LINE__);
+
+        sendSMS(
+            message: json_decode($this->notificationData['body'], true)[get_current_lang()] ?? '--',
+            mobile: $notifiable->mobile
+        );
     }
 
     public function sendToPusher(object $notifiable)
     {
         # Note $notificationData must contain title , body and topic attributes
         event(new NotificationEvent($this->notificationData));
+    }
+
+    private function chackNotificationDataIsValid()
+    {
+        throw_if(
+            !isset($notificationData['title'][get_current_lang()]) ||
+            !isset($notificationData['body'][get_current_lang()]) ||
+            !isset($notificationData['id']) ||
+            !isset($notificationData['type']),
+            'notification data not valid (title,body,id,type)' . ' at ' . __FILE__ . ' line ' . __LINE__);
+
     }
 }

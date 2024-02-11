@@ -10,11 +10,17 @@ class FCMChannel
     public function send($notifiable, Notification $notification)
     {
         $notificationData = $notification->toArray($notifiable);
+
+        throw_if(!isset($notificationData['title'][get_current_lang()]) ||
+            !isset($notificationData['body'][get_current_lang()]),
+            'body and title must be presented (FIREBASE)' . ' at ' . __FILE__ . ' line ' . __LINE__);
+
         (new SendFCM())
             ->sendNotification(
                 title: $notificationData['title'],
                 body: $notificationData['body'],
-                anotherData: $notificationData['anotherData'],
+                id: $notificationData['id'],
+                type: $notificationData['type'],
                 notifiable: $notifiable
             );
     }
