@@ -15,23 +15,17 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Notification;
 
-class RoleController extends Controller
+class RoleController extends BaseApiController
 {
     /**
      * RoleController constructor.
      * @param RoleContract $repository
      */
-//    public function __construct(RoleContract $repository)
-//    {
-//        parent::__construct($repository, RoleResource::class, 'role');
-//    }
-
-    public function index()
+    public function __construct(RoleContract $repository)
     {
-        return response()->json(NotificationResource::collection(User::find(1)->notifications));
-
-
+        parent::__construct($repository, RoleResource::class, 'role');
     }
+
     /**
      * @param RoleRequest $request
      * @return JsonResponse
