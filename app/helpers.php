@@ -405,10 +405,10 @@ if (!function_exists('setting')) {
     function setting($key, $value = null, $default = null)
     {
         if ($value) {
-            return data_get((new Setting())->{$key}, $value, $default);
+            return data_get(app_setting()->{$key}, $value, $default);
         }
 
-        return (new Setting())->{$key};
+        return (app_setting())->{$key};
     }
 }
 
@@ -478,3 +478,9 @@ if (!function_exists('prepareNotification')) {
     }
 }
 
+if (!function_exists('app_setting')) {
+    function app_setting()
+    {
+        return app('setting');
+    }
+}

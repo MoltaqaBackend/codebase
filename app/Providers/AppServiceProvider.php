@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Helpers\Setting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Response;
@@ -96,6 +97,9 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
         });
+
+        # setting helper class
+        $this->app->singleton('setting', Setting::class);
     }
 
     private function registerTelescope(): void
