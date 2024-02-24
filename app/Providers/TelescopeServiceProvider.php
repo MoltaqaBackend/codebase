@@ -14,28 +14,46 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     public function register(): void
     {
-        // Telescope::night();
+        if ($this->app->isProduction()) {
+            if (config('global.TELESCOPE_PRODUCTION', false)) {
+                $this->gate();
+            }
+        }
+//         Telescope::night();
 
         $this->hideSensitiveRequestDetails();
 
         Telescope::filter(function (IncomingEntry $entry) {
+
+            if ($this->app->isProduction()) {
+                if (config('global.TELESCOPE_PRODUCTION', false)) {
+                    return true;
+                }
+            }
+
             if ($this->app->environment('local') || $this->app->environment('staging')) {
                 return true;
             }
 
             return $entry->isReportableException() ||
-                   $entry->isFailedRequest() ||
-                   $entry->isFailedJob() ||
-                   $entry->isScheduledTask() ||
-                   $entry->hasMonitoredTag();
+                $entry->isFailedRequest() ||
+                $entry->isFailedJob() ||
+                $entry->isScheduledTask() ||
+                $entry->hasMonitoredTag();
         });
     }
 
-    /**
+/**
      * Prevent sensitive request details from being logged by Telescope.
      */
-    protected function hideSensitiveRequestDetails(): void
-    {
+protected function hideSensitiveRequestDetails(): void
+{
+    if ($this->app->isProduction()) {
+        if (config('global.TELESCOPE_PRODUCTION', false)) {
+            return;
+        }
+    }
+
         if ($this->app->environment('local') || $this->app->environment('staging')) {
             return;
         }
@@ -47,19 +65,44 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             'x-csrf-token',
             'x-xsrf-token',
         ]);
-    }
+}
 
-    /**
+/**
      * Register the Telescope gate.
      *
      * This gate determines who can access Telescope in non-local environments.
      */
-    protected function gate(): void
-    {
+protected function gate(): void
+{
+    if (config('global.TELESCOPE_PRODUCTION', false)) {
+        Gate::define('viewTelescope', function ($user) {
+            return true;
+        });
+    } else {
         Gate::define('viewTelescope', function ($user) {
             return in_array($user->email, [
                 "dev@moltaqa.net"
-            ]);
+                ]);
         });
     }
+}
+
+/**
+     * Configure the Telescope authorization services.
+     *
+     * @return void
+     */
+protected function authorization(): void
+{
+    $this->gate();
+    Telescope::auth(function ($request) {
+        if (config('global.TELESCOPE_PRODUCTION', false)) {
+            return $this->app->isProduction() ||
+                    Gate::check('viewTelescope', [$request->user()]);
+        }else{
+            return $this->app->environment('local') ||
+                    Gate::check('viewTelescope', [$request->user()]);
+        }
+    });
+}
 }

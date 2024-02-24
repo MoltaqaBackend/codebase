@@ -6,4 +6,5 @@ return [
     "login_require_otp" => env('AUTH_LOGIN_REQUIRE_OTP',false),
     "set_prefered_locale_home" => env('SET_PREFERED_LOCALE_ON_VISITING_HOME',true),
     "sms" => env('SMS','local'),
+    "TELESCOPE_PRODUCTION" => env("TELESCOPE_PRODUCTION",false),
 ];

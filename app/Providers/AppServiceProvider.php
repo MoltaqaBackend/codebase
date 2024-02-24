@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Response;
@@ -10,6 +11,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
+use Knuckles\Camel\Extraction\ExtractedEndpointData;
+use Knuckles\Scribe\Scribe;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +31,33 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        # Scribe config
+        # Matche laravel url schema
+        Scribe::normalizeEndpointUrlUsing(fn($url) => $url);
+        Scribe::beforeResponseCall(function (Request $request, ExtractedEndpointData $endpointData) {
+            # add api key to try it page
+            $apiKey = json_decode(Storage::disk('local')->get('api_key.json'), true);
+            $request->headers->set("Api-Key", $apiKey['api_key']);
+            # Uncomment if you would like to add token to try it page
+//            $token = json_decode(Storage::disk('local')->get('scribe_token.json'), true);
+//            if (is_null($token)) {
+//                $token['token'] = User::query()->first()->createToken('codebase', ['scribe'],now()->addDays(30))->plainTextToken;
+//                Storage::disk('local')->put('scribe_token.json', json_encode($token));
+//            }
+//            $token = $token['token'];
+//            $request->headers->set("Authorization", "Bearer $token");
+//            $request->server->set("HTTP_AUTHORIZATION", "Bearer $token");
+        });
+        # Eloquent Uncomment if you would like to run app in strict mode
+//        Model::shouldBeStrict();
+        # Telescope
+        if ($this->app->isProduction()) {
+            if (config('global.TELESCOPE_PRODUCTION', false)) {
+                $this->registerTelescope();
+            }
+        } else {
+            $this->registerTelescope();
+        }
 
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
@@ -64,5 +96,11 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
         });
+    }
+
+    private function registerTelescope(): void
+    {
+        $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+        $this->app->register(TelescopeServiceProvider::class);
     }
 }
