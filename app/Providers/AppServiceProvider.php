@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Classes\Scribe\FluentInterface;
 use App\Models\User;
 use App\Helpers\Setting;
 use Illuminate\Support\ServiceProvider;
@@ -33,24 +34,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         # Scribe config
+        $this->app->singleton('scribe_fluent', FluentInterface::class);
         # Matche laravel url schema
-        Scribe::normalizeEndpointUrlUsing(fn($url) => $url);
+        Scribe::normalizeEndpointUrlUsing(fn ($url) => $url);
         Scribe::beforeResponseCall(function (Request $request, ExtractedEndpointData $endpointData) {
             # add api key to try it page
             $apiKey = json_decode(Storage::disk('local')->get('api_key.json'), true);
             $request->headers->set("Api-Key", $apiKey['api_key']);
             # Uncomment if you would like to add token to try it page
-//            $token = json_decode(Storage::disk('local')->get('scribe_token.json'), true);
-//            if (is_null($token)) {
-//                $token['token'] = User::query()->first()->createToken('codebase', ['scribe'],now()->addDays(30))->plainTextToken;
-//                Storage::disk('local')->put('scribe_token.json', json_encode($token));
-//            }
-//            $token = $token['token'];
-//            $request->headers->set("Authorization", "Bearer $token");
-//            $request->server->set("HTTP_AUTHORIZATION", "Bearer $token");
+            //            $token = json_decode(Storage::disk('local')->get('scribe_token.json'), true);
+            //            if (is_null($token)) {
+            //                $token['token'] = User::query()->first()->createToken('codebase', ['scribe'],now()->addDays(30))->plainTextToken;
+            //                Storage::disk('local')->put('scribe_token.json', json_encode($token));
+            //            }
+            //            $token = $token['token'];
+            //            $request->headers->set("Authorization", "Bearer $token");
+            //            $request->server->set("HTTP_AUTHORIZATION", "Bearer $token");
         });
         # Eloquent Uncomment if you would like to run app in strict mode
-//        Model::shouldBeStrict();
+        //        Model::shouldBeStrict();
         # Telescope
         if ($this->app->isProduction()) {
             if (config('global.TELESCOPE_PRODUCTION', false)) {

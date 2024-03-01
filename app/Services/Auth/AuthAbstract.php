@@ -11,7 +11,6 @@ use App\Http\Requests\Api\Auth\SendOTPRequest;
 use App\Http\Requests\Api\Auth\VerifyOTPRequest;
 use App\Models\AuthenticatableOtp;
 use App\Traits\ApiResponseTrait;
-use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
@@ -42,9 +41,7 @@ abstract class AuthAbstract
         $user = $request->user();
 
         # TODO handel Cloud messaging
-
-        $accessToken = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($accessToken);
+        $accessToken = $user->createToken('snctumToken', $abilities ?? [], now()->addMonths(3))->plainTextToken;
 
         if ($this->loginRequireSendOTP) {
             tap($user)->update([
@@ -96,10 +93,8 @@ abstract class AuthAbstract
             }
 
             return $this->setStatusCode(422)->respondWithError(__("Code Not Matched"));
-
         }
         return $this->setStatusCode(422)->respondWithError(__("Code Expired"));
-
     }
 
     /**
@@ -120,7 +115,7 @@ abstract class AuthAbstract
         tap($user)->update([
             'email_verified_at' => NULL,
         ])->fresh();
-        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [])->plainTextToken : $user->currentAccessToken();
+        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [], now()->addHours(1))->plainTextToken : $user->currentAccessToken();
         return $this->handelOTPMethod($user);
     }
 
@@ -142,10 +137,8 @@ abstract class AuthAbstract
 
             $user->currentAccessToken()->delete();
 
-            $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-            $this->addTokenExpiration($user->access_token);
+            $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addMonths(3))->plainTextToken;
             return $this->respondWithArray(array("access_token" => $user->access_token));
-
         } else {
             return $this->setStatusCode(422)->respondWithError(__("Current Password Wrong"));
         }
@@ -166,8 +159,7 @@ abstract class AuthAbstract
         $user->password = $request->password;
         $user->save();
         $user->currentAccessToken()->delete();
-        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($user->access_token);
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addMonths(3))->plainTextToken;
         return $this->respondWithArray(array("access_token" => $user->access_token));
     }
 
@@ -310,29 +302,6 @@ abstract class AuthAbstract
         }
 
         return $user->hasRole(['super-admin', 'admin']) ? $this->handelMailOTP($user) : $this->handelMobileOTP($user);
-    }
-
-
-    protected function addTokenExpiration($accessToken): void
-    {
-        $expirationTime = Carbon::now()->addDays(90);
-        $personalAccessToken = PersonalAccessToken::findToken($accessToken);
-        $personalAccessToken->expires_at = $expirationTime;
-        $personalAccessToken->save();
-    }
-
-
-    protected function isTokenExpired($personalAccessToken)
-    {
-        $isExpired = false;
-        $expirationTime = $personalAccessToken->expires_at;
-        if ($expirationTime == null) {
-            $isExpired = true;
-        }
-        if ($expirationTime instanceof Carbon && $expirationTime->isPast()) {
-            $isExpired = true;
-        }
-        return $isExpired;
     }
 
     public function deleteAccount(Request $request)

@@ -21,16 +21,13 @@ class PermissionSeeder extends Seeder
         self::defaultPermissions(new RolesPermissionGenerator());
     }
 
-
     public static function defaultPermissions($rolesPermissionGenerator): void
     {
         # Admin Models
         $adminModels = [
             'users', 'roles', 'permissions', 'notifications', 'chats'
         ];
-        $clientModels = [
-
-        ];
+        $clientModels = [];
 
         # Default Methods
         $methods = ['index', 'create', 'edit', 'delete', 'show', 'activate'];
@@ -50,7 +47,5 @@ class PermissionSeeder extends Seeder
             'admin',
             additionalAdminPermissions: $additionalAdminPermissions
         );
-
-
     }
 }

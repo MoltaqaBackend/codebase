@@ -30,8 +30,7 @@ class AuthAdminService extends AuthAbstract
         $request->authenticate();
         $user = $request->user();
 
-        $accessToken = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($accessToken);
+        $accessToken = $user->createToken('snctumToken', $abilities ?? [], now()->addMonths(3))->plainTextToken;
 
         if ($this->loginRequireSendOTP) {
             tap($user)->update([
@@ -49,7 +48,7 @@ class AuthAdminService extends AuthAbstract
      *
      * @return JsonResponse
      */
-    public function forgetPassword(FormRequest $request, $abilities = null):JsonResponse
+    public function forgetPassword(FormRequest $request, $abilities = null): JsonResponse
     {
         if (!($request instanceof ForgetPasswordDashboardRequest)) {
             throw AuthException::wrongImplementation(['wrong_implementation' => [__('Wrong Implementation')]]);
@@ -60,9 +59,9 @@ class AuthAdminService extends AuthAbstract
             throw AuthException::userNotFound(['unauthorized' => [__("Unauthorized")]]);
         }
         tap($user)->update([
-             'email_verified_at' => NULL,
+            'email_verified_at' => NULL,
         ])->fresh();
-        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [])->plainTextToken : $user->currentAccessToken();
+        $user->access_token = is_null($user->currentAccessToken()) ? $user->createToken('snctumToken', $abilities ?? [],now()->addHours(1))->plainTextToken : $user->currentAccessToken();
         return $this->handelOTPMethod($user);
     }
 
@@ -77,9 +76,7 @@ class AuthAdminService extends AuthAbstract
         if (!$user->wasRecentlyCreated) {
             throw AuthException::userFailedRegistration('genration_failed**' . __("Failed Operation"));
         }
-        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($user->access_token);
-
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addHours(1))->plainTextToken;
         return $this->handelMailOTP($user);
     }
 }

@@ -9,11 +9,8 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
 class UserSeeder extends Seeder
 {
-
-
     /**
      * Run the database seeds.
      */
@@ -36,7 +33,7 @@ class UserSeeder extends Seeder
             ],
             'guard_name' => 'api',
             'slug' => Role::DEFAULT_ROLE_SUPER_ADMIN
-            ]);
+        ]);
         $adminRole->givePermissionTo($permissions);
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@admin.com'],
@@ -54,7 +51,6 @@ class UserSeeder extends Seeder
         $this->command->warn(123123);
         $this->command->line('------------------------------------------------------------------------------');
 
-
         # Client
         $clientRole = Role::create([
             'name' => [
@@ -63,7 +59,7 @@ class UserSeeder extends Seeder
             ],
             'guard_name' => 'api',
             'slug' => Role::DEFAULT_ROLE_CLIENT
-            ]);
+        ]);
         $clientRole->givePermissionTo($clientPermissions);
         $clientUser = User::firstOrCreate(
             ['email' => 'client@client.com'],
@@ -80,7 +76,5 @@ class UserSeeder extends Seeder
         $this->command->warn($clientUser->mobile);
         $this->command->warn(123123);
         $this->command->line('------------------------------------------------------------------------------');
-
     }
-
 }

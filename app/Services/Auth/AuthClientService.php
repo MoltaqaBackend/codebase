@@ -21,24 +21,23 @@ class AuthClientService extends AuthAbstract
     public function deleteAccount(Request $request): JsonResponse
     {
         $user = $request->user();
-        if(is_null($user)) {
+        if (is_null($user)) {
             throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]], 401);
         }
 
         DB::beginTransaction();
         $user->tokens()->delete();
-        if($user->delete()) {
+        if ($user->delete()) {
             DB::commit();
             return $this->respondWithSuccess(__('Deleted Successfully'));
         }
         DB::rollBack();
-
         return $this->setStatusCode(400)->respondWithError(__('Failed Operation'));
     }
 
     public function register(FormRequest $request, $abilities = null): User
     {
-        if(!($request instanceof RegisterClientRequest)) {
+        if (!($request instanceof RegisterClientRequest)) {
             throw AuthException::wrongImplementation(['wrong_implementation' => [__("Failed Operation")]]);
         }
 
@@ -46,13 +45,11 @@ class AuthClientService extends AuthAbstract
         $data['is_active'] = 1;
 
         $user = User::create($data);
-        if(!$user->wasRecentlyCreated) {
+        if (!$user->wasRecentlyCreated) {
             throw AuthException::userFailedRegistration(['genration_failed' => [__("Failed Operation")]]);
         }
 
-        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($user->access_token);
-
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addHours(1))->plainTextToken;
         return $this->handelMobileOTP($user);
     }
 }

@@ -37,7 +37,6 @@ if (!function_exists('activeGuard')) {
             if (auth()->guard($guard)->check()) {
                 return $guard;
             }
-
         }
         return null;
     }
@@ -459,13 +458,13 @@ if (!function_exists('prepareNotification')) {
         ]
     );
     */
-//    function prepareNotification($title, $body = null): array
-//    {
-//        return [
-//            'title' => json_encode(['en' => __($title, [], 'en'), 'ar' => __($title, [], 'ar'),]),
-//            'body' => json_encode($body ?? $title),
-//        ];
-//    }
+    //    function prepareNotification($title, $body = null): array
+    //    {
+    //        return [
+    //            'title' => json_encode(['en' => __($title, [], 'en'), 'ar' => __($title, [], 'ar'),]),
+    //            'body' => json_encode($body ?? $title),
+    //        ];
+    //    }
 
     function prepareNotification($title, $body, $id = null, $type = null): array
     {
@@ -482,5 +481,12 @@ if (!function_exists('app_setting')) {
     function app_setting()
     {
         return app('setting');
+    }
+}
+
+if (!function_exists('scribe_fluent')) {
+    function scribe_fluent()
+    {
+        return app('scribe_fluent');
     }
 }

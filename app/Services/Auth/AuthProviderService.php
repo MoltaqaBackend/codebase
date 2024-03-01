@@ -53,8 +53,7 @@ class AuthProviderService extends AuthAbstract
             throw AuthException::userFailedRegistration("generation_failed**" . __('Failed Operation'), 500);
         }
         DB::commit();
-        $user->access_token = $user->createToken('snctumToken', $abilities ?? [])->plainTextToken;
-        $this->addTokenExpiration($user->access_token);
+        $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addHours(1))->plainTextToken;
         return $this->handelMobileOTP($user);
     }
 }

@@ -12,12 +12,18 @@ class [modelName]Request extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([]);
+    }
 
     public function rules(): array
     {
-        return [
-
-        ];
+        $rules = [];
+        if($this->getMethod() == "POST")
+            return $this->postRules($rules);
+        elseif($this->getMethod() == "PUT" || $this->getMethod() == "PATCH" )
+            return $this->putPatchRules($rules);
     }
 
     public function attributes(): array
@@ -25,5 +31,20 @@ class [modelName]Request extends FormRequest
         return [
 
         ];
+    }
+
+    private function postRules(array $rules): array{
+        return $rules;
+    }
+
+    private function putPatchRules(array $rules): array{
+        return $rules;
+    }
+
+    public function bodyParameters(): array
+    {
+        return scribe_fluent()
+            ->parameter('is_active', 'boolean', '1')
+            ->toArray();
     }
 }

@@ -1,5 +1,6 @@
 *
 !public/
+!assets/
 !scribe_token.json
 !api_key.json
 !fixed_otp_emails.json
