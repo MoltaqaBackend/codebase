@@ -28,17 +28,14 @@ Route::prefix("auth")->group(function () {
         Route::delete('delete-account', [AuthController::class, 'deleteAccount']);
     });
     Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
     Route::post('register', [AuthController::class, 'register']);
-    Route::post('send-otp', [AuthController::class, 'sendOTP']);
     Route::post('forget-password', [AuthController::class, 'forgetPassword']);
     Route::post('validate-mobile-email', [AuthController::class, 'validateMobileorEmail']);
+    Route::post('send-otp', [AuthController::class, 'sendOTP']);
 });
 
 Route::middleware(["auth:api"])->group(function () {
 
     # Chat
     include __DIR__ . '/chat.php';
-
 });
-

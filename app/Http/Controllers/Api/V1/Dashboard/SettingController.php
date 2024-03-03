@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
+use App\Helpers\Setting;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\RoleRequest;
@@ -30,19 +31,21 @@ class SettingController extends BaseApiController
         cache()->clear();
         $setting = $this->repository->defaultUpdateOrCreate(
             [
-            'key' => $request->key,
-        ],
+                'key' => $request->key,
+            ],
             [
                 'key' => $request->key,
                 'name' => $request->key,
                 'value' => $request->validated('value')
             ]
         );
-        Cache::forget('settings');
-
+        # rebind the singleton instance
+        app()->singleton('setting', function ($app) {
+            Cache::forget('settings');
+            return new Setting();
+        });
         return $this->respondWithSuccess(__('setting added successfully'), [
             'setting' => new SettingResource($setting),
         ]);
     }
-
 }

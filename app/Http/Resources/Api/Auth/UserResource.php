@@ -15,7 +15,7 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            $this->mergeWhen($this->OTP != null, [
+            $this->mergeWhen($this->OTP != null && config('global.return_otp_in_response'), [
                 "verification_code" => $this->OTP ?? 0000,
             ]),
             $this->mergeWhen($this->access_token != null, [

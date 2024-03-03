@@ -22,19 +22,17 @@ Route::prefix("auth")->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
         Route::post('changpassword', [AuthController::class, 'changePassword']);
         Route::post('reset-password', [AuthController::class, 'resetPassword']);
-        Route::delete('delete-account',[AuthController::class,'deleteAccount']);
+        Route::delete('delete-account', [AuthController::class, 'deleteAccount']);
     });
-    Route::post('login',[AuthController::class,'login']);
-    Route::post('logout',[AuthController::class,'logout']);
-    Route::post('send-otp', [AuthController::class, 'sendOTP']);
+    Route::post('login', [AuthController::class, 'login']);
     Route::post('forget-password', [AuthController::class, 'forgetPassword']);
-
+    Route::post('send-otp', [AuthController::class, 'sendOTP']);
 });
 
 
 Route::middleware(["auth:api"])->group(function () {
     # Roles
-    Route::apiResource('roles',RoleController::class);
+    Route::apiResource('roles', RoleController::class);
 
     # Permission
     Route::get('permissions', PermissionController::class);
@@ -43,8 +41,8 @@ Route::middleware(["auth:api"])->group(function () {
     Route::apiResource('settings', SettingController::class);
 
     # Chat
-    include __DIR__.'/chat.php';
+    include __DIR__ . '/chat.php';
 
     # Notification
-    include __DIR__.'/notification.php';
+    include __DIR__ . '/notification.php';
 });

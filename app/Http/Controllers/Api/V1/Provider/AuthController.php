@@ -87,9 +87,9 @@ class AuthController extends Controller
     public function sendOTP(SendOTPRequest $request): JsonResponse
     {
         return $this->respondWithArray(
-            app()->isLocal() ? [
+            config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                    $this->authProviderService->sendOTP($request)->OTP
+                $this->authProviderService->sendOTP($request)->OTP
             ] : []
         );
     }
@@ -106,9 +106,9 @@ class AuthController extends Controller
     public function resendOTP(Request $request): JsonResponse
     {
         return $this->respondWithArray(
-            app()->isLocal() ? [
+            config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                    $this->authProviderService->resendOTP($request)->OTP
+                $this->authProviderService->resendOTP($request)->OTP
             ] : []
         );
     }
@@ -186,9 +186,9 @@ class AuthController extends Controller
     public function canChangeMobile(ChangeMobileRequest $request): JsonResponse
     {
         return $this->respondWithArray(
-            app()->isLocal() ? [
+            config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                    $this->authProviderService->canChangeMobile($request)->OTP
+                $this->authProviderService->canChangeMobile($request)->OTP
             ] : []
         );
     }
