@@ -341,9 +341,63 @@ if (!function_exists('uploadImage')) {
     {
         if ($file instanceof UploadedFile) {
             $model?->clearMediaCollection($name);
-
             return $model->addMedia($file)->toMediaCollection($name);
         }
+    }
+}
+
+if (!function_exists('uploadImageRequest')) {
+    function uploadImageRequest(string $collectionName, $reqeuestFileAttribute, ?Model $model)
+    {
+        $model?->clearMediaCollection($collectionName);
+        return $model->addMediaFromRequest($reqeuestFileAttribute)->preservingOriginal()->toMediaCollection($collectionName);
+    }
+}
+
+if (!function_exists('uploadImages')) {
+    function uploadImages(string $collectionName, string $reqeuestFileAttribute, ?Model $model)
+    {
+        $model?->clearMediaCollection($collectionName);
+        return $model->addMultipleMediaFromRequest(['' . $reqeuestFileAttribute])
+            ->each(function ($fileAdder) use ($collectionName) {
+                $fileAdder->preservingOriginal()->toMediaCollection($collectionName);
+            });
+    }
+}
+
+# Not Tested
+if (!function_exists('deleteMedia')) {
+    function deleteMedia(?Model $model, string $collectionName, mixed $mediaId = null)
+    {
+        if (is_null($mediaId)) {
+            $model->clearMediaCollection($collectionName);
+            $result = true;
+        } else {
+            if (is_array($mediaId)) {
+                $mediaCollection = $model->getMedia($collectionName);
+                $mediaItems = $mediaCollection->whereIn('id', $mediaId);
+                if ($mediaItems->isNotEmpty()) {
+                    foreach ($mediaItems as $mediaItem) {
+                        $mediaItem->delete();
+                        $mediaItem->deleteFile();
+                    }
+                    $result = true;
+                } else {
+                    $result = false;
+                }
+            } else {
+                $mediaCollection = $model->getMedia($collectionName);
+                $mediaItem = $mediaCollection->firstWhere('id', $mediaId);
+                if (!is_null($mediaItem)) {
+                    $mediaItem->delete();
+                    $mediaItem->deleteFile();
+                    $result = true;
+                } else {
+                    $result = false;
+                }
+            }
+        }
+        return $result;
     }
 }
 
