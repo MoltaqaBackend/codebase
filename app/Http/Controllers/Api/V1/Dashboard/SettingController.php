@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Helpers\Setting;
 use App\Http\Controllers\Api\BaseApiController;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\RoleRequest;
 use App\Http\Requests\Dashboard\SettingRequest;
 use App\Http\Resources\Api\Setting\SettingResource;
 use App\Repositories\Contracts\SettingContract;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
 
 class SettingController extends BaseApiController
 {
@@ -23,7 +20,7 @@ class SettingController extends BaseApiController
     }
 
     /**
-     * @param RoleRequest $request
+     * @param SettingRequest $request
      * @return JsonResponse
      */
     public function store(SettingRequest $request): JsonResponse
@@ -41,7 +38,7 @@ class SettingController extends BaseApiController
         );
         # rebind the singleton instance
         app()->singleton('setting', function ($app) {
-            Cache::forget('settings');
+            cache()->forget('settings');
             return new Setting();
         });
         return $this->respondWithSuccess(__('setting added successfully'), [

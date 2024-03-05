@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 use App\Models\Setting as SettingModel;
-use Illuminate\Support\Facades\Cache;
 
 class Setting
 {
@@ -12,12 +11,12 @@ class Setting
 
     public function __construct()
     {
-        if (Cache::has(self::CACHE_KEY)) {
-            $this->settings = Cache::get(self::CACHE_KEY);
-        } else {
-            $this->settings = SettingModel::all();
-            Cache::add(self::CACHE_KEY, $this->settings);
+        if (!cache()->has(self::CACHE_KEY)) {
+            $this->settings = cache()->rememberForever(self::CACHE_KEY, function(){
+                return SettingModel::all();
+            });
         }
+        $this->settings = cache()->get(self::CACHE_KEY);
     }
 
     public function __get($key)
