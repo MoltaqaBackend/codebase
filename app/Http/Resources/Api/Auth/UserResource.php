@@ -28,7 +28,7 @@ class UserResource extends JsonResource
                 "mobile" => $this->mobile ?? '',
                 "image" => $this->avatar ?? '',
                 "is_verified" => is_null($this->email_verified_at) ? false : true,
-                'roles' => implode(' ,', $this->getRoleNames()->toArray()),
+                'roles' => implode(' ,', $this->getRoleNamesArray()),
                 'roles_ids' => $this->getRoleIds(),
                 'role_id' => $this->getRoleIds()[0] ?? null,
                 'permissions' => $this->formatPermsForCASL()
@@ -41,10 +41,10 @@ class UserResource extends JsonResource
     {
         $output = [];
         foreach ($this->getAllPermissions() as $permission) {
-            $subject = $permission->model;
             $output[] = [
-                'action' => $permission->name,
-                'subject' => $subject,
+                'id' => $permission->id,
+                'action' => str_replace('-', ' ', $permission->slug),
+                'subject' => strtolower($permission->model),
             ];
         }
         return $output;
@@ -55,5 +55,12 @@ class UserResource extends JsonResource
         return $this->whenLoaded('roles', function () {
             return $this->roles->sortByDesc('id')->pluck('id')->toArray();
         });
+    }
+
+    public function getRoleNamesArray()
+    {
+        return $this->getRoleNames()->map(function ($role) {
+            return json_decode($role, true)[get_current_lang()];
+        })->toArray();
     }
 }
