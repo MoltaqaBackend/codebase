@@ -17,6 +17,7 @@ class PermissionResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'action' => str_replace('-', ' ', $this->slug),
             'subject' => strtolower($this->model),
         ];

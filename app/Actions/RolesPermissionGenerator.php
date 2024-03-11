@@ -52,15 +52,19 @@ class RolesPermissionGenerator
         if ($additionalAdminPermissions) {
             $parent = null;
             foreach ($additionalAdminPermissions as $additionalAdminPermission) {
+                $splitedData = explode(' ', $additionalAdminPermission);
+                $model = $splitedData[0];
+                $method = $splitedData[1];
                 $permissionMore = Permission::firstOrCreate([
                     'slug' => strtolower(Str::slug($additionalAdminPermission)),
                     'guard_name' => 'api',
                 ], [
                     'name' => [
-                        'ar' => trans('permissions.responses.' . $additionalAdminPermission, [], 'ar'),
+                        'ar' => trans('permissions.responses.' . $method, [], 'ar') . ' ' . trans('permissions.responses.' . $model, [], 'en'),
                         'en' => ucfirst(trans('permissions.responses.' . $model, [], 'en')) . ' ' . trans('permissions.responses.' . $method, [], 'en'),
                     ],
                     'slug' => strtolower(Str::slug($additionalAdminPermission)),
+                    'model' => $model,
                     'guard_name' => 'api',
                     'parent_id' => $parent,
                     'for_users' => $guard_name != 'admin' ? 1 : 0

@@ -31,7 +31,8 @@ class UserResource extends JsonResource
                 'roles' => implode(' ,', $this->getRoleNamesArray()),
                 'roles_ids' => $this->getRoleIds(),
                 'role_id' => $this->getRoleIds()[0] ?? null,
-                'permissions' => $this->formatPermsForCASL()
+                'permissions' => $this->formatPermsForCASL(),
+                'permissions_grouped' => $this->formatGroupedPermsForCASL()
             ],
         ];
     }
@@ -42,7 +43,8 @@ class UserResource extends JsonResource
         $output = [];
         foreach ($this->getAllPermissions() as $permission) {
             $output[] = [
-                'id' => $permission->id,
+                'id' => $this->id,
+                'name' => $permission->name,
                 'action' => str_replace('-', ' ', $permission->slug),
                 'subject' => strtolower($permission->model),
             ];
@@ -50,10 +52,30 @@ class UserResource extends JsonResource
         return $output;
     }
 
+    protected function formatGroupedPermsForCASL(): array
+    {
+        $output = [];
+        foreach ($this->getAllPermissions()->groupBy('model') as $key => $group) {
+            $temp = array();
+            foreach ($group as $permission) {
+                $temp[] = [
+                    'id' => $permission->id,
+                    'name' => $permission->name,
+                    'action' => str_replace('-', ' ', $permission->slug),
+                    'subject' => strtolower($permission->model),
+                ];
+            }
+            array_push($output, ['name' => strtolower($key), 'controls' => array_values($temp)]);
+        }
+        return $output;
+    }
+
     public function getRoleIds()
     {
         return $this->whenLoaded('roles', function () {
-            return $this->roles->sortByDesc('id')->pluck('id')->toArray();
+            return $this->roles->sortByDesc('id')->map(function ($role) {
+                return ['id' => $role->id, 'name' => json_decode($role->name, true)[get_current_lang()]];
+            })->collect();
         });
     }
 
