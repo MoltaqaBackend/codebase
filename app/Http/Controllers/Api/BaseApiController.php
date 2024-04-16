@@ -6,7 +6,6 @@ use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\BaseContract;
 use App\Traits\ApiResponseTrait;
-// use Illuminate\Support\Str;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class BaseApiController extends Controller
@@ -30,27 +29,16 @@ class BaseApiController extends Controller
     public function __construct(BaseContract $repository, mixed $modelResource, $model = null)
     {
          # All Letters must be small
-         if (!ctype_lower($model)) 
+         if (!ctype_lower($model))
             $model = strtolower($model);
-        
-        if (auth(activeGuard())->check() && !in_array(auth(activeGuard())->user()->type, [UserTypeEnum::ADMIN])) {
-            throw new UnauthorizedException(401, __('messages.responses.role_not_exists'));
-        } else {
+
+        if(auth(activeGuard())->check() && in_array(auth(activeGuard())->user()->type,
+                [UserTypeEnum::ADMIN,UserTypeEnum::PROVIDER,UserTypeEnum::EMPLOYEE])) {
             $this->middleware(['role_or_permission:' . $model . '-index|' . activeGuard()])->only(['__invoke', 'index']);
             $this->middleware(['role_or_permission:' . $model . '-edit|' . activeGuard()])->only('update');
             $this->middleware(['role_or_permission:' . $model . '-create|' . activeGuard()])->only('create');
             $this->middleware(['role_or_permission:' . $model . '-delete|' . activeGuard()])->only('destroy');
         }
-
-        // if (auth(activeGuard())->check() && auth(activeGuard())->user()->type == UserTypeEnum::CLIENT) {
-        //     if (!auth(activeGuard())->user()->hasAnyRole(['client']))
-        //         throw new UnauthorizedException(401, __('messages.responses.role_not_exists'));
-        // } else {
-        //     $this->middleware(['permission:' . Str::plural($model) . '-index|' . activeGuard()])->only(['__invoke', 'index']);
-        //     $this->middleware(['permission:' . Str::plural($model) . '-edit|' . activeGuard()])->only('update');
-        //     $this->middleware(['permission:' . Str::plural($model) . '-create|' . activeGuard()])->only('create');
-        //     $this->middleware(['permission:' . Str::plural($model) . '-delete|' . activeGuard()])->only('destroy');
-        // }
 
         $this->repository = $repository;
         $this->modelResource = $modelResource;
