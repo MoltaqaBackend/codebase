@@ -43,6 +43,7 @@ return [
     'digits_between' => 'يجب أن يحتوي الحقل :attribute بين :min و :max رقمًا/أرقام',
     'dimensions' => 'الـ :attribute يحتوي على أبعاد صورة غير صالحة.',
     'distinct' => 'للحقل :attribute قيمة مُكرّرة.',
+    'phone' => 'الحقل :attribute يجب ان يكون رقم هاتف صحيح',
     'doesnt_end_with' => 'الحقل :attribute يجب ألا ينتهي بواحدة من القيم التالية: :values.',
     'doesnt_start_with' => 'الحقل :attribute يجب ألا يبدأ بواحدة من القيم التالية: :values.',
     'email' => 'يجب أن يكون :attribute عنوان بريد إلكتروني صحيح البُنية',

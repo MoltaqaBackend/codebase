@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\ModelTrait;
 use App\Traits\Walletable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +28,7 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
     use HasRoles;
     use Walletable;
+    use ModelTrait;
 
     protected $guarded = ['avatar'];
 

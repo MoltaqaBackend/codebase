@@ -2,7 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Dashboard\{PermissionController, RoleController, AuthController, SettingController};
+use App\Http\Controllers\Api\V1\Dashboard\{PermissionController, RoleController, AuthController, SettingController, UserController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,6 +39,9 @@ Route::middleware(["auth:api"])->group(function () {
 
     # Setting
     Route::apiResource('settings', SettingController::class);
+
+    # Users
+    Route::apiResource('users', UserController::class);
 
     # Chat
     include __DIR__ . '/chat.php';

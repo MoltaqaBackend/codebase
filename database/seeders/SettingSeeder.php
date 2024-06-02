@@ -159,9 +159,9 @@ class SettingSeeder extends Seeder
             $setting->clearMediaCollection('contactSection');
         }
 
-        $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/mainSection.png'))->toMediaCollection('mainSection');
-        $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/aboutSection.png'))->toMediaCollection('aboutSection');
-        $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/contactSection.png'))->toMediaCollection('contactSection');
+        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/mainSection.png'))->toMediaCollection('mainSection');
+        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/aboutSection.png'))->toMediaCollection('aboutSection');
+        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/landing/contactSection.png'))->toMediaCollection('contactSection');
 
 
         Setting::query()
@@ -210,7 +210,7 @@ class SettingSeeder extends Seeder
             ]);
         if (!$setting->wasRecentlyCreated)
             $setting->clearMediaCollection('settingHeaderLogo');
-        $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/logo.png'))->toMediaCollection('settingHeaderLogo');
+        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/logo.png'))->toMediaCollection('settingHeaderLogo');
         $setting = Setting::query()
             ->updateOrCreate([
                 'key' => 'footer_logo',
@@ -221,7 +221,7 @@ class SettingSeeder extends Seeder
             ]);
         if (!$setting->wasRecentlyCreated)
             $setting->clearMediaCollection('settingFooterLogo');
-        $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/footerLogo.png'))->toMediaCollection('settingFooterLogo');
+        // $setting->addMediaFromUrl(\Illuminate\Support\Facades\URL::asset('assets/footerLogo.png'))->toMediaCollection('settingFooterLogo');
         # rebind the singleton instance
         app()->singleton('setting', function ($app) {
             cache()->forget('settings');
