@@ -45,6 +45,7 @@ if (!function_exists('activeGuard')) {
 if (!function_exists('get_current_lang')) {
     function get_current_lang()
     {
+        $lang = in_array(App::getLocale(), getLocales()) ? App::getLocale() : 'ar';
         return App::getLocale();
     }
 }
@@ -542,5 +543,12 @@ if (!function_exists('scribe_fluent')) {
     function scribe_fluent()
     {
         return app('scribe_fluent');
+    }
+}
+
+if (!function_exists('getTranslation')) {
+    function getTranslation($model, $filed, $lang)
+    {
+        return $model->getTranslations($filed)[$lang];
     }
 }

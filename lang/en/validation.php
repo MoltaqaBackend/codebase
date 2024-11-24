@@ -223,6 +223,7 @@ return [
         'rental_contract_date'=>'rental contract date',
         'commercialLicenseFile'=>'commercial license file',
         'rentalContractFile'=>'rental contract file',
+        'role_permissions'=>'permissions',
 
     ],
 

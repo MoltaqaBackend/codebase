@@ -2,117 +2,113 @@
 
 namespace App\Services;
 
-use App\Enum\UserTypeEnum;
-use App\Models\DeviceToken;
-use Carbon\Carbon;
+use Exception;
+use Google_Client;
+use GuzzleHttp\Client;
 
 class SendFCM
 {
-    public bool $shouldSendForAdmin = false;
-    public bool $shouldSendForUsers = false;
+    protected Client $client;
+    protected string $serverKey;
+    protected string $projectId;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct()
     {
+        $this->client = new Client();
+        $this->authenticate();
     }
 
-    public function sendForAdmin(bool $shouldSendForAdmin = false)
+    protected function authenticate(): void
     {
-        $this->shouldSendForAdmin = $shouldSendForAdmin;
-        return $this;
-    }
+        $credentialsFilePath = public_path('fcm.json');
 
-    public function sendForUsers(bool $shouldSendForUsers = false)
-    {
-        $this->shouldSendForUsers = $shouldSendForUsers;
-        return $this;
-    }
-
-    # Registration Id
-    public function registrationIds($fcmTokens = []): array
-    {
-        if ($fcmTokens) {
-            $tokens[] = $fcmTokens;
+        if (!file_exists($credentialsFilePath)) {
+            throw new Exception('Service account credentials file not found');
         }
 
-        if ($this->shouldSendForAdmin) {
-            $tokens[] = DeviceToken::query()->whereHas('tokenable', function ($q) {
-                $q->whereHas('roles', function ($q) {
-                    $q->whereIn("name", ["admin"]);
-                })
-                    ->orWhereIn("type", [UserTypeEnum::EMPLOYEE, UserTypeEnum::ADMIN]);
-            })->pluck('device_token')->toArray();
+        $credentials = json_decode(file_get_contents($credentialsFilePath), true);
+        $this->projectId = $credentials['project_id'];
+
+
+        $client = new Google_Client();
+        $client->setAuthConfig($credentialsFilePath);
+        $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+
+        # Ensure the credentials are loaded
+        $client->useApplicationDefaultCredentials();
+
+        # Fetch the access token
+        try {
+
+            $token = $client->fetchAccessTokenWithAssertion();
+
+            if (isset($token['error'])) {
+                throw new Exception('Error fetching access token: ' . $token['error_description']);
+            }
+
+            if (!empty($token) && isset($token['access_token'])) {
+                $this->serverKey = $token['access_token'];
+            } else {
+                throw new Exception('Failed to obtain access token');
+            }
+        } catch (Exception $e) {
+            # Handle the exception
+            throw new Exception('Error authenticating with Firebase: ' . $e->getMessage());
         }
-
-        if ($this->shouldSendForUsers) {
-            $tokens[] = DeviceToken::query()->whereHas('tokenable', function ($q) {
-                $q->whereDoesntHave('roles')
-                    ->orWhere("type", UserTypeEnum::EMPLOYEE);
-            })->pluck('device_token')->toArray();
-        }
-
-        return $tokens ?? [];
-    }
-
-    # Notification Action
-    # Ex >> ['home_screen' => true]
-    public function withAction(array $action): array
-    {
-        return $action;
     }
 
     public function sendNotification(
+        $notifiable,
         $title,
         $body,
         $id = null,
-        $type = null,
-        $notifiable = null
-    ): void
+        $type = null
+    )
     {
-        $body = [
-            'title' => $title[get_current_lang()],
-            'body' => $body[get_current_lang()],
-            'id' => $id,
-            'type' => $type,
-            'created_at' => (string)Carbon::now(),
-        ];
+        # Get title and body according to user language
+        $title = $title[$notifiable->lang] ?: ($title?->ar ?? 'title');
+        $body = is_array($body)
+            ? ($body[$notifiable->lang] ?? $body->ar ?? 'body')
+            : (json_decode($body, true)[$notifiable->lang] ?? $body?->ar ?? 'body');
 
-        if ($notifiable) {
-            $fcmTokens = $notifiable->deviceTokens?->pluck('device_token')->toArray();
+        $deviceToken = $notifiable->deviceTokens->first()?->device_token;
+        if (!$deviceToken) {
+            return false;
         }
+
+        $url = 'https://fcm.googleapis.com/v1/projects/' . $this->projectId . '/messages:send';
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->serverKey,
+            'Content-Type' => 'application/json; charset=UTF-8',
+        ];
 
         $data = [
-            'registration_ids' => collect($this->registrationIds($fcmTokens ?? []))->flatten()->unique()->toArray(),
-            'data' => $body,
-            'notification' => $body,
+            'message' => [
+                'token' => $deviceToken,
+                'notification' => [
+                    'title' => $title,
+                    'body' => $body,
+                ],
+                'data' => [
+                    'id' => $id,
+                    'type' => $type,
+                ]
+            ],
         ];
 
-        $this->CURLCalling($data);
-    }
+        try {
+            $response = $this->client->post($url, [
+                'headers' => $headers,
+                'json' => $data,
+            ]);
 
-
-    public function CURLCalling($data): int
-    {
-        $dataString = json_encode($data);
-        $headers = [
-            'Authorization: key=' . config('app.fcm_server_key'),
-            'Content-Type: application/json',
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-        if ($response === false) {
-            $result = 0;
-        } else {
-            $result = 1;
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            return false;
         }
-        return $result;
     }
-
 }

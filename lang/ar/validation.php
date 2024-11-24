@@ -335,6 +335,7 @@ return [
         'rentalContractFile'=>'ملف عقد الإيجار',
         'about_ar'=> 'عن المتجر بالعربيه',
         'about_en'=> 'عن المتجر بالانجليزيه',
+        'role_permissions'=> 'الصلاحيات',
     ],
     'validation' => [
         'auction_link_message'=>'أدخل رابط البث المباشر علي اليوتيوب',

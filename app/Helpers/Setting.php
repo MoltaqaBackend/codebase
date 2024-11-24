@@ -7,7 +7,7 @@ use App\Models\Setting as SettingModel;
 class Setting
 {
     public const CACHE_KEY = 'settings';
-    protected $settings;
+    protected mixed $settings;
 
     public function __construct()
     {

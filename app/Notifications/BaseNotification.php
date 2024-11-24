@@ -19,11 +19,12 @@ class BaseNotification extends Notification implements ShouldQueue
 
     /**
      * Create a new notification instance.
+     * @throws \Throwable
      */
     public function __construct($notificationData)
     {
         $this->notificationData = $notificationData;
-        $this->chackNotificationDataIsValid();
+        $this->checkNotificationDataIsValid();
     }
 
     /**
@@ -54,6 +55,7 @@ class BaseNotification extends Notification implements ShouldQueue
 
     /**
      * Get the mail representation of the notification.
+     * @throws \Throwable
      */
     public function toMail(object $notifiable): MailMessage
     {
@@ -73,6 +75,7 @@ class BaseNotification extends Notification implements ShouldQueue
      * Get the array representation of the notification.
      *
      * @return array<string, mixed>
+     * @throws \Throwable
      */
     public function toArray(object $notifiable): array
     {
@@ -80,19 +83,18 @@ class BaseNotification extends Notification implements ShouldQueue
             $this->sendToSms($notifiable);
         }
 
-        if (in_array('pusher', $this->notificationVia)) {
-            $this->sendToPusher($notifiable);
-        }
-
         return [
             'title' => json_decode($this->notificationData['title'], true),
             'body' => json_decode($this->notificationData['body'], true),
-            'id' => $this->notificationData['id'],
-            'type' => $this->notificationData['type'],
+            'id' => $this->notificationData['id'] ?? null,
+            'type' => $this->notificationData['type'] ?? null,
         ];
     }
 
 
+    /**
+     * @throws \Throwable
+     */
     public function sendToSms(object $notifiable)
     {
 
@@ -105,19 +107,15 @@ class BaseNotification extends Notification implements ShouldQueue
         );
     }
 
-    public function sendToPusher(object $notifiable)
-    {
-        # Note $notificationData must contain title , body and topic attributes
-        event(new NotificationEvent($this->notificationData));
-    }
 
-    private function chackNotificationDataIsValid()
+    /**
+     * @throws \Throwable
+     */
+    private function checkNotificationDataIsValid(): void
     {
         throw_if(
-            !isset(json_decode($this->notificationData['title'],true)[get_current_lang()]) ||
-            !isset(json_decode($this->notificationData['body'],true)[get_current_lang()]) ||
-            !array_key_exists('id',$this->notificationData) ||
-            !isset($this->notificationData['type']),
+            !isset(json_decode($this->notificationData['title'], true)[get_current_lang()])
+            || !isset(json_decode($this->notificationData['body'], true)[get_current_lang()]),
             'notification data not valid (title,body,id,type)' . ' at ' . __FILE__ . ' line ' . __LINE__);
 
     }

@@ -6,7 +6,6 @@ use App\Enum\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\BaseContract;
 use App\Traits\ApiResponseTrait;
-use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class BaseApiController extends Controller
 {
@@ -28,22 +27,24 @@ class BaseApiController extends Controller
      */
     public function __construct(BaseContract $repository, mixed $modelResource, $model = null)
     {
-         # All Letters must be small
-         if (!ctype_lower($model))
+        # All Letters must be small
+        if (!ctype_lower($model))
             $model = strtolower($model);
 
-        if(auth(activeGuard())->check() && in_array(auth(activeGuard())->user()->type,
-                [UserTypeEnum::ADMIN,UserTypeEnum::PROVIDER,UserTypeEnum::EMPLOYEE])) {
-            $this->middleware(['role_or_permission:' . $model . '-index|' . activeGuard()])->only(['__invoke', 'index']);
-            $this->middleware(['role_or_permission:' . $model . '-edit|' . activeGuard()])->only('update');
-            $this->middleware(['role_or_permission:' . $model . '-create|' . activeGuard()])->only('create');
-            $this->middleware(['role_or_permission:' . $model . '-delete|' . activeGuard()])->only('destroy');
+        if (
+            auth('api')->check()
+            && in_array(auth('api')->user()->type, [UserTypeEnum::ADMIN, UserTypeEnum::PROVIDER, UserTypeEnum::EMPLOYEE])
+        ) {
+            $this->middleware(['permission:' . $model . '-index'])->only(['__invoke', 'index']);
+            $this->middleware(['permission:' . $model . '-edit'])->only('update');
+            $this->middleware(['permission:' . $model . '-create'])->only('create');
+            $this->middleware(['permission:' . $model . '-delete'])->only('destroy');
         }
 
         $this->repository = $repository;
         $this->modelResource = $modelResource;
 
-        // Include relations data
+        # Include relations data
         if (request()->has('loadRelations')) {
             $this->includeRelations(request('loadRelations'));
         }

@@ -57,7 +57,6 @@ interface BaseContract
      */
     public function remove(Model $model): mixed;
 
-    public function canRemove(Model $model);
 
     /**
      * @param int $id

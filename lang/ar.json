@@ -1322,5 +1322,7 @@
     "wheres_your_team": "أين فريقك؟",
     "you_have_been_invited_to_join_team": "لقد تمت دعوتك للإنضمام إلى فريق :teamName!",
     "you_have_x_invitations_remaining": "لديك حاليا :count دعوة/دعوات متبقية.",
-    "you_have_x_teams_remaining": "لديك حاليا :teamCount فرق متبقية."
+    "you_have_x_teams_remaining": "لديك حاليا :teamCount فرق متبقية.",
+    "cannot delete role because it related to users": "لا يمكن حذف الدور لأنه مرتبط بمستخدمين",
+    "role deleted successfully": "تم حذف الدور بنجاح"
 }

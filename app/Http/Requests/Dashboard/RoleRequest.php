@@ -30,6 +30,7 @@ class RoleRequest extends FormRequest
                 'max:250',
                 new RoleBodyRule()
             ],
+            'role_permissions' => ['required','array'],
         ];
     }
 }

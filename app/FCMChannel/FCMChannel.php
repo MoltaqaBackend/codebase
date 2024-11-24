@@ -7,6 +7,9 @@ use Illuminate\Notifications\Notification;
 
 class FCMChannel
 {
+    /**
+     * @throws \Throwable
+     */
     public function send($notifiable, Notification $notification)
     {
         $notificationData = $notification->toArray($notifiable);
@@ -17,11 +20,11 @@ class FCMChannel
 
         (new SendFCM())
             ->sendNotification(
+                notifiable: $notifiable,
                 title: $notificationData['title'],
                 body: $notificationData['body'],
                 id: $notificationData['id'],
-                type: $notificationData['type'],
-                notifiable: $notifiable
+                type: $notificationData['type']
             );
     }
 }

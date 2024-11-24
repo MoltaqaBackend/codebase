@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Api\BaseApiController;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\RoleRequest;
 use App\Http\Resources\Api\RoleResource;
-use App\Http\Resources\Api\V1\Client\NotificationResource;
 use App\Models\Role;
-use App\Models\User;
-use App\Notifications\ClientNotification;
 use App\Repositories\Contracts\RoleContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Notification;
 
 class RoleController extends BaseApiController
 {
@@ -34,6 +29,7 @@ class RoleController extends BaseApiController
     {
         $role = $this->repository->create([
             'name' => $request['name'],
+            'slug' => $request['name']['en'] ?? null,
         ]);
         $requestPermissions = $request['role_permissions'] ? array_filter(Arr::flatten(array_values($request['role_permissions']))) : [];
         $role->syncPermissions($requestPermissions);
@@ -95,7 +91,10 @@ class RoleController extends BaseApiController
      */
     public function destroy(Role $role): JsonResponse
     {
-        $this->repository->remove($role);
-        return $this->respondWithSuccess(trans('messages.responses.deleted'));
+        $flag = $this->repository->remove($role);
+        if (!$flag) {
+            return $this->respondWithError(__('cannot delete role because it related to users'));
+        }
+        return $this->respondWithSuccess(__('role deleted successfully'));
     }
 }

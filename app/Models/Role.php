@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\ModelTrait;
 use Spatie\Translatable\HasTranslations;
 
-class Role extends \Spatie\Permission\Models\Role
+class   Role extends \Spatie\Permission\Models\Role
 {
     use ModelTrait;
 

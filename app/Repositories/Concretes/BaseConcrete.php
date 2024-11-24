@@ -194,11 +194,7 @@ abstract class BaseConcrete implements BaseContract
         // Check if has relations
         foreach ($model->getDefinedRelations() as $relation) {
             if ($model->$relation()->count()) {
-                return response()->json([
-                    'status' => 400,
-                    'error' => __("messages.responses.can_not_delete"),
-                    'message' => __("messages.responses.can_not_delete"),
-                ], 400);
+                return false;
             }
         }
         $this->propertyLogActivity(
@@ -208,17 +204,6 @@ abstract class BaseConcrete implements BaseContract
             ['action' => 'Removing', 'module' => $this->modelName]
         );
         return $model->delete();
-    }
-
-    public function canRemove(Model $model): bool
-    {
-        // Check if model has relations
-        foreach ($model->getDefinedRelations() as $relation) {
-            if ($model->$relation()->count()) {
-                return false;
-            }
-        }
-        return true;
     }
 
 
@@ -321,15 +306,6 @@ abstract class BaseConcrete implements BaseContract
     public function decrement(Model $model, $column, $value): void
     {
         $model->decrement($column, $value);
-    }
-
-    /**
-     * @param $column
-     * @return mixed
-     */
-    public function sum($column): mixed
-    {
-        return $this->aggregate('sum', $column);
     }
 
     /**
@@ -522,44 +498,6 @@ abstract class BaseConcrete implements BaseContract
         );
     }
 
-    /**
-     * @param array $filters
-     * @param array $relations
-     * @param bool $applyOrder
-     * @param bool $page
-     * @param int $limit
-     * @param string $orderBy
-     * @param string $orderDir
-     * @param array $conditions
-     *
-     * @return mixed
-     */
-    public function searchWithTrashed(
-        array  $filters = [],
-        array  $relations = [],
-        bool   $applyOrder = true,
-        bool   $page = true,
-        int    $limit = self::LIMIT,
-        string $orderBy = self::ORDER_BY,
-        string $orderDir = self::ORDER_DIR,
-        array  $conditions = [],
-    ): mixed
-    {
-        $query = $this->baseSearch(
-            query: $this->query->withTrashed(),
-            filters: $filters,
-            relations: $relations,
-            conditions: $conditions,
-        );
-        return $this->getQueryResult(
-            query: $query,
-            applyOrder: $applyOrder,
-            page: $page,
-            limit: $limit,
-            orderBy: $orderBy,
-            orderDir: $orderDir
-        );
-    }
 
     /**
      * @param $query

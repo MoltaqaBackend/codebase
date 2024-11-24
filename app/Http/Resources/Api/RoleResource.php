@@ -18,40 +18,28 @@ class RoleResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            "name_ar" => getTranslation($this, 'name', 'ar'),
+            "name_en" => getTranslation($this, 'name', 'en'),
             'slug' => $this->slug,
-            'is_active' => $this->is_active,
             'created_at' => $this->created_at?->translatedFormat('Y-m-d H:i a'),
-            'permissions' => $this->permissions->isNotEmpty() ? PermissionResource::collection($this->permissions) : [],
-            'permissions_grouped' => $this->permissions->isNotEmpty() ? $this->groupedPermissionsNames() : (object)null,
-            // 'permissions_ids' => $this->permissions->isNotEmpty() ? $this->permissionsIds() : (object)null,
-            // 'permissions_names' => $this->permissions->isNotEmpty() ? $this->permissionsNames() : (object)null,
+            'permissions' => $this->permissions->isNotEmpty() ? $this->groupedPermissions() : (object)null,
         ];
     }
 
-    private function permissionsIds()
+    private function groupedPermissions()
     {
-        return $this->permissions->groupBy('model')->map(function ($model, $key) {
-            return $model->pluck('id');
-        })->collect();
-    }
+        return $this->permissions->groupBy('model')->map(function ($controls, $key) {
+            return [
+                'name' => __('permissions.responses.' . $key),
+                'controls' => $controls->map(function ($control) {
+                    return [
+                        "name" => $control->name,
+                        "key" => explode(" ", $control->name)[0],
+                        "id" => $control->id,
+                    ];
+                })->all(),
+            ];
+        })->values();
 
-    private function permissionsNames()
-    {
-        return $this->permissions->map(function ($model, $key) {
-            return str_replace('-', ' ', $model->slug);
-        })->collect();
-    }
-
-    private function groupedPermissionsNames()
-    {
-        $output = [];
-        foreach ($this->permissions->groupBy('model') as $key => $group) {
-            $temp = array();
-            foreach ($group as $permission) {
-                $temp[] = new PermissionResource($permission);
-            }
-            array_push($output, ['name' => strtolower($key), 'controls' => array_values($temp)]);
-        }
-        return $output;
     }
 }
