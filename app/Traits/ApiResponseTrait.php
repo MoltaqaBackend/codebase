@@ -29,7 +29,13 @@ trait ApiResponseTrait
      */
     protected function respondWithArray($data, array $headers = []): JsonResponse
     {
-        return response()->json($data, $data['status'] ?? 200, $headers);
+        $response = [
+            'status' => $data['status'] ?? 200,
+            'message' => !empty($data['message']) ? $data['message'] : '--',
+            'data' => !empty($data['data']) ? $data['data'] : new \stdClass(),
+            'errors' => !empty($data['errors']) ? $data['errors'] : new \stdClass(),
+        ];
+        return response()->json($response, $data['status'] ?? 200, $headers);
     }
 
     /**
@@ -41,6 +47,7 @@ trait ApiResponseTrait
     {
         return $this->statusCode ?: 200;
     }
+
     /**
      * respondWithSuccess() used to return success message
      *
@@ -74,52 +81,32 @@ trait ApiResponseTrait
     protected function respondWithModelData($model, int $statusCode = null, array $headers = []): mixed
     {
         $statusCode = $statusCode ?? 200;
-        $resource = new $this->modelResource($model->load($this->relations)); // ???
         return $this->setStatusCode($statusCode)->respond($model, $headers);
     }
 
-    /**
-     * respondWithError() used to return error message
-     *
-     * @param $message
-     * @return JsonResponse
-     */
-    protected function respondWithError($message): JsonResponse
+    protected function respondWithError($message, $errors = []): JsonResponse
     {
-        if ($this->statusCode === 200) {
-            trigger_error(
-                "You better have a really good reason for error on a 200...",
-                E_USER_WARNING
-            );
-        }
-        return $this->respondWithErrors($message, $this->statusCode, [], $message);
+        return $this->respondWithErrors($message, $this->statusCode, $errors, $message);
     }
 
-    /**
-     * respondWithErrors()
-     *
-     * @param string $errors
-     * @param null $statusCode
-     * @param array $data
-     * @param null $message
-     * @return JsonResponse
-     */
     protected function respondWithErrors(
         string $errors = 'messages.error',
-        $statusCode = null,
+               $statusCode = null,
         array  $data = [],
-        $message = null
-    ): JsonResponse {
+               $message = null
+    ): JsonResponse
+    {
         $statusCode = !empty($statusCode) ? $statusCode : 400;
         if (is_string($errors)) {
             $errors = __($errors);
         }
         $response = ['status' => $statusCode, 'message' => $message, 'errors' => ['message' => [$errors]]];
+
         if (!empty($message)) {
             $response['message'] = $message;
         }
         if (!empty($data)) {
-            $response['data'] = $data;
+            $response['errors'] = $data;
         }
         return $this->setStatusCode($statusCode)->respondWithArray($response);
     }
@@ -135,18 +122,7 @@ trait ApiResponseTrait
         return $result ? $this->respondWithSuccess() : $this->errorUnknown();
     }
 
-    /**
-     * **************************************************************************
-     *                           Response Status Helpers
-     * **************************************************************************
-     */
 
-    /**
-     * errorWrongArgs() Generates a Response with a 400 HTTP header and a given message.
-     *
-     * @param null $message
-     * @return JsonResponse
-     */
     public function errorWrongArgs($message = null): JsonResponse
     {
         if (empty($message)) {
@@ -155,12 +131,7 @@ trait ApiResponseTrait
         return $this->setStatusCode(400)->respondWithError($message);
     }
 
-    /**
-     * errorUnauthorized() Generates a Response with a 401 HTTP header and a given message.
-     *
-     * @param null $message
-     * @return JsonResponse
-     */
+
     public function errorUnauthorized($message = null): JsonResponse
     {
         if (empty($message)) {
@@ -169,12 +140,7 @@ trait ApiResponseTrait
         return $this->respondWithErrors($message, 401);
     }
 
-    /**
-     * errorForbidden() Generates a Response with a 403 HTTP header and a given message.
-     *
-     * @param null $message
-     * @return JsonResponse
-     */
+
     public function errorForbidden($message = null): JsonResponse
     {
         if (empty($message)) {
@@ -183,12 +149,7 @@ trait ApiResponseTrait
         return $this->setStatusCode(403)->respondWithError($message);
     }
 
-    /**
-     * errorNotFound() Generates a Response with a 404 HTTP header and a given message.
-     *
-     * @param null $message
-     * @return JsonResponse
-     */
+
     public function errorNotFound($message = null): JsonResponse
     {
         if (empty($message)) {
@@ -197,12 +158,7 @@ trait ApiResponseTrait
         return $this->setStatusCode(404)->respondWithError($message);
     }
 
-    /**
-     * errorInternalError() Generates a Response with a 500 HTTP header and a given message.
-     *
-     * @param null $message
-     * @return JsonResponse
-     */
+
     public function errorInternalError($message = null): JsonResponse
     {
         if (empty($message)) {
@@ -211,12 +167,7 @@ trait ApiResponseTrait
         return $this->setStatusCode(500)->respondWithError($message);
     }
 
-    /**
-     * errorUnknown() Generates a Response with a 500 HTTP header and a given message.
-     *
-     * @param string $message
-     * @return JsonResponse
-     */
+
     public function errorUnknown(string $message = 'dashboard.unknown_error'): JsonResponse
     {
         if (empty($message)) {
@@ -225,13 +176,7 @@ trait ApiResponseTrait
         return $this->setStatusCode(500)->respondWithError($message);
     }
 
-    /**
-     * base json response
-     *
-     * @param $data
-     * @param int $statusCode
-     * @return JsonResponse
-     */
+
     public function respondWithJson($data, int $statusCode = 200): JsonResponse
     {
         return response()->json($data, $statusCode);
@@ -240,11 +185,14 @@ trait ApiResponseTrait
 
     protected function respond($resources, array $headers = []): mixed
     {
-        return $resources
-            ->additional(['status' => $this->getStatusCode()])
-            ->response()
-            ->setStatusCode($this->getStatusCode())
-            ->withHeaders($headers);
+        $response = [
+            'status' => $this->getStatusCode() ?? 200,
+            'message' => !empty($data['message']) ? $data['message'] : '--',
+            'data' => $resources
+                ->additional(['status' => $this->getStatusCode()]),
+            'errors' => !empty($data['errors']) ? $data['errors'] : new \stdClass(),
+        ];
+        return response()->json($response, $this->getStatusCode(), $headers);
     }
 
 

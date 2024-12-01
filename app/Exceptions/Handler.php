@@ -75,9 +75,8 @@ class Handler extends ExceptionHandler
 
             if ($exception instanceof ValidationException) {
                 $errors = $exception->errors();
-                dd($errors);
                 $message = is_array($exception->getMessage()) ? $exception->getMessage()[0] : $exception->getMessage();
-                return $this->setStatusCode(422)->respondWithError($message);
+                return $this->setStatusCode(422)->respondWithError($message, $errors);
             }
         }
         return parent::render($request, $exception);

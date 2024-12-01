@@ -106,11 +106,15 @@ class BaseApiController extends Controller
      */
     protected function respond($resources, array $headers = []): mixed
     {
-        return $resources
-            ->additional(['status' => $this->getStatusCode()])
-            ->response()
-            ->setStatusCode($this->getStatusCode())
-            ->withHeaders($headers);
+        $response = [
+            'status' => $this->getStatusCode() ?? 200,
+            'message' => !empty($data['message']) ? $data['message'] : '--',
+            'data' => $resources
+                ->additional(['status' => $this->getStatusCode()])
+                ->response()->getData(true),
+            'errors' => !empty($data['errors']) ? $data['errors'] : new \stdClass(),
+        ];
+        return response()->json($response, $this->getStatusCode(), $headers);
     }
 
     /**
