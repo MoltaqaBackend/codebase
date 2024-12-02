@@ -67,7 +67,7 @@ class AuthController extends Controller
         return $this->respondWithArray(
             config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                $this->authAdminService->sendOTP($request)->OTP
+                $this->authAdminService->sendOTP($request)
             ] : []
         );
     }
@@ -86,7 +86,7 @@ class AuthController extends Controller
         return $this->respondWithArray(
             config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                $this->authAdminService->resendOTP($request)->OTP
+                $this->authAdminService->resendOTP($request)
             ] : []
         );
     }

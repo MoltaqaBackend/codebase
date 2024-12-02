@@ -16,20 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("auth")->group(function () {
     Route::middleware(["auth:api"])->group(function () {
-        Route::post('resend-otp', [AuthController::class, 'resendOTP']);
-        Route::post('verify-otp', [AuthController::class, 'verifyOTP']);
-        Route::post('logout', [AuthController::class, 'logout']);
-        Route::get('profile', [AuthController::class, 'profile']);
-        Route::post('can-change-mobile', [AuthController::class, 'canChangeMobile']);
-        Route::post('change-mobile', [AuthController::class, 'changeMobile']);
-        Route::post('chang-password', [AuthController::class, 'changePassword']);
+        Route::post('resend-otp', [AuthController::class, 'resendOTP']); #
+        Route::post('verify-otp', [AuthController::class, 'verifyOTP']); #
+        Route::post('logout', [AuthController::class, 'logout']); #
+        Route::get('profile', [AuthController::class, 'profile']); #
+        Route::post('change-mobile', [AuthController::class, 'changeMobile']); #
+        Route::post('chang-password', [AuthController::class, 'changePassword']); #
         Route::post('reset-password', [AuthController::class, 'resetPassword']);
         Route::delete('delete-account', [AuthController::class, 'deleteAccount']);
     });
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']); #
+    Route::post('register', [AuthController::class, 'register']); #
     Route::post('forget-password', [AuthController::class, 'forgetPassword']);
-    Route::post('validate-mobile-email', [AuthController::class, 'validateMobileorEmail']);
     Route::post('send-otp', [AuthController::class, 'sendOTP']);
 });
 

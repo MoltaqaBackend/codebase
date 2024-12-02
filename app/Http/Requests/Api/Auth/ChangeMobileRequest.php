@@ -27,7 +27,7 @@ class ChangeMobileRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ['required', "unique:users,mobile,".optional(request()->user()->id).',id'],
+            'mobile' => ['required', "unique:users,mobile,".request()->user()?->id.',id'],
         ];
     }
 

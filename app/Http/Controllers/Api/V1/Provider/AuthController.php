@@ -89,7 +89,7 @@ class AuthController extends Controller
         return $this->respondWithArray(
             config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                $this->authProviderService->sendOTP($request)->OTP
+                $this->authProviderService->sendOTP($request)
             ] : []
         );
     }
@@ -108,7 +108,7 @@ class AuthController extends Controller
         return $this->respondWithArray(
             config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                $this->authProviderService->resendOTP($request)->OTP
+                $this->authProviderService->resendOTP($request)
             ] : []
         );
     }
@@ -188,7 +188,7 @@ class AuthController extends Controller
         return $this->respondWithArray(
             config('global.return_otp_in_response') ? [
                 "verification_code" =>
-                $this->authProviderService->canChangeMobile($request)->OTP
+                $this->authProviderService->canChangeMobile($request)
             ] : []
         );
     }
@@ -211,19 +211,6 @@ class AuthController extends Controller
         );
     }
 
-    /**
-     * validate email and mobile.
-     *
-     * an API which Offers a mean to Validate Email and Mobile.
-     * @authenticated
-     * @header Api-Key xx
-     * @header Api-Version v1
-     * @header Accept-Language ar
-     */
-    public function validateMobileorEmail(ValidateMobileorEmailRequest $request): JsonResponse
-    {
-        return $this->authProviderService->validateMobileorEmail($request);
-    }
 
     /**
      * Provider Profile.

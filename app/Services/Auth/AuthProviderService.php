@@ -2,9 +2,6 @@
 
 namespace App\Services\Auth;
 
-use App\Exceptions\Api\Auth\AuthException;
-use App\Http\Requests\Api\Auth\RegisterProviderRequest;
-use App\Services\Auth\AuthAbstract;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
@@ -21,10 +18,6 @@ class AuthProviderService extends AuthAbstract
     public function deleteAccount(Request $request): JsonResponse
     {
         $user = $request->user();
-        if (is_null($user)) {
-            throw AuthException::userNotFound(['unauthorized' => [__('Unauthorized')]], 401);
-        }
-
         DB::beginTransaction();
         $user->tokens()->delete();
         if ($user->delete()) {
@@ -37,9 +30,6 @@ class AuthProviderService extends AuthAbstract
 
     public function register(FormRequest $request, $abilities = null): User
     {
-        if (!($request instanceof RegisterProviderRequest)) {
-            throw AuthException::wrongImplementation('wrong_implementation**' . __("Failed Operation"));
-        }
         DB::beginTransaction();
         $user = User::create([
             'name' => $request->name,
@@ -50,7 +40,6 @@ class AuthProviderService extends AuthAbstract
         $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         if (is_null($user)) {
             DB::rollBack();
-            throw AuthException::userFailedRegistration("generation_failed**" . __('Failed Operation'), 500);
         }
         DB::commit();
         $user->access_token = $user->createToken('snctumToken', $abilities ?? [], now()->addHours(1))->plainTextToken;

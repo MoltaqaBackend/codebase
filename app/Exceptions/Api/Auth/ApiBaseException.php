@@ -40,9 +40,4 @@ class ApiBaseException extends Exception
             message: $this->message
         );
     }
-
-    public static function wrongImplementation($errors, $code = null)
-    {
-        return new self($errors, __("Failed Operation"), $code ?? 500);
-    }
 }

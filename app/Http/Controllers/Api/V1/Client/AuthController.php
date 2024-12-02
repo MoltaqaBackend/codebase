@@ -105,11 +105,14 @@ class AuthController extends Controller
      */
     public function resendOTP(Request $request): JsonResponse
     {
+        $returned = $this->authClientService->resendOTP($request);
+        if (!$returned){
+            return $this->setStatusCode(401)->respondWithError(__('Unauthorized'));
+        }
         return $this->respondWithArray(
-            config('global.return_otp_in_response') ? [
-                "verification_code" =>
-                $this->authClientService->resendOTP($request)->OTP
-            ] : []
+            ['data' => [
+                "verification_code" => $this->authClientService->resendOTP($request)->OTP,
+            ]]
         );
     }
 
@@ -173,24 +176,6 @@ class AuthController extends Controller
         );
     }
 
-    /**
-     * can Client Change Mobile.
-     *
-     * an API which Offers a mean to check if client can change mobile number if can send OTP.
-     * @authenticated
-     * @header Api-Key xx
-     * @header Api-Version v1
-     * @header Accept-Language ar
-     */
-    public function canChangeMobile(ChangeMobileRequest $request): JsonResponse
-    {
-        return $this->respondWithArray(
-            config('global.return_otp_in_response') ? [
-                "verification_code" =>
-                $this->authClientService->canChangeMobile($request)->OTP
-            ] : []
-        );
-    }
 
     /**
      * Client Change Mobile.
@@ -210,19 +195,6 @@ class AuthController extends Controller
         );
     }
 
-    /**
-     * validate email and mobile.
-     *
-     * an API which Offers a mean to Validate Email and Mobile.
-     * @authenticated
-     * @header Api-Key xx
-     * @header Api-Version v1
-     * @header Accept-Language ar
-     */
-    public function validateMobileorEmail(ValidateMobileorEmailRequest $request): JsonResponse
-    {
-        return $this->authClientService->validateMobileorEmail($request);
-    }
 
     /**
      * Client Profile.

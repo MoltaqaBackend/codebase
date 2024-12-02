@@ -30,7 +30,6 @@ Route::prefix("auth")->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('forget-password', [AuthController::class, 'forgetPassword']);
-    Route::post('validate-mobile-email', [AuthController::class, 'validateMobileorEmail']);
     Route::post('send-otp', [AuthController::class, 'sendOTP']);
 });
 
